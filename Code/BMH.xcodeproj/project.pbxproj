@@ -72,15 +72,47 @@
 		EA29CDB9206B22DF00B016FE /* BMH */ = {
 			isa = PBXGroup;
 			children = (
+				EA4A98A5206BF6CE004C0957 /* SupportViews */,
+				EA4A98A3206BF66D004C0957 /* ViewControllers */,
+				EA4A98A2206BF648004C0957 /* HistoryViews */,
+				EA4A98A1206BF639004C0957 /* ProgressViews */,
 				EA29CDBA206B22DF00B016FE /* AppDelegate.swift */,
-				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
-				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
-				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
 				EA29CDC3206B22DF00B016FE /* Assets.xcassets */,
+				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
 				EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */,
 				EA29CDC8206B22DF00B016FE /* Info.plist */,
 			);
 			path = BMH;
+			sourceTree = "<group>";
+		};
+		EA4A98A1206BF639004C0957 /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProgressViews;
+			sourceTree = "<group>";
+		};
+		EA4A98A2206BF648004C0957 /* HistoryViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HistoryViews;
+			sourceTree = "<group>";
+		};
+		EA4A98A3206BF66D004C0957 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
+				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EA4A98A5206BF6CE004C0957 /* SupportViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupportViews;
 			sourceTree = "<group>";
 		};
 		EB89E9CA20796AAA3FF51249 /* Frameworks */ = {
@@ -388,11 +420,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BMH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth.BMH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -403,11 +436,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = BMH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth.BMH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
