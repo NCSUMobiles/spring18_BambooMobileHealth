@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch Screen-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController title="Launch Screen" id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="RAe-Kp-frH">
+                                <rect key="frame" x="70" y="314" width="235" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="235" id="DQn-kd-e11"/>
+                                    <constraint firstAttribute="height" constant="60" id="Xi2-dP-iqH"/>
+                                </constraints>
+                                <string key="text">Bamboo Mobile Health
+MS101.me Viewer</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N2-wT-5IG">
+                                <rect key="frame" x="150" y="570" width="75" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="WMS-v3-qe7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="HcT-dc-ani">
+                                <rect key="frame" x="87" y="104" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HcT-dc-ani" secondAttribute="height" multiplier="1:1" id="jOU-FU-TRJ"/>
+                                    <constraint firstAttribute="height" constant="200" id="zW0-R6-gCm"/>
+                                    <constraint firstAttribute="width" constant="200" id="zqc-vo-wC8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RAe-Kp-frH" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6Li-rc-3nN"/>
+                            <constraint firstItem="HcT-dc-ani" firstAttribute="centerX" secondItem="RAe-Kp-frH" secondAttribute="centerX" id="7wz-7g-y7i"/>
+                            <constraint firstItem="RAe-Kp-frH" firstAttribute="top" secondItem="HcT-dc-ani" secondAttribute="bottom" constant="10" id="BN1-Wd-UTd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2N2-wT-5IG" secondAttribute="bottom" constant="80" id="XbB-v7-Fgg"/>
+                            <constraint firstItem="RAe-Kp-frH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="g0p-x6-G5D"/>
+                            <constraint firstItem="2N2-wT-5IG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="o5H-iv-7G7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashLogo" width="1024" height="1024"/>
+    </resources>
+</document>

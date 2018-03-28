@@ -1,0 +1,19 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '10.0'
+
+target 'BMH' do
+	# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+	use_frameworks!
+
+	# Pods for BMH
+	pod 'Firebase/Core'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Database'
+	pod 'Firebase/Storage'
+	pod 'Firebase/Firestore'
+	pod 'Firebase/Messaging'
+
+	pod 'IQKeyboardManager'
+	pod 'CryptoSwift'
+	pod 'SQLite.swift/SQLCipher'
+end
