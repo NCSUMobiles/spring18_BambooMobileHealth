@@ -34,3 +34,4 @@ xcuserdata
 Pods/
 *.lock
 
+.DS_Store
