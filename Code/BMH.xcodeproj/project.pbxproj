@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
+		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
+		78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */; };
 		98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1710C135088E5B384F48D3 /* Pods_BMH.framework */; };
 		EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBA206B22DF00B016FE /* AppDelegate.swift */; };
 		EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */; };
@@ -23,6 +26,9 @@
 		1524DDA64DF11A654BCBB4D3 /* Pods-BMH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.debug.xcconfig"; sourceTree = "<group>"; };
 		19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.release.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.release.xcconfig"; sourceTree = "<group>"; };
 		1D1710C135088E5B384F48D3 /* Pods_BMH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		EA29CDB7206B22DF00B016FE /* BMH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA29CDBA206B22DF00B016FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 			children = (
 				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
 				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
+				78428CC8206D1450004A6342 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -120,6 +127,8 @@
 			children = (
 				EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */,
 				EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */,
+				78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */,
+				78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -290,9 +299,12 @@
 			files = (
 				EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
+				78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */,
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
+				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
+				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
