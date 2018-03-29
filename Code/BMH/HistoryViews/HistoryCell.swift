@@ -1,17 +1,17 @@
 //
-//  History_Cell.swift
-//  BMH
+//  HistoryCell.swift
+//  
 //
 //  Created by Otto on 3/29/18.
-//  Copyright © 2018 Bamboo Mobile Health. All rights reserved.
 //
 
 import UIKit
 import Charts
 
-class History_Cell: UITableViewCell {
+class HistoryCell: UITableViewCell {
 
-    @IBOutlet weak var chart_view: UIView!
+    @IBOutlet weak var barChartView : BarChartView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +22,5 @@ class History_Cell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

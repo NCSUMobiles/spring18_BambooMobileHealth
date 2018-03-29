@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class HistoryTableViewController: UITableViewController {
 
@@ -18,6 +19,9 @@ class HistoryTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // register our custom nibs
+        self.tableView.register(UINib(nibName:"HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryGraphView")
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,13 +43,16 @@ class HistoryTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! History_Cell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
+        (cell.barChartView).noDataText = "You need to provide data for the chart."
         // Configure the cell...
 
         return cell
     }
  
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500
+    }
 
     /*
     // Override to support conditional editing of the table view.

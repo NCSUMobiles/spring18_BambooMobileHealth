@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -332,28 +331,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" rowHeight="182" id="JGW-EM-Mvv" customClass="History_Cell" customModule="BMH" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="182"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="JGW-EM-Mvv">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JGW-EM-Mvv" id="GOw-nH-j4m" customClass="History_Cell" customModule="BMH" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="181.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic9-ha-Vu1">
-                                            <rect key="frame" x="16" y="11" width="343" height="160"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Ic9-ha-Vu1" firstAttribute="bottom" secondItem="GOw-nH-j4m" secondAttribute="bottomMargin" id="6Yn-Sc-CwY"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Ic9-ha-Vu1" secondAttribute="trailing" id="Hgb-vK-zyN"/>
-                                        <constraint firstItem="Ic9-ha-Vu1" firstAttribute="leading" secondItem="GOw-nH-j4m" secondAttribute="leadingMargin" id="RTq-0q-Tbp"/>
-                                        <constraint firstItem="Ic9-ha-Vu1" firstAttribute="top" secondItem="GOw-nH-j4m" secondAttribute="topMargin" id="Rsd-Gb-MCF"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="chart_view" destination="Ic9-ha-Vu1" id="9Pa-Gk-LIV"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
