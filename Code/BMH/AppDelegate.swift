@@ -17,10 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // customize the color of the page control
+        let violetColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
+        let purpleColor = UIColor.init(red: 178/255.0, green: 58/255.0, blue: 251/255.0, alpha: 1)
+        
         let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = UIColor.init(red: 91/255.0, green: 63/255.0, blue: 254/255.0, alpha: 1)
-        pageControl.currentPageIndicatorTintColor = UIColor.init(red: 171/255.0, green: 0, blue: 254/255.0, alpha: 1)
-        pageControl.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
+        pageControl.pageIndicatorTintColor = violetColor
+        pageControl.currentPageIndicatorTintColor = purpleColor
+        pageControl.backgroundColor = UIColor.clear
+        
+        // set the custom images for selected item
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        let tabBar = tabBarController.tabBar
+        tabBar.items![0].selectedImage = UIImage(named: "progress")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![1].selectedImage = UIImage(named: "history")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![2].selectedImage = UIImage(named: "record")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![3].selectedImage = UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal)
+        
+        // set the tint of text
+        tabBar.tintColor = violetColor
         
         return true
     }

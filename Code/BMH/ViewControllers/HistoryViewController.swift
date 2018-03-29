@@ -29,6 +29,9 @@ class HistoryViewController: UIPageViewController, UIPageViewControllerDelegate,
         // set the datasource to self
         dataSource = self
         
+        // set the background color to gray
+        self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
+        
         // load up the first controller
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
@@ -57,7 +60,8 @@ class HistoryViewController: UIPageViewController, UIPageViewControllerDelegate,
         // User is on the first view controller and swiped left to loop to
         // the last view controller.
         guard previousIndex >= 0 else {
-            return orderedViewControllers.last
+            //return orderedViewControllers.last
+            return nil // uncomment above to loop back
         }
         
         guard orderedViewControllers.count > previousIndex else {
@@ -79,7 +83,8 @@ class HistoryViewController: UIPageViewController, UIPageViewControllerDelegate,
         // User is on the last view controller and swiped right to loop to
         // the first view controller.
         guard orderedViewControllersCount != nextIndex else {
-            return orderedViewControllers.first
+            //return orderedViewControllers.first
+            return nil // uncomment above to loop back
         }
         
         guard orderedViewControllersCount > nextIndex else {

@@ -14,6 +14,9 @@
 		EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC0206B22DF00B016FE /* Main.storyboard */; };
 		EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC3206B22DF00B016FE /* Assets.xcassets */; };
 		EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */; };
+		EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */; };
+		EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */; };
+		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		EA29CDC3206B22DF00B016FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA29CDC6206B22DF00B016FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA29CDC8206B22DF00B016FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ActivityViewController.swift; sourceTree = "<group>"; };
+		EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
+		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,7 @@
 		EA4A98A1206BF639004C0957 /* ProgressViews */ = {
 			isa = PBXGroup;
 			children = (
+				EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */,
 			);
 			path = ProgressViews;
 			sourceTree = "<group>";
@@ -111,6 +118,8 @@
 		EA4A98A5206BF6CE004C0957 /* SupportViews */ = {
 			isa = PBXGroup;
 			children = (
+				EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */,
+				EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
 				EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */,
 				EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */,
@@ -278,8 +288,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
+				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,7 +435,7 @@
 				INFOPLIST_FILE = BMH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth.BMH;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -440,7 +452,7 @@
 				INFOPLIST_FILE = BMH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth.BMH;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bamboomobilehealth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
