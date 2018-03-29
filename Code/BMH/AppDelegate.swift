@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // set the tint of text
         tabBar.tintColor = violetColor
+        
+        // configure firebase
+        FirebaseApp.configure()
         
         return true
     }

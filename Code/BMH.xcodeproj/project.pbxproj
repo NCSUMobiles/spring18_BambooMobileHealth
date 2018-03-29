@@ -20,8 +20,8 @@
 		EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */; };
 		EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */; };
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
+		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +42,8 @@
 		EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ActivityViewController.swift; sourceTree = "<group>"; };
 		EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
+		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +70,7 @@
 		EA29CDAE206B22DF00B016FE = {
 			isa = PBXGroup;
 			children = (
+				EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */,
 				EA29CDB9206B22DF00B016FE /* BMH */,
 				EA29CDB8206B22DF00B016FE /* Products */,
 				63C0C10646FF0E49B1C3FB7B /* Pods */,
@@ -210,6 +211,7 @@
 			files = (
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
+				EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */,
 				EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */,
 				EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */,
 			);
