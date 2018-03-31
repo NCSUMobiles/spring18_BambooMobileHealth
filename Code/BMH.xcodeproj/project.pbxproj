@@ -22,6 +22,8 @@
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
+		EA5DCF5D206F144600B9A496 /* Progress_ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ExerciseViewController.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */,
+				EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */,
 			);
 			path = ProgressViews;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
 				78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */,
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
+				EA5DCF5D206F144600B9A496 /* Progress_ExerciseViewController.swift in Sources */,
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,

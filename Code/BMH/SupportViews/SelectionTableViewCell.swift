@@ -9,23 +9,13 @@
 import UIKit
 
 class SelectionTableViewCell: UITableViewCell {
-    @IBOutlet weak var textField : UITextField!
     @IBOutlet weak var pickerView : UIPickerView!
    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-//        textField.borderStyle = .none
-//        textField.layer.backgroundColor = UIColor.white.cgColor
-//        textField.layer.masksToBounds = false
-//        textField.layer.shadowColor = UIColor.gray.cgColor
-//        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-//        textField.layer.shadowOpacity = 1.0
-//        textField.layer.shadowRadius = 0.0
-        
-        pickerView.layer.borderColor = UIColor.lightGray.cgColor
-        pickerView.layer.borderWidth = 1
+        pickerView.selectRow(0, inComponent: 0, animated: true)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
