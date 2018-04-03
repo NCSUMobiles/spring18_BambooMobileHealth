@@ -17,28 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // customize the color of the page control
-//        let violetColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
-//        let purpleColor = UIColor.init(red: 178/255.0, green: 58/255.0, blue: 251/255.0, alpha: 1)
-//        
-//        let pageControl = UIPageControl.appearance()
-//        pageControl.pageIndicatorTintColor = violetColor
-//        pageControl.currentPageIndicatorTintColor = purpleColor
-//        pageControl.backgroundColor = UIColor.clear
-//        
-//        // set the custom images for selected item
-//        let tabBarController = self.window?.rootViewController as! UITabBarController
-//        let tabBar = tabBarController.tabBar
-//        tabBar.items![0].selectedImage = UIImage(named: "progress")?.withRenderingMode(.alwaysOriginal)
-//        tabBar.items![1].selectedImage = UIImage(named: "history")?.withRenderingMode(.alwaysOriginal)
-//        tabBar.items![2].selectedImage = UIImage(named: "record")?.withRenderingMode(.alwaysOriginal)
-//        tabBar.items![3].selectedImage = UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal)
-//        
-//        // set the tint of text
-//        tabBar.tintColor = violetColor
-//        
-//        // configure firebase
-//        FirebaseApp.configure()
+
+        // configure firebase
+        FirebaseApp.configure()
+        
+        if let userId = LoginHelper.getLogedInUser(){
+            var tabBarController = setViewControllerOnWindowFromId(storyBoardId: "tabBarController")
+            AppDelegate.initialTabConterllerSetup(rootTabBarController: tabBarController)
+        }else{
+            setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
+        }
+        
         
         return true
     }
@@ -65,6 +54,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func setViewControllerOnWindowFromId(storyBoardId : String) -> UIViewController{
+        let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: storyBoardId) as UIViewController
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        return initialViewController
+    }
+    
+    static func initialTabConterllerSetup( rootTabBarController : UIViewController){
+        // customize the color of the page control
+        let violetColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
+        let purpleColor = UIColor.init(red: 178/255.0, green: 58/255.0, blue: 251/255.0, alpha: 1)
+    
+        let pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = violetColor
+        pageControl.currentPageIndicatorTintColor = purpleColor
+        pageControl.backgroundColor = UIColor.clear
+    
+        // set the custom images for selected item
+        let tabBarController = rootTabBarController as! UITabBarController
+        let tabBar = tabBarController.tabBar
+        tabBar.items![0].selectedImage = UIImage(named: "progress")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![1].selectedImage = UIImage(named: "history")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![2].selectedImage = UIImage(named: "record")?.withRenderingMode(.alwaysOriginal)
+        tabBar.items![3].selectedImage = UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal)
+    
+        // set the tint of text
+        tabBar.tintColor = violetColor
+    }
 
 }
 
