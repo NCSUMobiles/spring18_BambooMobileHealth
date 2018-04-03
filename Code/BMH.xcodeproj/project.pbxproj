@@ -22,6 +22,7 @@
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
+		FA55AA27206D60B400F0D7D9 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55AA28206D60B400F0D7D9 /* CryptoSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		FA55AA28206D60B400F0D7D9 /* CryptoSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA55AA27206D60B400F0D7D9 /* CryptoSwift.framework in Frameworks */,
 				98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +145,7 @@
 		EB89E9CA20796AAA3FF51249 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA55AA28206D60B400F0D7D9 /* CryptoSwift.framework */,
 				1D1710C135088E5B384F48D3 /* Pods_BMH.framework */,
 			);
 			name = Frameworks;

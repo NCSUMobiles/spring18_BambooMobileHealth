@@ -157,7 +157,7 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--Record-->
+        <!--Voice Memo-->
         <scene sceneID="r1n-Vq-5Lp">
             <objects>
                 <tableViewController id="Ah0-GN-bg5" customClass="RecordViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
@@ -166,7 +166,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordCell" rowHeight="217" id="ZFt-91-wlu">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecordCell" rowHeight="217" id="ZFt-91-wlu">
                                 <rect key="frame" x="0.0" y="28" width="375" height="217"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZFt-91-wlu" id="o06-9q-YPg">
@@ -229,6 +229,37 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="OGb-qf-yNW">
+                                <rect key="frame" x="0.0" y="245" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OGb-qf-yNW" id="X9r-de-Dfp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="FileName.mp3" translatesAutoresizingMaskIntoConstraints="NO" id="aQ3-9R-a5E">
+                                            <rect key="frame" x="16" y="8" width="131" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="02/05/2018" translatesAutoresizingMaskIntoConstraints="NO" id="GkQ-uI-BFz">
+                                            <rect key="frame" x="16" y="29" width="76" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="#tag1, #tag2, #tag3, #tag4 #tag.." translatesAutoresizingMaskIntoConstraints="NO" id="lrW-1A-e8C">
+                                            <rect key="frame" x="155" y="11" width="204" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -236,11 +267,11 @@
                             <outlet property="delegate" destination="Ah0-GN-bg5" id="x2f-0U-Wyo"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Record" image="record" id="x5a-9b-0F1"/>
+                    <tabBarItem key="tabBarItem" title="Voice Memo" image="record" id="x5a-9b-0F1"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zVX-Ml-3GQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-591" y="1388"/>
+            <point key="canvasLocation" x="-591.20000000000005" y="1387.5562218890557"/>
         </scene>
         <!--Settings-->
         <scene sceneID="0d8-E1-U3k">
