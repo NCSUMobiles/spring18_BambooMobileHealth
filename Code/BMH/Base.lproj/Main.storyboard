@@ -119,7 +119,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="49e-Tb-3d3" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -140,7 +140,7 @@
         <!--Login View Controller-->
         <scene sceneID="c9y-1C-54l">
             <objects>
-                <viewController id="QX6-nm-4Z5" customClass="LoginViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="QX6-nm-4Z5" customClass="LoginViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q75-Gw-5nn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -220,6 +220,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="cdE-Q3-0PK" id="mPE-uQ-ibK"/>
                         <outlet property="usernameTextField" destination="A8W-WZ-eLd" id="C7g-la-qxv"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="loginToTabBar" id="OHJ-i1-IEF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPM-lv-fTT" userLabel="First Responder" sceneMemberID="firstResponder"/>

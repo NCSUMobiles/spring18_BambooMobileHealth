@@ -29,11 +29,17 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         if(usernameTextField.text == username && passwordTextField.text == password){
-            print("Login Successful")
+            LoginHelper.saveLogedInUser(userId: username)
+            performSegue(withIdentifier: "loginToTabBar", sender: self)
         }else{
             print("Incorrect Username Password")
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationController = segue.destination as? UITabBarController {
+            AppDelegate.initialTabConterllerSetup(rootTabBarController: destinationController)
+        }
+    }
 
 }

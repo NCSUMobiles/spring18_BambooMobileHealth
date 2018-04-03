@@ -12,6 +12,7 @@
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
+		78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDD33720742C8E00A870F6 /* LoginHelper.swift */; };
 		98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1710C135088E5B384F48D3 /* Pods_BMH.framework */; };
 		EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0A98E42071A9B400C7D253 /* HistoryCell.xib */; };
 		EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0A98E52071A9B400C7D253 /* HistoryCell.swift */; };
@@ -38,6 +39,7 @@
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		78DDD33720742C8E00A870F6 /* LoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHelper.swift; sourceTree = "<group>"; };
 		EA0A98E42071A9B400C7D253 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		EA0A98E52071A9B400C7D253 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		EA29CDB7206B22DF00B016FE /* BMH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMH.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
 				EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */,
 				EA29CDC8206B22DF00B016FE /* Info.plist */,
+				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
 			);
 			path = BMH;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
 				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
+				78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */,
 				786926DE20741346009CC203 /* LoginViewController.swift in Sources */,
 				FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */,
 			);
