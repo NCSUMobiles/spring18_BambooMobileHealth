@@ -16,5 +16,8 @@ target 'BMH' do
 	pod 'IQKeyboardManager'
 	pod 'CryptoSwift'
 	pod 'SQLite.swift/SQLCipher'
+
+	pod 'Locksmith'	
+
     pod 'Charts'
 end
