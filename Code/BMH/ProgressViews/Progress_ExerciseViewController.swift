@@ -1,24 +1,24 @@
 //
-//  Progress_ActivityViewController.swift
+//  Progress_ExerciseViewController.swift
 //  BMH
 //
-//  Created by Kalpesh Padia on 3/28/18.
+//  Created by Kalpesh Padia on 3/30/18.
 //  Copyright © 2018 Bamboo Mobile Health. All rights reserved.
 //
 
 import UIKit
 
-class Progress_ActivityViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var showPickerView : Bool = false
-    var activityList : [String] = ["Physical Therapy @ PT Clinic",
-                                   "Physical Therapy @ Home Session",
-                                   "Walking",
-                                   "Running/Elliptical",
-                                   "Swimming",
-                                   "Strength Training",
-                                   "Cycling/Hand Cycling",
-                                   "Yoga/Pilates"]
+    var activityList : [String] = ["Exercise 1",
+                                   "Exercise 2",
+                                   "Exercise 3",
+                                   "Exercise 4",
+                                   "Exercise 5",
+                                   "Exercise 6",
+                                   "Exercise 7",
+                                   "Exercise 8"]
     var selectedActivity : String = ""
     
     override func viewDidLoad() {
@@ -34,28 +34,13 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
         // for now we are hard-coding the list above
         
         // register our custom nibs
-        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ActivitySelectionCell")
+        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseSelectionCell")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func weekDaysString() -> String {
-        let gregorian = Calendar(identifier: .gregorian)
-        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
-        
-        let startOfWeek = gregorian.date(byAdding: .day, value: 1, to: sunday!)
-        let endOfWeek = gregorian.date(byAdding: .day, value: 7, to: sunday!)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
-        
-        return dateFormatter.string(from: startOfWeek!) + " — " + dateFormatter.string(from: endOfWeek!)
-    }
-    
     
     // MARK: - Picker view data source and delegates
     // number of sections
@@ -89,7 +74,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
     
     // Return number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     // Return number of rows in each section
@@ -111,7 +96,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
         if (indexPath.section == 0 && indexPath.row == 1) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivitySelectionCell", for: indexPath) as! SelectionTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseSelectionCell", for: indexPath) as! SelectionTableViewCell
             
             // Configure the cell...
             let pickerView = (cell as! SelectionTableViewCell).pickerView
@@ -139,7 +124,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
             print("Selected activity \"\(selectedActivity)\"")
         }
         else if (indexPath.section == 0 && indexPath.row == 0) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivityViewCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
@@ -149,13 +134,8 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
                 cell.textLabel?.text = selectedActivity
             }
         }
-        else if (indexPath.section == 1){
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivityViewCell", for: indexPath)
-            
-            // Configure the cell...
-            cell.textLabel?.text = weekDaysString()
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivityViewCell", for: indexPath)
+        else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
             
             // Configure the cell...
         }
@@ -171,9 +151,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Choose an Activity"
-        case 1:
-            return "Showing Week of:"
+            return "Choose an Exercise"
         default:
             return ""
         }
@@ -200,12 +178,8 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
             return 163;
         }
         
-        if indexPath.section == 1 {
-            return 44;
-        }
-        
         // so that you can scroll and fill the screen in iPhone 5
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             return 490;
         }
         
@@ -214,14 +188,14 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
     
     // Set the section header height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
+        if section == 1 {
             return CGFloat.leastNormalMagnitude
         }
         return tableView.sectionHeaderHeight
     }
     // Set the section footer height
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == 0 {
             return 2
         }
         return tableView.sectionFooterHeight
