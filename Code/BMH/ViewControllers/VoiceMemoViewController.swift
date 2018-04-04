@@ -1,5 +1,5 @@
 //
-//  RecordViewController.swift
+//  VoiceMemoViewController.swift
 //  BMH
 //
 //  Created by Robert Dates on 3/29/18.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RecordViewController: UITableViewController {
+class VoiceMemoViewController: UITableViewController {
     override func viewDidLoad() {
         tableView.delegate = self
     }
@@ -19,17 +19,23 @@ class RecordViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
-        
-        return cell
+        switch(indexPath.section){
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath)
+            return cell
+            
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 177.0
+        return 250.0
     }
     
 }
