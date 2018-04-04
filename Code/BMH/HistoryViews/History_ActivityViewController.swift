@@ -10,7 +10,47 @@ import UIKit
 import Charts
 import CoreMotion
 
-class HistoryTableViewController: UITableViewController {
+class History_ActivityViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var showPickerView : Bool = false
+    var activityList : [String] = ["Physical Therapy @ PT Clinic",
+                                   "Physical Therapy @ Home Session",
+                                   "Walking",
+                                   "Running/Elliptical",
+                                   "Swimming",
+                                   "Strength Training",
+                                   "Cycling/Hand Cycling",
+                                   "Yoga/Pilates"]
+    var selectedActivity : String = ""
+    
+    // MARK: - Picker view data source and delegates
+    // number of sections
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // number of items
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return activityList.count
+    }
+    
+    // update the content shown in pickerview
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if row < activityList.count  {
+            return activityList[row]
+        }
+        return ""
+    }
+    
+    // if select any row, force update the table view
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.tableView.beginUpdates()
+        selectedActivity = activityList[row]
+        print("Selected activity \"\(selectedActivity)\"")
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = selectedActivity
+        self.tableView.endUpdates()
+    }
+    
 
     var weekdays: [String]!
     var stepsTaken = [Int]()
@@ -66,20 +106,39 @@ override func viewDidLoad() {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
+//        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if self.showPickerView && section == 0 {
+            return 2
+        }
         return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
-        (cell.barChartView).noDataText = "You need to provide data for the chart."
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
+            (cell.barChartView).noDataText = "You need to provide data for the chart."
+            (cell.barChartView).maxVisibleCount = 10000
+            // create some dummy data
+            axisFormatDelegate = self as IAxisValueFormatter
+            weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+            stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
+            
+            // load that dummy data into our cell
+            setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
+            return cell
+        
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
+//        (cell.barChartView).noDataText = "You need to provide data for the chart."
 //        (cell.barChartView).drawGridBackgroundEnabled = true
-        (cell.barChartView).maxVisibleCount = 10000
+//        (cell.barChartView).maxVisibleCount = 10000
         
         // Configure the cell...
+        
+        /*
         // create some dummy data
         axisFormatDelegate = self as IAxisValueFormatter
         weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
@@ -87,15 +146,13 @@ override func viewDidLoad() {
         
         // load that dummy data into our cell
         setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
+        */
+//        return cell
         
-        
-        return cell
     }
-    
-    
- 
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 490
     }
 
     /*
@@ -145,7 +202,7 @@ override func viewDidLoad() {
 
 }
 
-extension HistoryTableViewController: IAxisValueFormatter {
+extension History_ActivityViewController: IAxisValueFormatter {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return weekdays[Int(value)]
