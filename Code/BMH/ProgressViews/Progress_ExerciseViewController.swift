@@ -9,11 +9,11 @@
 import UIKit
 import Charts
 
-class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
     
     var showPickerView : Bool = false
     var exerciseList : [String]!
-    var selectedExercise : String = ""
+    var selectedExercise : Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +28,14 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseSelectionCell")
         self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseChartCell")
         
-        // load the exerise list array
+        // load the exercise list
         exerciseList = []
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         for exercise in appDelegate.exercises {
             exerciseList.append(exercise.name)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,9 +63,16 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
-        selectedExercise = exerciseList[row]
-        print("Selected exercise \"\(selectedExercise)\"")
-        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = selectedExercise
+        
+        selectedExercise = row
+        print("Selected exercise \"\(exerciseList[selectedExercise])\"")
+        
+        // update the text in first section first row
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = exerciseList[selectedExercise]
+        
+        // update the chart in third section first row
+        createChart(inCell: ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell), forExercise: selectedExercise)
+        
         self.tableView.endUpdates()
     }
     
@@ -91,11 +98,10 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         }
     }
     
-    // Return a dynamic cell depending on the section.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
         if (indexPath.section == 0 && indexPath.row == 1) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseSelectionCell", for: indexPath) as! SelectionTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseSelectionCell", for: indexPath)
             
             // Configure the cell...
             let pickerView = (cell as! SelectionTableViewCell).pickerView
@@ -104,9 +110,9 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
             pickerView?.showsSelectionIndicator = true;
             
             // save the selected text
-            if selectedExercise == "" {
+            if selectedExercise == -1 {
                 // scroll to the middle exercise
-                pickerView?.selectRow(exerciseList.count / 2, inComponent: 0, animated: true)
+                pickerView?.selectRow(0, inComponent: 0, animated: true)
                 
                 // hack to make sure the selection indicator shows
                 // first remove the picker
@@ -119,18 +125,19 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
                                                  NSLayoutConstraint.init(item: pickerView as Any, attribute: .leading, relatedBy: .equal, toItem: cell.contentView, attribute: .leading, multiplier: 1, constant: 0)])
             }
             
-            selectedExercise = exerciseList[(pickerView?.selectedRow(inComponent: 0))!]
-            print("Selected exercise \"\(selectedExercise)\"")
+            selectedExercise = (pickerView?.selectedRow(inComponent: 0))!
+            print("Selected exercise \"\(exerciseList[selectedExercise])\"")
         }
         else if (indexPath.section == 0 && indexPath.row == 0) {
             cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
-            if  selectedExercise == "" {
-                cell.textLabel?.text = exerciseList[exerciseList.count / 2]
-            } else {
-                cell.textLabel?.text = selectedExercise
+            if  selectedExercise == -1 {
+                cell.textLabel?.text = exerciseList[0]
+            }
+            else {
+                cell.textLabel?.text = exerciseList[selectedExercise]
             }
         }
         else if (indexPath.section == 1){
@@ -141,17 +148,13 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseChartCell", for: indexPath)
             
-            // Configure the cell...
-            // For this exercise retrieve weekly goal value and units from the local database
-            // some default assumption
-            let goalValue = 20000
-            let goalUnits = "Steps"
-            
-            // Set a default donut chart where no goal is achieved
-            createChart(forExercise: selectedExercise, inView: (cell as! ProgressChartCell).chartView, withData: [0, 0, 0, 0, 0, 0, 0, goalValue], goalValue: goalValue, goalUnits: goalUnits)
-            // Retrieve values for this week from Firebase
-            
-            // Update the chart to show the updated value 
+            // create chart inside this cell
+            if selectedExercise == -1 {
+                createChart(inCell: cell as! ProgressChartCell, forExercise: 0)
+            }
+            else {
+                createChart(inCell: cell as! ProgressChartCell, forExercise: selectedExercise)
+            }
         }
         
         cell.preservesSuperviewLayoutMargins = false
@@ -200,7 +203,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         
         // so that you can scroll and fill the screen in iPhone 5
         if indexPath.section == 2 {
-            return 480;
+            return 455;
         }
         
         return 44;
@@ -221,6 +224,29 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         return tableView.sectionFooterHeight
     }
     
+    // MARK: - Chart View Delegate
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        NSLog("chartValueSelected");
+        
+        // get the cell that contains the chartview
+        let cell = (self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell
+        
+        // get the value of the selected day
+        let value = Int(entry.y)
+        
+        _ = updateProgressValue(value: value, inCell: cell)
+        
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chartValueNothingSelected");
+        
+        // get the cell that contains the chartview
+        let cell = (self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell
+        
+        _ = updateProgressValue(value: cell.progressValue, inCell: cell)
+    }
+    
     // MARK: - Custom functions
     func weekDaysString() -> String {
         let gregorian = Calendar(identifier: .gregorian)
@@ -236,8 +262,130 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         return dateFormatter.string(from: startOfWeek!) + " — " + dateFormatter.string(from: endOfWeek!)
     }
     
-    func createChart(forExercise exercise: String, inView view: PieChartView, withData values: [Int], goalValue: Int, goalUnits: String) {
+    func updateProgressValue(value: Int, inCell cell: ProgressChartCell) -> UIColor {
+        let exercise = cell.actEx
+        // update the bottom view
+        cell.iconImage.image = UIImage(named: (exercise?.imageName)!)
+        cell.iconLabel.text = exercise?.name
         
+        // calculate percent of goal achieved to customize label color
+        var goalPercent = 0.0
+        var valueColor = UIColor.orange
+        
+        goalPercent = Double(value) * 100.0 / Double((exercise?.goalValue)!)
+        
+        // Customize label color
+        if goalPercent <= 30.0 {
+            valueColor = UIColor.red
+        }
+        else if goalPercent <= 80.0 {
+            valueColor = UIColor.orange
+        }
+        else {
+            valueColor = UIColor(hex: "#22AA03")
+        }
+        
+        var valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 24.0)!, NSAttributedStringKey.foregroundColor: valueColor]
+        let valueString = NSMutableAttributedString(string: String(value), attributes: valueAttribute)
+        
+        valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 20.0)!, NSAttributedStringKey.foregroundColor: valueColor]
+        let valueString2 = NSAttributedString(string: " " + (exercise?.goalUnits)!, attributes: valueAttribute)
+        valueString.append(valueString2)
+        cell.valueLabel.attributedText = valueString
+        
+        return valueColor
     }
     
+    // Create a chart inside the specified cell
+    func createChart(inCell cell: ProgressChartCell, forExercise index: Int) {
+        // Configure the cell...
+        // For this exercise obtain weekly goal value and units
+        let exercise = (UIApplication.shared.delegate as! AppDelegate).exercises[index]
+
+        // save exercise into cell for futture use
+        cell.actEx = exercise
+        
+        // Retrieve values for this week from Firebase
+        
+        // Update the chart to show the updated value
+        // Set a dummy donut chart
+        drawChart(inCell: cell, withData: [Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5))])
+        
+        // set chart delegate to self
+        cell.chartView.delegate = self
+    }
+    
+    // draw the chart
+    func drawChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+        let initDaysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        
+        var values : [Int] = []
+        var daysOfWeek : [String] = []
+        // calculate percent of goal achieved to customize label color
+        var sum = 0
+        for i in 0...6 {
+            if (initValues[i] > 0) {
+                sum += initValues[i]
+                
+                values.append(initValues[i])
+                daysOfWeek.append(initDaysOfWeek[i])
+            }
+        }
+        
+        // save the total progress this week
+        cell.progressValue = sum
+        let exercise = cell.actEx
+        
+        // customize the bottom view
+        let valueColor = updateProgressValue(value: sum, inCell: cell)
+        
+        // customize the legend
+        let legend = cell.chartView.legend
+        legend.horizontalAlignment = .center
+        legend.verticalAlignment = .bottom
+        legend.orientation = .horizontal
+        legend.xEntrySpace = 7
+        cell.chartView.chartDescription?.enabled = false
+        
+        // create data entries
+        let entries = (0..<values.count).map { (i) -> PieChartDataEntry in
+            return PieChartDataEntry(value: Double(values[i]), label: daysOfWeek[i])
+        }
+        
+        // create a data set from the data
+        let set = PieChartDataSet(values: entries, label: "")
+        
+        // customize the data set
+        set.drawIconsEnabled = false
+        set.drawValuesEnabled = false //hides the day values
+        set.sliceSpace = 2
+        set.colors = [UIColor(hex: "#1f77b4"), UIColor(hex: "#ff7f0e"), UIColor(hex: "#2ca02c"), UIColor(hex: "#d62728"), UIColor(hex: "#9467bd"), UIColor(hex: "#8c564b"), UIColor(hex: "#e377c2")]
+        
+        // customize the center text
+        let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        paragraphStyle.alignment = .center
+        
+        var valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 36.0)!, NSAttributedStringKey.foregroundColor: valueColor, NSAttributedStringKey.paragraphStyle: paragraphStyle]
+        
+        let centerText = NSMutableAttributedString(string: String(sum) + "\n" + String((exercise?.goalValue)!) + " " + (exercise?.goalUnits)!)
+        centerText.setAttributes(valueAttribute, range: NSRange(location: 0, length: centerText.length))
+        print (String(sum).count)
+        
+        valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 16.0)!, NSAttributedStringKey.foregroundColor: UIColor.black]
+        centerText.addAttributes(valueAttribute, range: NSRange(location: String(sum).count, length: centerText.length - String(sum).count))
+        
+        // finally set the data
+        let data = PieChartData(dataSet: set)
+        
+        // visualize
+        cell.chartView.data = data
+        
+        // assign a center text
+        cell.chartView.centerAttributedText = centerText
+        cell.chartView.drawCenterTextEnabled = true
+        
+        // and animate
+        cell.chartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+    }
 }

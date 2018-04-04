@@ -74,6 +74,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.imageName = activity["image"]!
                     actEx.name = activity["name"]!
                     actEx.goalUnits = activity["units"]!
+                    actEx.goalTime = activity["per"]!
+                    
+                    // some dummy value -> should be updated from DB
+                    actEx.goalValue = Int(arc4random_uniform(2000)) + 1
+                    
                     activities.append(actEx)
                 }
                 
@@ -84,6 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.imageName = exercise["image"]!
                     actEx.name = exercise["name"]!
                     actEx.goalUnits = exercise["units"]!
+                    actEx.goalTime = exercise["per"]!
+                    
+                    // some dummy value -> should be updated from DB
+                    actEx.goalValue = Int(arc4random_uniform(30))  + 1
+                    
                     exercises.append(actEx)
                 }
                 
@@ -94,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateFromDB() {
-        
     }
     
     func setViewControllerOnWindowFromId(storyBoardId : String) -> UIViewController{

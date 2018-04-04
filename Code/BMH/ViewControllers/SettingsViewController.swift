@@ -49,7 +49,7 @@ class SettingsViewController: UITableViewController {
         let currentDataElement = tableData[indexPath.section][indexPath.row];
         cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
         cell.nameLabel.text = currentDataElement.name
-        cell.unitsLabel.text = currentDataElement.goalUnits
+        cell.unitsLabel.text = currentDataElement.goalUnits + "/" + currentDataElement.goalTime
         return cell
     }
 

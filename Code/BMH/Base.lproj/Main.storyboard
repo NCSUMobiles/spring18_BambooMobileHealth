@@ -401,7 +401,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-2S-cwb">
                                             <rect key="frame" x="49" y="13.5" width="90" height="17"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="90" id="tJK-eY-pab"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="tJK-eY-pab"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -416,7 +416,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="miles/week" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0X-v3-GRP">
                                             <rect key="frame" x="277" y="15" width="90" height="14.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="90" id="bry-pr-Pva"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="bry-pr-Pva"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -460,6 +460,7 @@
                                     <constraints>
                                         <constraint firstItem="Htv-Sj-1A1" firstAttribute="centerY" secondItem="hZO-hi-ZF6" secondAttribute="centerY" id="91X-lI-sO7"/>
                                         <constraint firstItem="Htv-Sj-1A1" firstAttribute="leading" secondItem="hZO-hi-ZF6" secondAttribute="leading" constant="16" id="EoN-6O-PuG"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Htv-Sj-1A1" secondAttribute="trailing" constant="20" symbolic="YES" id="RNi-PA-DCD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.81977712560000005" green="0.81977712560000005" blue="0.81977712560000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

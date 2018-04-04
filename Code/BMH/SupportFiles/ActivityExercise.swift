@@ -13,4 +13,5 @@ struct ActEx{
     var imageName : String = "history"
     var goalValue : Int = 0
     var goalUnits : String = ""
+    var goalTime : String = "week"
 }

@@ -12,9 +12,12 @@ import Charts
 class ProgressChartCell: UITableViewCell {
 
     @IBOutlet weak var chartView : PieChartView!
-    @IBOutlet weak var activityImage: UIImageView!
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var activityLabel: UILabel!
+    @IBOutlet weak var iconLabel: UILabel!
+    
+    var progressValue : Int!
+    var actEx : ActEx!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -3,59 +3,70 @@
                    {
                    "image": "walking",
                    "name": "Walking",
-                   "units": "steps/week"
+                   "units": "steps",
+                   "per": "week"
                    },
                    {
                    "image": "history",
                    "name": "Running/Elliptical",
-                   "units": "miles/week"
+                   "units": "miles",
+                   "per": "week"
                    },
                    {
                    "image": "history",
                    "name": "Swimming",
-                   "units": "miles/week"
+                   "units": "miles",
+                   "per": "week"
                    },
                    {
                    "image": "history",
                    "name": "Physical Therapy @ PT Clinic",
-                   "units": "sessions/week"
+                   "units": "sessions",
+                   "per": "week"
                    },
                    {
                    "image": "history",
                    "name": "Physical Therapy @ Home Session",
-                   "units": "sessions/week"
+                   "units": "sessions",
+                   "per": "week"
                    },
                    {
                    "image": "pilates",
                    "name": "Yoga/Pilates",
-                   "units": "minutes/week"
+                   "units": "minutes",
+                   "per": "week"
                    }
                 ],
     "exercises": [
                   {
                   "image": "dumbbell",
                   "name": "Strength Training",
-                  "units": "minutes/week"
+                  "units": "minutes",
+                  "per": "week"
                   },
                   {
                   "image": "history",
                   "name": "Cycling/Hand Cycling",
-                  "units": "miles/week"
+                  "units": "miles",
+                  "per": "week"
                   },
                   {
                   "image": "history",
                   "name": "Exercise 3",
-                  "units": "sessions/week"
+                  "units": "sessions",
+                  "per": "week"
                   },
                   {
                   "image": "history",
                   "name": "Exercise 4",
-                  "units": "sessions/week"
+                  "units": "sessions",
+                  "per": "week"
                   },
                   {
                   "image": "history",
                   "name": "Exercise 5",
-                  "units": "sessions/week"
+                  "units": "sessions",
+                  "per": "week"
                   }
                 ]
 }
