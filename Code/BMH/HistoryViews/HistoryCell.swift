@@ -2,7 +2,7 @@
 //  HistoryCell.swift
 //  
 //
-//  Created by Otto on 3/29/18.
+//  Created by Yu-Ching Hu on 3/29/18.
 //
 
 import UIKit
@@ -22,5 +22,6 @@ class HistoryCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+  
     
 }
