@@ -7,25 +7,25 @@
                    "per": "week"
                    },
                    {
-                   "image": "history",
+                   "image": "running",
                    "name": "Running/Elliptical",
                    "units": "miles",
                    "per": "week"
                    },
                    {
-                   "image": "history",
+                   "image": "swimming",
                    "name": "Swimming",
                    "units": "miles",
                    "per": "week"
                    },
                    {
-                   "image": "history",
+                   "image": "physical-therapy",
                    "name": "Physical Therapy @ PT Clinic",
                    "units": "sessions",
                    "per": "week"
                    },
                    {
-                   "image": "history",
+                   "image": "physical-therapy",
                    "name": "Physical Therapy @ Home Session",
                    "units": "sessions",
                    "per": "week"
@@ -45,25 +45,25 @@
                   "per": "week"
                   },
                   {
-                  "image": "history",
+                  "image": "cycling",
                   "name": "Cycling/Hand Cycling",
                   "units": "miles",
                   "per": "week"
                   },
                   {
-                  "image": "history",
+                  "image": "exercise-general",
                   "name": "Exercise 3",
                   "units": "sessions",
                   "per": "week"
                   },
                   {
-                  "image": "history",
+                  "image": "exercise-general",
                   "name": "Exercise 4",
                   "units": "sessions",
                   "per": "week"
                   },
                   {
-                  "image": "history",
+                  "image": "exercise-general",
                   "name": "Exercise 5",
                   "units": "sessions",
                   "per": "week"
