@@ -10,25 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    let tableData = [
-        [
-            ["image":"history", "name" : "Running", "units" : "miles/week"],
-            ["image":"history", "name" : "Walking", "units" : "steps/week"],
-            ["image":"history", "name" : "Jogging", "units" : "miles/week"],
-            ["image":"history", "name" : "Climbing", "units" : "ft/week"],
-            ["image":"history", "name" : "Cycling", "units" : "miles/week"],
-            ["image":"history", "name" : "Activity 1", "units" : "units/week"],
-            ["image":"history", "name" : "Activity 2", "units" : "units/week"]
-        ],
-        [
-            ["image":"history", "name" : "Exercise 1", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 2", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 3", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 4", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 5", "units" : "sessions/week"],
-        ]
-    ]
-    
+    var tableData : [[ActEx]]!
     let tableSections = ["Activity","Exercise"]
     
     override func viewDidLoad() {
@@ -39,6 +21,10 @@ class SettingsViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // get the app delegate
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        tableData = [appDelegate.activities, appDelegate.exercises]
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,9 +47,9 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! SettingsTableViewCell
         let currentDataElement = tableData[indexPath.section][indexPath.row];
-        cell.leftImageView.image = UIImage(named: currentDataElement["image"]!);
-        cell.nameLabel.text = currentDataElement["name"]!
-        cell.unitsLabel.text = currentDataElement["units"]!
+        cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
+        cell.nameLabel.text = currentDataElement.name
+        cell.unitsLabel.text = currentDataElement.goalUnits
         return cell
     }
 

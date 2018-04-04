@@ -7,19 +7,13 @@
 //
 
 import UIKit
+import Charts
 
 class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var showPickerView : Bool = false
-    var activityList : [String] = ["Exercise 1",
-                                   "Exercise 2",
-                                   "Exercise 3",
-                                   "Exercise 4",
-                                   "Exercise 5",
-                                   "Exercise 6",
-                                   "Exercise 7",
-                                   "Exercise 8"]
-    var selectedActivity : String = ""
+    var exerciseList : [String]!
+    var selectedExercise : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +24,18 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // load the activity list array from a file?
-        // for now we are hard-coding the list above
-        
         // register our custom nibs
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseSelectionCell")
+        self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseChartCell")
+        
+        // load the exerise list array
+        exerciseList = []
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        for exercise in appDelegate.exercises {
+            exerciseList.append(exercise.name)
+        }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,13 +49,13 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     
     // number of items
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return activityList.count
+        return exerciseList.count
     }
     
     // update the content shown in pickerview
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row < activityList.count  {
-            return activityList[row]
+        if row < exerciseList.count  {
+            return exerciseList[row]
         }
         return ""
     }
@@ -64,9 +63,9 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
-        selectedActivity = activityList[row]
-        print("Selected activity \"\(selectedActivity)\"")
-        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = selectedActivity
+        selectedExercise = exerciseList[row]
+        print("Selected exercise \"\(selectedExercise)\"")
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = selectedExercise
         self.tableView.endUpdates()
     }
     
@@ -74,7 +73,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     
     // Return number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     // Return number of rows in each section
@@ -105,9 +104,9 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
             pickerView?.showsSelectionIndicator = true;
             
             // save the selected text
-            if selectedActivity == "" {
-                // scroll to the middle activity
-                pickerView?.selectRow(activityList.count / 2, inComponent: 0, animated: true)
+            if selectedExercise == "" {
+                // scroll to the middle exercise
+                pickerView?.selectRow(exerciseList.count / 2, inComponent: 0, animated: true)
                 
                 // hack to make sure the selection indicator shows
                 // first remove the picker
@@ -120,24 +119,39 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
                                                  NSLayoutConstraint.init(item: pickerView as Any, attribute: .leading, relatedBy: .equal, toItem: cell.contentView, attribute: .leading, multiplier: 1, constant: 0)])
             }
             
-            selectedActivity = activityList[(pickerView?.selectedRow(inComponent: 0))!]
-            print("Selected activity \"\(selectedActivity)\"")
+            selectedExercise = exerciseList[(pickerView?.selectedRow(inComponent: 0))!]
+            print("Selected exercise \"\(selectedExercise)\"")
         }
         else if (indexPath.section == 0 && indexPath.row == 0) {
             cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
-            if  selectedActivity == "" {
-                cell.textLabel?.text = activityList[activityList.count / 2]
+            if  selectedExercise == "" {
+                cell.textLabel?.text = exerciseList[exerciseList.count / 2]
             } else {
-                cell.textLabel?.text = selectedActivity
+                cell.textLabel?.text = selectedExercise
             }
         }
-        else {
+        else if (indexPath.section == 1){
             cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
             
             // Configure the cell...
+            cell.textLabel?.text = weekDaysString()
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseChartCell", for: indexPath)
+            
+            // Configure the cell...
+            // For this exercise retrieve weekly goal value and units from the local database
+            // some default assumption
+            let goalValue = 20000
+            let goalUnits = "Steps"
+            
+            // Set a default donut chart where no goal is achieved
+            createChart(forExercise: selectedExercise, inView: (cell as! ProgressChartCell).chartView, withData: [0, 0, 0, 0, 0, 0, 0, goalValue], goalValue: goalValue, goalUnits: goalUnits)
+            // Retrieve values for this week from Firebase
+            
+            // Update the chart to show the updated value 
         }
         
         cell.preservesSuperviewLayoutMargins = false
@@ -152,6 +166,8 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         switch section {
         case 0:
             return "Choose an Exercise"
+        case 1:
+            return "Showing Week of:"
         default:
             return ""
         }
@@ -178,9 +194,13 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
             return 163;
         }
         
-        // so that you can scroll and fill the screen in iPhone 5
         if indexPath.section == 1 {
-            return 490;
+            return 44;
+        }
+        
+        // so that you can scroll and fill the screen in iPhone 5
+        if indexPath.section == 2 {
+            return 480;
         }
         
         return 44;
@@ -188,17 +208,36 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     
     // Set the section header height
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        if section == 2 {
             return CGFloat.leastNormalMagnitude
         }
         return tableView.sectionHeaderHeight
     }
     // Set the section footer height
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
+        if section == 1 {
             return 2
         }
         return tableView.sectionFooterHeight
+    }
+    
+    // MARK: - Custom functions
+    func weekDaysString() -> String {
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
+        
+        let startOfWeek = gregorian.date(byAdding: .day, value: 1, to: sunday!)
+        let endOfWeek = gregorian.date(byAdding: .day, value: 7, to: sunday!)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        
+        return dateFormatter.string(from: startOfWeek!) + " — " + dateFormatter.string(from: endOfWeek!)
+    }
+    
+    func createChart(forExercise exercise: String, inView view: PieChartView, withData values: [Int], goalValue: Int, goalUnits: String) {
+        
     }
     
 }

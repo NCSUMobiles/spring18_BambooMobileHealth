@@ -7,18 +7,12 @@
 //
 
 import UIKit
+import Charts
 
 class Progress_ActivityViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var showPickerView : Bool = false
-    var activityList : [String] = ["Physical Therapy @ PT Clinic",
-                                   "Physical Therapy @ Home Session",
-                                   "Walking",
-                                   "Running/Elliptical",
-                                   "Swimming",
-                                   "Strength Training",
-                                   "Cycling/Hand Cycling",
-                                   "Yoga/Pilates"]
+    var activityList : [String]!
     var selectedActivity : String = ""
     
     override func viewDidLoad() {
@@ -30,32 +24,22 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // load the activity list array from a file?
-        // for now we are hard-coding the list above
-        
         // register our custom nibs
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ActivitySelectionCell")
+        self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: "Progress_ActivityChartCell")
+        
+        // load the activity list
+        activityList = []
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        for activity in appDelegate.activities {
+            activityList.append(activity.name)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func weekDaysString() -> String {
-        let gregorian = Calendar(identifier: .gregorian)
-        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
-        
-        let startOfWeek = gregorian.date(byAdding: .day, value: 1, to: sunday!)
-        let endOfWeek = gregorian.date(byAdding: .day, value: 7, to: sunday!)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
-        
-        return dateFormatter.string(from: startOfWeek!) + " — " + dateFormatter.string(from: endOfWeek!)
-    }
-    
     
     // MARK: - Picker view data source and delegates
     // number of sections
@@ -111,7 +95,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
         if (indexPath.section == 0 && indexPath.row == 1) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivitySelectionCell", for: indexPath) as! SelectionTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivitySelectionCell", for: indexPath)
             
             // Configure the cell...
             let pickerView = (cell as! SelectionTableViewCell).pickerView
@@ -155,9 +139,19 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
             // Configure the cell...
             cell.textLabel?.text = weekDaysString()
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivityViewCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ActivityChartCell", for: indexPath)
             
             // Configure the cell...
+            // For this activity retrieve weekly goal value and units from the local database
+            // some default assumption
+            let goalValue = 20000
+            let goalUnits = "Steps"
+            
+            // Set a default donut chart where no goal is achieved
+            createChart(forActivity: selectedActivity, inCell: (cell as! ProgressChartCell), withData: [0, 0, 0, 0, 0, 0, 0, goalValue], goalValue: goalValue, goalUnits: goalUnits)
+            // Retrieve values for this week from Firebase
+            
+            // Update the chart to show the updated value 
         }
         
         cell.preservesSuperviewLayoutMargins = false
@@ -206,7 +200,7 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
         
         // so that you can scroll and fill the screen in iPhone 5
         if indexPath.section == 2 {
-            return 490;
+            return 480;
         }
         
         return 44;
@@ -225,6 +219,26 @@ class Progress_ActivityViewController: UITableViewController, UIPickerViewDelega
             return 2
         }
         return tableView.sectionFooterHeight
+    }
+    
+    // MARK: - Custom functions
+    func weekDaysString() -> String {
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
+        
+        let startOfWeek = gregorian.date(byAdding: .day, value: 1, to: sunday!)
+        let endOfWeek = gregorian.date(byAdding: .day, value: 7, to: sunday!)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        
+        return dateFormatter.string(from: startOfWeek!) + " — " + dateFormatter.string(from: endOfWeek!)
+    }
+    
+    func createChart(forActivity activity: String, inCell cell: ProgressChartCell, withData values: [Int], goalValue: Int, goalUnits: String) {
+        // customize the legend
+        //cell.activityImage = [UIima]
     }
     
 }

@@ -14,6 +14,8 @@
 		98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1710C135088E5B384F48D3 /* Pods_BMH.framework */; };
 		EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0A98E42071A9B400C7D253 /* HistoryCell.xib */; };
 		EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0A98E52071A9B400C7D253 /* HistoryCell.swift */; };
+		EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E531520741F19005A9F41 /* ActivityExercise.swift */; };
+		EA1E531A2074211F005A9F41 /* ActExList.json in Resources */ = {isa = PBXBuildFile; fileRef = EA1E53192074211F005A9F41 /* ActExList.json */; };
 		EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBA206B22DF00B016FE /* AppDelegate.swift */; };
 		EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */; };
 		EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */; };
@@ -23,10 +25,11 @@
 		EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */; };
 		EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */; };
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
-		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
-		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
 		EA5DCF5D206F144600B9A496 /* Progress_ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */; };
-
+		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
+		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
+		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
+		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,8 @@
 		78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSectionHeader.swift; sourceTree = "<group>"; };
 		EA0A98E42071A9B400C7D253 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		EA0A98E52071A9B400C7D253 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		EA1E531520741F19005A9F41 /* ActivityExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityExercise.swift; sourceTree = "<group>"; };
+		EA1E53192074211F005A9F41 /* ActExList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ActExList.json; sourceTree = "<group>"; };
 		EA29CDB7206B22DF00B016FE /* BMH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA29CDBA206B22DF00B016FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
@@ -50,10 +55,11 @@
 		EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ActivityViewController.swift; sourceTree = "<group>"; };
 		EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
-		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ExerciseViewController.swift; sourceTree = "<group>"; };
-
+		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
+		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
+		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,15 @@
 				19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EA1E531420741EA9005A9F41 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				EA1E531520741F19005A9F41 /* ActivityExercise.swift */,
+				EA1E53192074211F005A9F41 /* ActExList.json */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		EA29CDAE206B22DF00B016FE = {
@@ -99,6 +114,7 @@
 		EA29CDB9206B22DF00B016FE /* BMH */ = {
 			isa = PBXGroup;
 			children = (
+				EA1E531420741EA9005A9F41 /* SupportFiles */,
 				EA4A98A5206BF6CE004C0957 /* SupportViews */,
 				EA4A98A3206BF66D004C0957 /* ViewControllers */,
 				EA4A98A2206BF648004C0957 /* HistoryViews */,
@@ -117,6 +133,8 @@
 			children = (
 				EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */,
 				EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */,
+				EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */,
+				EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */,
 			);
 			path = ProgressViews;
 			sourceTree = "<group>";
@@ -226,9 +244,11 @@
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
+				EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */,
 				EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */,
 				EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */,
 				EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */,
+				EA1E531A2074211F005A9F41 /* ActExList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +343,7 @@
 			files = (
 				EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
+				EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */,
 				78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */,
 				278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */,
 				EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */,
@@ -331,6 +352,7 @@
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
+				EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */,
 				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
 				FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */,
 			);
