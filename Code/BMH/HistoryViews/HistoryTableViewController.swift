@@ -2,18 +2,32 @@
 //  HistoryTableViewController.swift
 //  BMH
 //
-//  Created by Otto on 3/29/18.
+//  Created by Yu-Ching Hu on 3/29/18.
 //  Copyright © 2018 Bamboo Mobile Health. All rights reserved.
 //
 
 import UIKit
 import Charts
+import CoreMotion
 
 class HistoryTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
+    var weekdays: [String]!
+    var stepsTaken = [Int]()
+    weak var axisFormatDelegate: IAxisValueFormatter?
+    
+override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.register(UINib(nibName:"HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryGraphView")
+        
+        /*
+        axisFormatDelegate = self as IAxisValueFormatter
+        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
+        setChart(dataEntryX: weekdays, dataEntryY: stepsTaken)
+        */
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -21,9 +35,27 @@ class HistoryTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // register our custom nibs
-        self.tableView.register(UINib(nibName:"HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryGraphView")
+        
     }
 
+    func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
+        cell.barChartView.noDataText = "You need to provide data for the chart."
+        var dataEntries:[BarChartDataEntry] = []
+        for i in 0..<forX.count{
+            // print(forX[i])
+            // let dataEntry = BarChartDataEntry(x: (forX[i] as NSString).doubleValue, y: Double(unitsSold[i]))
+            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(forY[i]) , data: weekdays as AnyObject?)
+            print(dataEntry)
+            dataEntries.append(dataEntry)
+        }
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        let chartData = BarChartData(dataSet: chartDataSet)
+        cell.barChartView.data = chartData
+        let xAxisValue = cell.barChartView.xAxis
+        xAxisValue.valueFormatter = axisFormatDelegate
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,14 +73,26 @@ class HistoryTableViewController: UITableViewController {
         return 1
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
         (cell.barChartView).noDataText = "You need to provide data for the chart."
+//        (cell.barChartView).drawGridBackgroundEnabled = true
+        (cell.barChartView).maxVisibleCount = 10000
+        
         // Configure the cell...
-
+        // create some dummy data
+        axisFormatDelegate = self as IAxisValueFormatter
+        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
+        
+        // load that dummy data into our cell
+        setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
+        
+        
         return cell
     }
+    
+    
  
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 500
@@ -99,4 +143,11 @@ class HistoryTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension HistoryTableViewController: IAxisValueFormatter {
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return weekdays[Int(value)]
+    }
 }

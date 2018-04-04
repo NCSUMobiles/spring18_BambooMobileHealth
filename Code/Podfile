@@ -17,4 +17,5 @@ target 'BMH' do
 	pod 'CryptoSwift'
 	pod 'SQLite.swift/SQLCipher'
     pod 'Charts'
+    
 end
