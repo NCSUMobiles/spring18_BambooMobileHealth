@@ -16,7 +16,7 @@
         <!--Progress_ActivityView-->
         <scene sceneID="NaB-pg-0Ky">
             <objects>
-                <tableViewController storyboardIdentifier="Progress_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JxN-ne-8YG" userLabel="Progress_ActivityView" customClass="Progress_ActivityViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Progress_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JxN-ne-8YG" userLabel="Progress_ActivityView" customClass="ProgressTableViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="18" id="p5C-xc-pF0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +58,7 @@
         <!--Progress_ExerciseView-->
         <scene sceneID="2RM-J9-5Ph">
             <objects>
-                <tableViewController storyboardIdentifier="Progress_ExerciseViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9V1-fj-fc2" userLabel="Progress_ExerciseView" customClass="Progress_ExerciseViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Progress_ExerciseViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9V1-fj-fc2" userLabel="Progress_ExerciseView" customClass="ProgressTableViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="18" id="msh-0w-jlg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,19 +1,25 @@
 //
-//  Progress_ExerciseViewController.swift
+//  ProgressTableViewController.swift
 //  BMH
 //
-//  Created by Kalpesh Padia on 3/30/18.
+//  Created by Kalpesh Padia on 4/5/18.
 //  Copyright © 2018 Bamboo Mobile Health. All rights reserved.
 //
 
 import UIKit
 import Charts
 
-class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
+class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
     
     var showPickerView : Bool = false
-    var exerciseList : [String]!
-    var selectedExercise : Int = -1
+    var activities : [ActEx]!
+    var selectedActivity : Int = -1
+    
+    var selectionCellReuseIdentifer : String!
+    var chartCellReuseIdentifier : String!
+    var labelCellReuseIdentifer : String!
+    
+    var activityDebugLabel : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,16 +30,32 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // register our custom nibs
-        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseSelectionCell")
-        self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: "Progress_ExerciseChartCell")
-        
-        // load the exercise list
-        exerciseList = []
+        // get the app delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        for exercise in appDelegate.exercises {
-            exerciseList.append(exercise.name)
+        
+        // load the activity list and register custom nibs depending on the scene
+        activities = []
+        if self.restorationIdentifier == "Progress_ActivityViewController" {
+            activities = appDelegate.activities
+            
+            selectionCellReuseIdentifer = "Progress_ActivitySelectionCell"
+            chartCellReuseIdentifier = "Progress_ActivityChartCell"
+            labelCellReuseIdentifer = "Progress_ActivityViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
+            
+            activityDebugLabel = "activity"
         }
+        else if self.restorationIdentifier == "Progress_ExerciseViewController" {
+            activities = appDelegate.exercises
+            
+            selectionCellReuseIdentifer = "Progress_ExerciseSelectionCell"
+            chartCellReuseIdentifier = "Progress_ExerciseChartCell"
+            labelCellReuseIdentifer = "Progress_ExerciseViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
+            
+            activityDebugLabel = "exercise"
+        }
+        
+        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
+        self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: chartCellReuseIdentifier)
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,15 +71,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     
     // number of items
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exerciseList.count
-    }
-    
-    // update the content shown in pickerview
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row < exerciseList.count  {
-            return exerciseList[row]
-        }
-        return ""
+        return activities.count
     }
     
     // size the text in each row of pickerview
@@ -66,7 +80,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         let labelRow = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
         
         pickerLabel.textColor = UIColor.black
-        pickerLabel.text = exerciseList[row]
+        pickerLabel.text = activities[row].name
         pickerLabel.font = labelRow?.textLabel?.font
         pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
@@ -76,18 +90,18 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
         
-        selectedExercise = row
-        print("Selected exercise \"\(exerciseList[selectedExercise])\"")
+        selectedActivity = row
+        print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         
         // update the text in first section first row
-        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = exerciseList[selectedExercise]
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
         
         // remove any existing selection
         let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
         chartCell.chartView.clear()
         
         // update the chart in third section first row
-        createChart(inCell: chartCell, forExercise: selectedExercise)
+        createChart(inCell: chartCell, forActivity: selectedActivity)
         
         self.tableView.endUpdates()
     }
@@ -117,7 +131,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
         if (indexPath.section == 0 && indexPath.row == 1) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseSelectionCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: selectionCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
             let pickerView = (cell as! SelectionTableViewCell).pickerView
@@ -126,8 +140,8 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
             pickerView?.showsSelectionIndicator = true;
             
             // save the selected text
-            if selectedExercise == -1 {
-                // scroll to the middle exercise
+            if selectedActivity == -1 {
+                // scroll to the middle activity
                 pickerView?.selectRow(0, inComponent: 0, animated: true)
                 
                 // hack to make sure the selection indicator shows
@@ -141,35 +155,35 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
                                                  NSLayoutConstraint.init(item: pickerView as Any, attribute: .leading, relatedBy: .equal, toItem: cell.contentView, attribute: .leading, multiplier: 1, constant: 0)])
             }
             
-            selectedExercise = (pickerView?.selectedRow(inComponent: 0))!
-            print("Selected exercise \"\(exerciseList[selectedExercise])\"")
+            selectedActivity = (pickerView?.selectedRow(inComponent: 0))!
+            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         }
         else if (indexPath.section == 0 && indexPath.row == 0) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
-            if  selectedExercise == -1 {
-                cell.textLabel?.text = exerciseList[0]
+            if  selectedActivity == -1 {
+                cell.textLabel?.text = activities[0].name
             }
             else {
-                cell.textLabel?.text = exerciseList[selectedExercise]
+                cell.textLabel?.text = activities[selectedActivity].name
             }
         }
         else if (indexPath.section == 1){
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseViewCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
             cell.textLabel?.text = weekDaysString()
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "Progress_ExerciseChartCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: chartCellReuseIdentifier, for: indexPath)
             
             // create chart inside this cell
-            if selectedExercise == -1 {
-                createChart(inCell: cell as! ProgressChartCell, forExercise: 0)
+            if selectedActivity == -1 {
+                createChart(inCell: cell as! ProgressChartCell, forActivity: 0)
             }
             else {
-                createChart(inCell: cell as! ProgressChartCell, forExercise: selectedExercise)
+                createChart(inCell: cell as! ProgressChartCell, forActivity: selectedActivity)
             }
         }
         
@@ -184,7 +198,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Choose an Exercise"
+            return "Choose an Activity"
         case 1:
             return "Showing Week of:"
         default:
@@ -279,16 +293,16 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     }
     
     func updateProgressValue(value: Int, inCell cell: ProgressChartCell) -> UIColor {
-        let exercise = cell.actEx
+        let activity = cell.actEx
         // update the bottom view
-        cell.iconImage.image = UIImage(named: (exercise?.imageName)!)
-        cell.iconLabel.text = exercise?.name
+        cell.iconImage.image = UIImage(named: (activity?.imageName)!)
+        cell.iconLabel.text = activity?.name
         
         // calculate percent of goal achieved to customize label color
         var goalPercent = 0.0
         var valueColor = UIColor.orange
         
-        goalPercent = Double(value) * 100.0 / Double((exercise?.goalValue)!)
+        goalPercent = Double(value) * 100.0 / Double((activity?.goalValue)!)
         
         // Customize label color
         if goalPercent <= 30.0 {
@@ -305,7 +319,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         let valueString = NSMutableAttributedString(string: String(value), attributes: valueAttribute)
         
         valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 20.0)!, NSAttributedStringKey.foregroundColor: valueColor]
-        let valueString2 = NSAttributedString(string: " " + (exercise?.goalUnits)!, attributes: valueAttribute)
+        let valueString2 = NSAttributedString(string: " " + (activity?.goalUnits)!, attributes: valueAttribute)
         valueString.append(valueString2)
         cell.valueLabel.attributedText = valueString
         
@@ -313,19 +327,19 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
     }
     
     // Create a chart inside the specified cell
-    func createChart(inCell cell: ProgressChartCell, forExercise index: Int) {
+    func createChart(inCell cell: ProgressChartCell, forActivity index: Int) {
         // Configure the cell...
-        // For this exercise obtain weekly goal value and units
-        let exercise = (UIApplication.shared.delegate as! AppDelegate).exercises[index]
-
-        // save exercise into cell for futture use
-        cell.actEx = exercise
+        // For this activity obtain weekly goal value and units
+        let activity = activities[index]
+        
+        // save activity into cell for futture use
+        cell.actEx = activity
         
         // Retrieve values for this week from Firebase
         
         // Update the chart to show the updated value
         // Set a dummy donut chart
-        drawChart(inCell: cell, withData: [Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5)), Int(arc4random_uniform(5))])
+        drawChart(inCell: cell, withData: [Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001))])
         
         // set chart delegate to self
         cell.chartView.delegate = self
@@ -350,7 +364,7 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         
         // save the total progress this week
         cell.progressValue = sum
-        let exercise = cell.actEx
+        let activity = cell.actEx
         
         // customize the bottom view
         let valueColor = updateProgressValue(value: sum, inCell: cell)
@@ -384,9 +398,8 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         
         var valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 36.0)!, NSAttributedStringKey.foregroundColor: valueColor, NSAttributedStringKey.paragraphStyle: paragraphStyle]
         
-        let centerText = NSMutableAttributedString(string: String(sum) + "\n" + String((exercise?.goalValue)!) + " " + (exercise?.goalUnits)!)
+        let centerText = NSMutableAttributedString(string: String(sum) + "\n" + String((activity?.goalValue)!) + " " + (activity?.goalUnits)!)
         centerText.setAttributes(valueAttribute, range: NSRange(location: 0, length: centerText.length))
-        print (String(sum).count)
         
         valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 16.0)!, NSAttributedStringKey.foregroundColor: UIColor.black]
         centerText.addAttributes(valueAttribute, range: NSRange(location: String(sum).count, length: centerText.length - String(sum).count))
