@@ -60,6 +60,18 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         return ""
     }
     
+    // size the text in each row of pickerview
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        let labelRow = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.text = exerciseList[row]
+        pickerLabel.font = labelRow?.textLabel?.font
+        pickerLabel.textAlignment = NSTextAlignment.center
+        return pickerLabel
+    }
+    
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
@@ -70,8 +82,12 @@ class Progress_ExerciseViewController: UITableViewController, UIPickerViewDelega
         // update the text in first section first row
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = exerciseList[selectedExercise]
         
+        // remove any existing selection
+        let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        chartCell.chartView.clear()
+        
         // update the chart in third section first row
-        createChart(inCell: ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell), forExercise: selectedExercise)
+        createChart(inCell: chartCell, forExercise: selectedExercise)
         
         self.tableView.endUpdates()
     }
