@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -27,13 +27,22 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func loginButtonClicked(_ sender: UIButton) {
-        if(usernameTextField.text == username && passwordTextField.text == password){
+    fileprivate func performLogin() {
+        if(usernameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == username && passwordTextField.text == password) {
             LoginHelper.saveLogedInUser(userId: username)
             performSegue(withIdentifier: "loginToTabBar", sender: self)
-        }else{
+        }
+        else {
             print("Incorrect Username Password")
         }
+    }
+    
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
+        performLogin()
+    }
+    
+    @IBAction func textFieldPrimaryAction(_ sender: UITextField) {
+        performLogin()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -102,8 +102,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.tableView.beginUpdates()
-        
         selectedActivity = row
         print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         
@@ -122,8 +120,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // update the chart in third section first row
         createChart(inCell: chartCell, forActivity: selectedActivity)
-        
-        self.tableView.endUpdates()
     }
     
     // MARK: - Table view data source and delegates
@@ -291,6 +287,10 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // get the cell that contains the chartview
         let cell = (self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell
         
+        if !showSlicedPieChart && cell.pieChartView.highlighted[0].x == 0.0 {
+            togglePieChartType(button: cell.pieChartToggle)
+        }
+        
         // get the value of the selected day
         let value = Int(entry.y)
         
@@ -387,7 +387,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             // set chart delegate to self
             cell.pieChartView.delegate = self
             
-            // custom double tap gesture if showing not showing slices
+            // custom double tap gesture if not showing slices
             if !showSlicedPieChart {
                 cell.pieChartView.addGestureRecognizer(tap)
             } else {
@@ -596,8 +596,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // toggle the state of Pie Chart
         showSlicedPieChart = !showSlicedPieChart
         
-        // start tableView updates
-        self.tableView.beginUpdates()
         if (showSlicedPieChart) {
             // switch the image for the button
             button.setImage(UIImage(named: "donut-single"), for: UIControlState.normal)
@@ -620,9 +618,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             cell.pieChartView.clear()
             createChart(inCell: cell, forActivity: selectedActivity)
         }
-        
-        // end tableView udpates
-        self.tableView.endUpdates()
     }
     
     // toggle between pie chart and bar chart
@@ -632,8 +627,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // toggle the state of Pie Chart
         showPieChart = !showPieChart
         
-        // start tableView updates
-        self.tableView.beginUpdates()
         if (showPieChart) {
             // switch the image for the button
             button.setImage(UIImage(named: "bar-chart"), for: UIControlState.normal)
@@ -669,9 +662,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         else {
             createChart(inCell: cell, forActivity: selectedActivity)
         }
-        
-        // end tableView udpates
-        self.tableView.endUpdates()
     }
     
     // MARK: - Custom gestures for piechartview

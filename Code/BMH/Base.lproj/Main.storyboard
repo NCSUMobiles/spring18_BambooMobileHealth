@@ -592,7 +592,7 @@
                                 <rect key="frame" x="56" y="313" width="263.5" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="td1-fJ-STc">
-                                        <rect key="frame" x="10" y="41.5" width="83.5" height="21.5"/>
+                                        <rect key="frame" x="10" y="46.5" width="83.5" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -613,23 +613,38 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPz-gW-XTu">
-                                        <rect key="frame" x="105" y="78" width="53" height="39"/>
+                                        <rect key="frame" x="105" y="92.5" width="53" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
                                             <action selector="loginButtonClicked:" destination="kqA-VM-SWx" eventType="touchUpInside" id="lJi-E4-Yd5"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ym1-EW-wW4">
+                                        <rect key="frame" x="103.5" y="42.5" width="150" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="textFieldPrimaryAction:" destination="kqA-VM-SWx" eventType="primaryActionTriggered" id="Trm-Zo-XYm"/>
+                                            <outlet property="delegate" destination="kqA-VM-SWx" id="tK6-L8-Xnm"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="6yF-M5-wy3" firstAttribute="top" secondItem="WTC-GQ-SXB" secondAttribute="top" constant="10" id="49Q-QR-3Xq"/>
                                     <constraint firstItem="PPz-gW-XTu" firstAttribute="centerX" secondItem="WTC-GQ-SXB" secondAttribute="centerX" id="8Fc-Iq-ppz"/>
-                                    <constraint firstItem="td1-fJ-STc" firstAttribute="top" secondItem="6yF-M5-wy3" secondAttribute="bottom" constant="10" id="BCY-Xy-ESc"/>
+                                    <constraint firstItem="td1-fJ-STc" firstAttribute="top" secondItem="6yF-M5-wy3" secondAttribute="bottom" constant="15" id="BCY-Xy-ESc"/>
                                     <constraint firstItem="6yF-M5-wy3" firstAttribute="leading" secondItem="WTC-GQ-SXB" secondAttribute="leading" constant="10" id="JGD-Gt-31K"/>
+                                    <constraint firstItem="PPz-gW-XTu" firstAttribute="top" secondItem="ym1-EW-wW4" secondAttribute="bottom" constant="20" id="KDJ-iK-Fjo"/>
                                     <constraint firstItem="td1-fJ-STc" firstAttribute="trailing" secondItem="6yF-M5-wy3" secondAttribute="trailing" id="MJC-OT-W9q"/>
+                                    <constraint firstItem="ym1-EW-wW4" firstAttribute="centerY" secondItem="td1-fJ-STc" secondAttribute="centerY" id="S3R-ku-Z3N"/>
+                                    <constraint firstItem="ym1-EW-wW4" firstAttribute="centerX" secondItem="l4F-A1-fJl" secondAttribute="centerX" id="TdM-7U-qEb"/>
                                     <constraint firstItem="td1-fJ-STc" firstAttribute="leading" secondItem="6yF-M5-wy3" secondAttribute="leading" id="UGT-Me-C6G"/>
                                     <constraint firstItem="l4F-A1-fJl" firstAttribute="centerY" secondItem="6yF-M5-wy3" secondAttribute="centerY" id="XC9-IY-UHM"/>
+                                    <constraint firstItem="ym1-EW-wW4" firstAttribute="height" secondItem="l4F-A1-fJl" secondAttribute="height" id="Zcf-IY-kLL"/>
                                     <constraint firstItem="l4F-A1-fJl" firstAttribute="leading" secondItem="6yF-M5-wy3" secondAttribute="trailing" constant="10" id="mmZ-rN-Dnl"/>
+                                    <constraint firstItem="ym1-EW-wW4" firstAttribute="width" secondItem="l4F-A1-fJl" secondAttribute="width" id="xZk-cp-kdz"/>
                                     <constraint firstAttribute="trailing" secondItem="l4F-A1-fJl" secondAttribute="trailing" constant="10" id="xeC-55-R8C"/>
                                 </constraints>
                             </view>
@@ -641,21 +656,11 @@
                                     <constraint firstAttribute="width" secondItem="DPY-7M-C6q" secondAttribute="height" multiplier="1:1" id="ujo-DH-SSG"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ym1-EW-wW4">
-                                <rect key="frame" x="159.5" y="351" width="150" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DPY-7M-C6q" firstAttribute="centerX" secondItem="Sxa-n5-30Y" secondAttribute="centerX" id="C6w-uP-ViS"/>
                             <constraint firstItem="WTC-GQ-SXB" firstAttribute="height" secondItem="DPY-7M-C6q" secondAttribute="height" id="NQa-Rm-17C"/>
-                            <constraint firstItem="PPz-gW-XTu" firstAttribute="top" secondItem="ym1-EW-wW4" secondAttribute="bottom" constant="10" id="S9z-vQ-gba"/>
-                            <constraint firstItem="ym1-EW-wW4" firstAttribute="leading" secondItem="l4F-A1-fJl" secondAttribute="leading" id="edq-Td-ned"/>
-                            <constraint firstItem="ym1-EW-wW4" firstAttribute="trailing" secondItem="l4F-A1-fJl" secondAttribute="trailing" id="hho-9M-e7Y"/>
-                            <constraint firstItem="ym1-EW-wW4" firstAttribute="centerY" secondItem="td1-fJ-STc" secondAttribute="centerY" id="jUY-02-fLN"/>
                             <constraint firstItem="DPY-7M-C6q" firstAttribute="bottom" secondItem="Sxa-n5-30Y" secondAttribute="centerY" constant="-40" id="kag-Rz-mRo"/>
                             <constraint firstItem="WTC-GQ-SXB" firstAttribute="width" secondItem="UqJ-Ce-W0H" secondAttribute="width" multiplier="0.7" constant="1" id="qC2-CO-pqB"/>
                             <constraint firstItem="WTC-GQ-SXB" firstAttribute="top" secondItem="Sxa-n5-30Y" secondAttribute="centerY" constant="-30" id="xoE-jr-zyZ"/>
