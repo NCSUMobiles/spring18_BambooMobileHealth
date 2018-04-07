@@ -62,15 +62,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         self.tableView.register(UINib(nibName:"HistoryCell", bundle: nil), forCellReuseIdentifier: chartCellReuseIdentifier)
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
-        
-        
-        /*
-         axisFormatDelegate = self as IAxisValueFormatter
-         weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-         stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
-         setChart(dataEntryX: weekdays, dataEntryY: stepsTaken)
-         */
-        
+       
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -107,7 +99,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     }
     
     // if select any row, force update the table view
-    /*
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
         
@@ -123,11 +115,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     
         // update the chart in third section first row
         // TODO: change to random data
-        setChart(inCell: chartCell, dataEntryX: weekdays, dataEntryY: stepsTaken)
-        
+//        setChart(inCell: chartCell, dataEntryX: weekdays, dataEntryY: stepsTaken)
+        setChart(inCell: chartCell, forActivity: selectedActivity)
         self.tableView.endUpdates()
     }
- */
+ 
   
     // dummy data for now
     var weekdays: [String]!
