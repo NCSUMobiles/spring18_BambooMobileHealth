@@ -134,13 +134,22 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     var stepsTaken = [Int]()
     weak var axisFormatDelegate: IAxisValueFormatter?
     
-    func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
+//    func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
+    func setChart(inCell cell: HistoryCell, forActivity index: Int) {
         cell.barChartView.noDataText = "You need to provide data for the chart."
+        
+        let activity = activities[index]
+        
+        axisFormatDelegate = self as IAxisValueFormatter
+        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
+        
         var dataEntries:[BarChartDataEntry] = []
-        for i in 0..<forX.count{
+        
+        for i in 0..<weekdays.count{
             // print(forX[i])
             // let dataEntry = BarChartDataEntry(x: (forX[i] as NSString).doubleValue, y: Double(unitsSold[i]))
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(forY[i]) , data: weekdays as AnyObject?)
+            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
             print(dataEntry)
             dataEntries.append(dataEntry)
         }
@@ -220,12 +229,22 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: chartCellReuseIdentifier, for: indexPath) as! HistoryCell
-            (cell.barChartView).noDataText = "You need to provide data for the chart."
-            (cell.barChartView).maxVisibleCount = 10000
+            //(cell.barChartView).noDataText = "You need to provide data for the chart."
+            cell.barChartView.maxVisibleCount = 10000
+            cell.barChartView.chartDescription?.text = ""
+           
+            if selectedActivity == -1 {
+                setChart(inCell: cell, forActivity: 0)
+            }
+            else {
+                setChart(inCell: cell, forActivity: selectedActivity)
+            }
+            
+            
             // create some dummy data
-            axisFormatDelegate = self as IAxisValueFormatter
-            weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-            stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
+//            axisFormatDelegate = self as IAxisValueFormatter
+//            weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+//            stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
             
             // load that dummy data into our cell
 //            setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
