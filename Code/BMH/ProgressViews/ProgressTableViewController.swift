@@ -12,12 +12,22 @@ import Charts
 class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
     
     var showPickerView : Bool = false
+    var showPieChart : Bool = true
+    var showSlicedPieChart : Bool = false
+    
     var activities : [ActEx]!
     var selectedActivity : Int = -1
+    var dataArr : [Int] = []
     
     var selectionCellReuseIdentifer : String!
     var chartCellReuseIdentifier : String!
     var labelCellReuseIdentifer : String!
+    
+    let initDaysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let sliceColors = [UIColor(hex: "#1f77b4"), UIColor(hex: "#ff7f0e"), UIColor(hex: "#2ca02c"), UIColor(hex: "#d62728"), UIColor(hex: "#9467bd"), UIColor(hex: "#8c564b"), UIColor(hex: "#e377c2"), UIColor.lightGray]
+    let chartColors = [UIColor(red: 18.0/255.0, green: 121.0/255.0, blue: 201.0/255.0, alpha: 1.0), UIColor.lightGray]
+    
+    var tap : UITapGestureRecognizer!
     
     var activityDebugLabel : String = ""
     
@@ -56,6 +66,10 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
         self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: chartCellReuseIdentifier)
+        
+        // custom double tap gesture which is added and removed at will
+        tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapGesture))
+        tap.numberOfTapsRequired = 2
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,7 +112,13 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // remove any existing selection
         let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
-        chartCell.chartView.clear()
+        chartCell.pieChartView.clear()
+        
+        // get the data for the selected activity
+        // Retrieve values for this week from Firebase
+        
+        // For now, create some dummy data
+        createDummyData()
         
         // update the chart in third section first row
         createChart(inCell: chartCell, forActivity: selectedActivity)
@@ -178,6 +198,12 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: chartCellReuseIdentifier, for: indexPath)
             
+            // get the data for the selected activity
+            // Retrieve values for this week from Firebase
+            
+            // For now, create some dummy data
+            createDummyData()
+            
             // create chart inside this cell
             if selectedActivity == -1 {
                 createChart(inCell: cell as! ProgressChartCell, forActivity: 0)
@@ -185,6 +211,10 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             else {
                 createChart(inCell: cell as! ProgressChartCell, forActivity: selectedActivity)
             }
+            
+            // associate custom handler for touch up inside the toggle buttons in our chart cells
+            (cell as! ProgressChartCell).pieChartToggle.addTarget(self, action: #selector(togglePieChartType(button:)), for: UIControlEvents.touchUpInside)
+            (cell as! ProgressChartCell).barChartToggle.addTarget(self, action: #selector(toggleChartType(button:)), for: UIControlEvents.touchUpInside)
         }
         
         cell.preservesSuperviewLayoutMargins = false
@@ -278,6 +308,21 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     }
     
     // MARK: - Custom functions
+    func createDummyData() {
+        if dataArr.count > 0 {
+            dataArr.removeAll()
+        }
+        
+        var limit : UInt32 = 3000
+        if self.restorationIdentifier == "Progress_ExerciseViewController" {
+            limit = 5
+        }
+        
+        for _ in 0...6 {
+            dataArr.append(Int(arc4random_uniform(limit)))
+        }
+    }
+    
     func weekDaysString() -> String {
         let gregorian = Calendar(identifier: .gregorian)
         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
@@ -335,47 +380,74 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // save activity into cell for futture use
         cell.actEx = activity
         
-        // Retrieve values for this week from Firebase
+        if showPieChart {
+            // Create a pie chart
+            drawPieChart(inCell: cell, withData: dataArr)
+            
+            // set chart delegate to self
+            cell.pieChartView.delegate = self
+            
+            // custom double tap gesture if showing not showing slices
+            if !showSlicedPieChart {
+                cell.pieChartView.addGestureRecognizer(tap)
+            } else {
+                cell.pieChartView.removeGestureRecognizer(tap)
+            }
+        }
+        else {
+            // Create a bar chart
+            drawBarChart(inCell: cell, withData: dataArr)
+            
+            // set chart delegate to self
+            cell.barChartView.delegate = self
+        }
         
-        // Update the chart to show the updated value
-        // Set a dummy donut chart
-        drawChart(inCell: cell, withData: [Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001)), Int(arc4random_uniform(3001))])
-        
-        // set chart delegate to self
-        cell.chartView.delegate = self
     }
     
-    // draw the chart
-    func drawChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
-        let initDaysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    // draw a pie chart
+    func drawPieChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+        // get the activity object for this cell
+        let activity = cell.actEx
+        
+        let chartView = cell.pieChartView!
         
         var values : [Int] = []
         var daysOfWeek : [String] = []
-        // calculate percent of goal achieved to customize label color
+        var setColors : [UIColor] = []
         var sum = 0
+        
+        // calculate percent of goal achieved to customize label color
         for i in 0...6 {
             if (initValues[i] > 0) {
                 sum += initValues[i]
                 
-                values.append(initValues[i])
-                daysOfWeek.append(initDaysOfWeek[i])
+                if showSlicedPieChart {
+                    values.append(initValues[i])
+                    daysOfWeek.append(initDaysOfWeek[i])
+                    setColors.append(sliceColors[i])
+                }
             }
         }
         
         // save the total progress this week
         cell.progressValue = sum
-        let activity = cell.actEx
         
-        // customize the bottom view
+        // need to add a remaining part if not showing sliced pie chart
+        if !showSlicedPieChart {
+            values.append(sum)
+            daysOfWeek.append("Completed")
+            setColors.append(chartColors[0])
+            
+            // create an optional empty "gray area"
+            if sum < (activity?.goalValue)! {
+                values.append((activity?.goalValue)! - sum)
+                daysOfWeek.append("Remaining")
+                setColors.append(chartColors[1])
+            }
+        }
+        
+        // First customize the bottom view
         let valueColor = updateProgressValue(value: sum, inCell: cell)
-        
-        // customize the legend
-        let legend = cell.chartView.legend
-        legend.horizontalAlignment = .center
-        legend.verticalAlignment = .bottom
-        legend.orientation = .horizontal
-        legend.xEntrySpace = 7
-        cell.chartView.chartDescription?.enabled = false
         
         // create data entries
         let entries = (0..<values.count).map { (i) -> PieChartDataEntry in
@@ -387,9 +459,20 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // customize the data set
         set.drawIconsEnabled = false
-        set.drawValuesEnabled = false //hides the day values
+        set.drawValuesEnabled = false // hides the value of each day
+        set.colors = setColors
         set.sliceSpace = 2
-        set.colors = [UIColor(hex: "#1f77b4"), UIColor(hex: "#ff7f0e"), UIColor(hex: "#2ca02c"), UIColor(hex: "#d62728"), UIColor(hex: "#9467bd"), UIColor(hex: "#8c564b"), UIColor(hex: "#e377c2")]
+        
+        if !showSlicedPieChart {
+            set.sliceSpace = 0
+        }
+        
+        // customize the legend
+        let legend = chartView.legend
+        legend.horizontalAlignment = .center
+        legend.verticalAlignment = .bottom
+        legend.orientation = .horizontal
+        legend.xEntrySpace = 7
         
         // customize the center text
         let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
@@ -404,17 +487,199 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 16.0)!, NSAttributedStringKey.foregroundColor: UIColor.black]
         centerText.addAttributes(valueAttribute, range: NSRange(location: String(sum).count, length: centerText.length - String(sum).count))
         
+        // assign the center text
+        chartView.centerAttributedText = centerText
+        chartView.drawCenterTextEnabled = true
+        
+        // chartView properties
+        chartView.chartDescription?.enabled = false
+        
         // finally set the data
         let data = PieChartData(dataSet: set)
         
         // visualize
-        cell.chartView.data = data
-        
-        // assign a center text
-        cell.chartView.centerAttributedText = centerText
-        cell.chartView.drawCenterTextEnabled = true
+        chartView.data = data
         
         // and animate
-        cell.chartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        chartView.animate(xAxisDuration: 1.2, easingOption: .easeOutQuint)
+    }
+    
+    // draw a bar chart
+    func drawBarChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+        // get the activity object for this cell
+        let activity = cell.actEx
+        
+        let chartView = cell.barChartView!
+        let formatter:BarChartFormatter = BarChartFormatter()
+        
+        var values : [Int] = []
+        var setColors : [UIColor] = []
+        var sum = 0
+        
+        // calculate percent of goal achieved to customize label color
+        for i in 0...6 {
+            if (initValues[i] > 0) {
+                sum += initValues[i]
+                values.append(initValues[i])
+                setColors.append(sliceColors[i])
+            }
+        }
+        
+        // save the total progress this week
+        cell.progressValue = sum
+        
+        // customize the bottom view
+        _ = updateProgressValue(value: sum, inCell: cell)
+        
+        // create data entries
+        let entries = (0..<values.count).map { (i) -> BarChartDataEntry in
+            _ = formatter.stringForValue(Double(i), axis: chartView.xAxis)
+            return BarChartDataEntry(x: Double(i), y: Double(values[i]))
+        }
+        
+        // create a data set from the data
+        let datasetLabel : String = "Goal: " +  String((activity?.goalValue)!) + " " + (activity?.goalUnits)!
+        let set = BarChartDataSet(values: entries, label: datasetLabel)
+        
+        // customize the data set
+        set.drawIconsEnabled = false
+        set.drawValuesEnabled = false //hides the day values
+        set.colors = setColors
+        
+        // customize the axes
+        chartView.rightAxis.enabled = false
+        chartView.rightAxis.labelPosition = .outsideChart
+        chartView.rightAxis.spaceTop = 0.01
+        chartView.rightAxis.axisMinimum = 0
+        
+        chartView.leftAxis.enabled = true
+        chartView.leftAxis.labelPosition = .outsideChart
+        chartView.leftAxis.spaceTop = 0.01
+        chartView.leftAxis.axisMinimum = 0
+        
+        chartView.xAxis.enabled = true
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.granularity = 1
+        chartView.xAxis.labelCount = values.count
+        chartView.xAxis.valueFormatter = formatter
+        
+        // customize the legend
+        let legend = chartView.legend
+        legend.horizontalAlignment = .center
+        legend.verticalAlignment = .bottom
+        legend.orientation = .horizontal
+        legend.drawInside = false
+        legend.xEntrySpace = 0
+        legend.form = .none
+        legend.font = UIFont(name: "Hiragino Sans", size: 16.0)!
+        legend.xOffset = -(datasetLabel.width(withConstrainedHeight: 16.0, font: legend.font))*0.3
+        
+        // chartView properties
+        chartView.chartDescription?.enabled = false
+        chartView.pinchZoomEnabled = false
+        chartView.doubleTapToZoomEnabled = false
+        chartView.xAxis.drawGridLinesEnabled = false
+        
+        // finally set the data
+        let data = BarChartData(dataSet: set)
+        
+        // visualize
+        chartView.data = data
+        
+        // and animate
+        chartView.animate(yAxisDuration: 1.2, easingOption: .easeOutQuart)
+    }
+    
+    // MARK: - Custom IBActions for controlling the chart type
+    // toggle between filled and segmented pie chart
+    @objc func togglePieChartType (button : UIButton) {
+        // toggle the state of Pie Chart
+        showSlicedPieChart = !showSlicedPieChart
+        
+        // start tableView updates
+        self.tableView.beginUpdates()
+        if (showSlicedPieChart) {
+            // switch the image for the button
+            button.setImage(UIImage(named: "donut-single"), for: UIControlState.normal)
+            print ("Now showing donut-multi")
+        }
+        else {
+            // switch the image for the button
+            button.setImage(UIImage(named: "donut-multi"), for: UIControlState.normal)
+            print ("Now showing donut-single")
+        }
+        
+        // update the chart
+        let cell = ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        
+        if selectedActivity == -1 {
+            cell.pieChartView.clear()
+            createChart(inCell: cell, forActivity: 0)
+        }
+        else {
+            cell.pieChartView.clear()
+            createChart(inCell: cell, forActivity: selectedActivity)
+        }
+        
+        // end tableView udpates
+        self.tableView.endUpdates()
+    }
+    
+    // toggle between pie chart and bar chart
+    @objc func toggleChartType (button : UIButton) {
+        let cell = ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        
+        // toggle the state of Pie Chart
+        showPieChart = !showPieChart
+        
+        // start tableView updates
+        self.tableView.beginUpdates()
+        if (showPieChart) {
+            // switch the image for the button
+            button.setImage(UIImage(named: "bar-chart"), for: UIControlState.normal)
+            button.imageEdgeInsets = UIEdgeInsetsMake(4,4,4,4) // hack because we don't have padding for the bar chart icon
+            print ("Now showing pie chart")
+            
+            // update the chartview visibility
+            cell.pieChartView.isHidden = false
+            cell.barChartView.isHidden = true
+            cell.pieChartToggle.isHidden = false
+        }
+        else {
+            // switch the image for the button
+            if (showSlicedPieChart) {
+                button.setImage(UIImage(named: "donut-multi"), for: UIControlState.normal)
+            }
+            else {
+                button.setImage(UIImage(named: "donut-single"), for: UIControlState.normal)
+            }
+            button.imageEdgeInsets = UIEdgeInsetsMake(2,2,2,2)
+            print ("Now showing bar chart")
+            
+            // update the chartview visibility
+            cell.pieChartView.isHidden = true
+            cell.barChartView.isHidden = false
+            cell.pieChartToggle.isHidden = true
+        }
+        
+        // draw new chart
+        if selectedActivity == -1 {
+            createChart(inCell: cell, forActivity: 0)
+        }
+        else {
+            createChart(inCell: cell, forActivity: selectedActivity)
+        }
+        
+        // end tableView udpates
+        self.tableView.endUpdates()
+    }
+    
+    // MARK: - Custom gestures for piechartview
+    @objc func doubleTapGesture() {
+        print ("double tap recognized")
+        let cell = ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        if cell.pieChartView.highlighted[0].x == 0.0 {
+            togglePieChartType(button: cell.pieChartToggle)
+        }
     }
 }

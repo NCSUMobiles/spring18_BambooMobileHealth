@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.goalTime = activity["per"]!
                     
                     // some dummy value -> should be updated from DB
-                    actEx.goalValue = Int(arc4random_uniform(2000)) + 1
+                    actEx.goalValue = Int(arc4random_uniform(10001)) + 10000
                     
                     activities.append(actEx)
                 }
