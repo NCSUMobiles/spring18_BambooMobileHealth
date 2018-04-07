@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		278A4A5F206D4EAF00D0F040 /* History_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* History_ActivityViewController.swift */; };
+		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
@@ -37,7 +37,7 @@
 		1524DDA64DF11A654BCBB4D3 /* Pods-BMH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.debug.xcconfig"; sourceTree = "<group>"; };
 		19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.release.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.release.xcconfig"; sourceTree = "<group>"; };
 		1D1710C135088E5B384F48D3 /* Pods_BMH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		278A4A5E206D4EAF00D0F040 /* History_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_ActivityViewController.swift; sourceTree = "<group>"; };
+		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				EA0A98E52071A9B400C7D253 /* HistoryCell.swift */,
 				EA0A98E42071A9B400C7D253 /* HistoryCell.xib */,
-				278A4A5E206D4EAF00D0F040 /* History_ActivityViewController.swift */,
+				278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */,
 			);
 			path = HistoryViews;
 			sourceTree = "<group>";

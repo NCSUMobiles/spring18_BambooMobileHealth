@@ -399,7 +399,7 @@
         <!--History_ActivityView-->
         <scene sceneID="MCl-qJ-Qwz">
             <objects>
-                <tableViewController storyboardIdentifier="History_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Scq-9l-cXf" userLabel="History_ActivityView" customClass="History_ActivityViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="History_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Scq-9l-cXf" userLabel="History_ActivityView" customClass="HistoryTableViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="68d-4p-rWt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -598,7 +598,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WTC-GQ-SXB">
-                                <rect key="frame" x="56" y="313" width="263.5" height="200"/>
+                                <rect key="frame" x="56" y="313.5" width="263.5" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="td1-fJ-STc">
                                         <rect key="frame" x="10" y="41.5" width="83.5" height="21.5"/>
@@ -643,7 +643,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="DPY-7M-C6q">
-                                <rect key="frame" x="87.5" y="104" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="103.5" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Ll2-ZW-F64"/>
                                     <constraint firstAttribute="width" constant="200" id="r79-hb-ajP"/>
@@ -651,7 +651,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ym1-EW-wW4">
-                                <rect key="frame" x="159.5" y="351" width="150" height="30"/>
+                                <rect key="frame" x="159.5" y="351.5" width="150" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
