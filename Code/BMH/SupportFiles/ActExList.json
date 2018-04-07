@@ -1,0 +1,72 @@
+{
+    "activities": [
+                   {
+                   "image": "walking",
+                   "name": "Walking",
+                   "units": "steps",
+                   "per": "week"
+                   },
+                   {
+                   "image": "running",
+                   "name": "Running/Elliptical",
+                   "units": "miles",
+                   "per": "week"
+                   },
+                   {
+                   "image": "swimming",
+                   "name": "Swimming",
+                   "units": "miles",
+                   "per": "week"
+                   },
+                   {
+                   "image": "physical-therapy",
+                   "name": "Physical Therapy @ PT Clinic",
+                   "units": "sessions",
+                   "per": "week"
+                   },
+                   {
+                   "image": "physical-therapy",
+                   "name": "Physical Therapy @ Home Session",
+                   "units": "sessions",
+                   "per": "week"
+                   },
+                   {
+                   "image": "pilates",
+                   "name": "Yoga/Pilates",
+                   "units": "minutes",
+                   "per": "week"
+                   }
+                ],
+    "exercises": [
+                  {
+                  "image": "dumbbell",
+                  "name": "Strength Training",
+                  "units": "minutes",
+                  "per": "week"
+                  },
+                  {
+                  "image": "cycling",
+                  "name": "Cycling/Hand Cycling",
+                  "units": "miles",
+                  "per": "week"
+                  },
+                  {
+                  "image": "exercise-general",
+                  "name": "Exercise 3",
+                  "units": "sessions",
+                  "per": "week"
+                  },
+                  {
+                  "image": "exercise-general",
+                  "name": "Exercise 4",
+                  "units": "sessions",
+                  "per": "week"
+                  },
+                  {
+                  "image": "exercise-general",
+                  "name": "Exercise 5",
+                  "units": "sessions",
+                  "per": "week"
+                  }
+                ]
+}

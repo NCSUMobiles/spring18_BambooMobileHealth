@@ -10,25 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    let tableData = [
-        [
-            ["image":"history", "name" : "Running", "units" : "miles/week"],
-            ["image":"history", "name" : "Walking", "units" : "steps/week"],
-            ["image":"history", "name" : "Jogging", "units" : "miles/week"],
-            ["image":"history", "name" : "Climbing", "units" : "ft/week"],
-            ["image":"history", "name" : "Cycling", "units" : "miles/week"],
-            ["image":"history", "name" : "Activity 1", "units" : "units/week"],
-            ["image":"history", "name" : "Activity 2", "units" : "units/week"]
-        ],
-        [
-            ["image":"history", "name" : "Exercise 1", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 2", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 3", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 4", "units" : "sessions/week"],
-            ["image":"history", "name" : "Exercise 5", "units" : "sessions/week"],
-        ]
-    ]
-    
+    var tableData : [[ActEx]]!
     let tableSections = ["Activity","Exercise"]
     
     override func viewDidLoad() {
@@ -39,6 +21,14 @@ class SettingsViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // get the activies and exercises data from app delegate
+        let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
+        tableData = [appDelegate.activities, appDelegate.exercises]
+        
+        // prevent it from going below the nav bar.
+        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,9 +51,18 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! SettingsTableViewCell
         let currentDataElement = tableData[indexPath.section][indexPath.row];
-        cell.leftImageView.image = UIImage(named: currentDataElement["image"]!);
-        cell.nameLabel.text = currentDataElement["name"]!
-        cell.unitsLabel.text = currentDataElement["units"]!
+        cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
+        cell.nameLabel.text = currentDataElement.name
+        cell.unitsLabel.text = currentDataElement.goalUnits + "/" + currentDataElement.goalTime
+        
+        cell.inputTextField.borderStyle = .none
+        cell.inputTextField.layer.backgroundColor = UIColor.white.cgColor
+        cell.inputTextField.layer.masksToBounds = false
+        cell.inputTextField.layer.shadowColor = UIColor.gray.cgColor
+        cell.inputTextField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        cell.inputTextField.layer.shadowOpacity = 1.0
+        cell.inputTextField.layer.shadowRadius = 0.0
+        
         return cell
     }
 
@@ -71,14 +70,20 @@ class SettingsViewController: UITableViewController {
         return 45
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewSectionHeader") as! SettingsTableViewSectionHeader
-        sectionHeader.sectionTitleLabel.text = tableSections[section]
-        return sectionHeader
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return tableSections[section]
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return tableView.sectionHeaderHeight
+    }
+    
+    @IBAction func logout() {
+        // logout
+        LoginHelper.logOut()
+        
+        // now go back to login screen
+        _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
     }
     
 }

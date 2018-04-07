@@ -10,22 +10,27 @@
 		278A4A5F206D4EAF00D0F040 /* History_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* History_ActivityViewController.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
-		78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */; };
+		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
+		78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDD33720742C8E00A870F6 /* LoginHelper.swift */; };
 		98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1710C135088E5B384F48D3 /* Pods_BMH.framework */; };
+		EA0810202075E2580059C0DD /* ProgressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08101F2075E2580059C0DD /* ProgressTableViewController.swift */; };
 		EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0A98E42071A9B400C7D253 /* HistoryCell.xib */; };
 		EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0A98E52071A9B400C7D253 /* HistoryCell.swift */; };
+		EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E531520741F19005A9F41 /* ActivityExercise.swift */; };
+		EA1E531A2074211F005A9F41 /* ActExList.json in Resources */ = {isa = PBXBuildFile; fileRef = EA1E53192074211F005A9F41 /* ActExList.json */; };
 		EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBA206B22DF00B016FE /* AppDelegate.swift */; };
 		EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */; };
 		EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */; };
 		EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC0206B22DF00B016FE /* Main.storyboard */; };
 		EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC3206B22DF00B016FE /* Assets.xcassets */; };
 		EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */; };
-		EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */; };
 		EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */; };
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
-		EA5DCF5D206F144600B9A496 /* Progress_ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */; };
+		EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
-		FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* RecordViewController.swift */; };
+		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
+		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
+		FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +40,13 @@
 		278A4A5E206D4EAF00D0F040 /* History_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_ActivityViewController.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSectionHeader.swift; sourceTree = "<group>"; };
+		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		78DDD33720742C8E00A870F6 /* LoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHelper.swift; sourceTree = "<group>"; };
+		EA08101F2075E2580059C0DD /* ProgressTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewController.swift; sourceTree = "<group>"; };
 		EA0A98E42071A9B400C7D253 /* HistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryCell.xib; sourceTree = "<group>"; };
 		EA0A98E52071A9B400C7D253 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		EA1E531520741F19005A9F41 /* ActivityExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityExercise.swift; sourceTree = "<group>"; };
+		EA1E53192074211F005A9F41 /* ActExList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ActExList.json; sourceTree = "<group>"; };
 		EA29CDB7206B22DF00B016FE /* BMH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BMH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA29CDBA206B22DF00B016FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
@@ -46,12 +55,13 @@
 		EA29CDC3206B22DF00B016FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA29CDC6206B22DF00B016FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA29CDC8206B22DF00B016FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ActivityViewController.swift; sourceTree = "<group>"; };
 		EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
-		EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress_ExerciseViewController.swift; sourceTree = "<group>"; };
+		EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FA040ABD206CAC850083D44E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
+		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
+		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,17 @@
 				19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EA1E531420741EA9005A9F41 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				EA1E531520741F19005A9F41 /* ActivityExercise.swift */,
+				EA1E53192074211F005A9F41 /* ActExList.json */,
+				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
+				EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		EA29CDAE206B22DF00B016FE = {
@@ -97,6 +118,7 @@
 		EA29CDB9206B22DF00B016FE /* BMH */ = {
 			isa = PBXGroup;
 			children = (
+				EA1E531420741EA9005A9F41 /* SupportFiles */,
 				EA4A98A5206BF6CE004C0957 /* SupportViews */,
 				EA4A98A3206BF66D004C0957 /* ViewControllers */,
 				EA4A98A2206BF648004C0957 /* HistoryViews */,
@@ -113,8 +135,9 @@
 		EA4A98A1206BF639004C0957 /* ProgressViews */ = {
 			isa = PBXGroup;
 			children = (
-				EA31488B206C3228006F712A /* Progress_ActivityViewController.swift */,
-				EA5DCF5C206F144600B9A496 /* Progress_ExerciseViewController.swift */,
+				EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */,
+				EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */,
+				EA08101F2075E2580059C0DD /* ProgressTableViewController.swift */,
 			);
 			path = ProgressViews;
 			sourceTree = "<group>";
@@ -135,7 +158,8 @@
 				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
 				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
 				78428CC8206D1450004A6342 /* SettingsViewController.swift */,
-				FA040ABD206CAC850083D44E /* RecordViewController.swift */,
+				786926DD20741345009CC203 /* LoginViewController.swift */,
+				FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -146,7 +170,6 @@
 				EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */,
 				EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */,
 				78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */,
-				78428CCC206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift */,
 			);
 			path = SupportViews;
 			sourceTree = "<group>";
@@ -189,7 +212,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Bamboo Mobile Health";
 				TargetAttributes = {
 					EA29CDB6206B22DF00B016FE = {
@@ -224,9 +247,11 @@
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
+				EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */,
 				EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */,
 				EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */,
 				EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */,
+				EA1E531A2074211F005A9F41 /* ActExList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +304,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLCipher/SQLCipher.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -297,6 +323,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLCipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
@@ -319,18 +346,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA31488C206C3228006F712A /* Progress_ActivityViewController.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
-				78428CCD206D2ADD004A6342 /* SettingsTableViewSectionHeader.swift in Sources */,
-				278A4A5F206D4EAF00D0F040 /* History_ActivityViewController.swift in Sources */,
+				EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */,
+				278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */,
 				EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */,
+				EA0810202075E2580059C0DD /* ProgressTableViewController.swift in Sources */,
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
-				EA5DCF5D206F144600B9A496 /* Progress_ExerciseViewController.swift in Sources */,
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
+				EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */,
+				EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */,
 				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
-				FA040ABE206CAC850083D44E /* RecordViewController.swift in Sources */,
+				78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */,
+				786926DE20741346009CC203 /* LoginViewController.swift in Sources */,
+				FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +400,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -377,6 +408,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -404,7 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -427,6 +459,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -434,6 +467,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -455,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
