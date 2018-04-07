@@ -207,7 +207,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
             return cell
         } else if (indexPath.section == 0 && indexPath.row == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: selectionCellReuseIdentifer, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
