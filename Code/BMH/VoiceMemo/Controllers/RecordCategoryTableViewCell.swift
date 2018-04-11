@@ -17,13 +17,26 @@ protocol RecordCategoryTableViewCellProtocol: NSObjectProtocol {
 class RecordCategoryTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var redButton: UIButton!
     @IBAction func redButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
+        self.delegate.redButtonPressed()
+        
     }
+    @IBOutlet weak var yellowButton: UIButton!
     @IBAction func yellowButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
+        self.delegate.yellowButtonPressed()
+        
     }
+    @IBOutlet weak var greenButton: UIButton!
     @IBAction func greenButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
+        self.delegate.greenButtonPressed()
+        
     }
     var delegate: RecordCategoryTableViewCellProtocol!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

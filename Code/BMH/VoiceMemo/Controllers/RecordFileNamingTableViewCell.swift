@@ -17,9 +17,14 @@ class RecordFileNamingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var fileNameTextField: UITextField!
     
+    @IBAction func fileNameTextFieldBeginAction(_ sender: Any) {
+        
+    }
     @IBAction func voiceButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
     }
     @IBAction func doneButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
     }
     
     var delegate:RecordFileNamingTableViewCellProtocol!

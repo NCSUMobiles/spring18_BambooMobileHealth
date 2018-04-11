@@ -28,6 +28,9 @@
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="fileNameTextFieldBeginAction:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="17c-G6-aF5"/>
+                        </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhn-I2-MDN">
                         <rect key="frame" x="222" y="11" width="90" height="61"/>

@@ -10,16 +10,21 @@ import UIKit
 protocol RecordInputTableViewCellProtocol: NSObjectProtocol {
     func recordButtonPressed()
     func previewButtonPressed()
+    func sendRecordedFile()
     
 }
 
 class RecordInputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var previewButton: UIButton!
     @IBAction func recordButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
         
     }
     @IBAction func previewButtonAction(_ sender: Any) {
+        guard self.delegate != nil else { return }
     }
     
     var delegate:RecordInputTableViewCellProtocol!

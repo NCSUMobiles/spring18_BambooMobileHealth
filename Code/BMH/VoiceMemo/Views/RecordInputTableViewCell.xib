@@ -63,6 +63,8 @@
             <color key="backgroundColor" red="0.9500473947441691" green="1" blue="0.95612824882982095" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="previewButton" destination="NqM-EO-Xwl" id="04n-g0-oJj"/>
+                <outlet property="recordButton" destination="3Yt-kX-2LT" id="jli-y0-1pN"/>
                 <outlet property="timeLabel" destination="PSq-LM-6TO" id="Bmk-pl-kM4"/>
             </connections>
             <point key="canvasLocation" x="34" y="246.5"/>

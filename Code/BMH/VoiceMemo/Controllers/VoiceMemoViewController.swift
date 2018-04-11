@@ -39,8 +39,6 @@ class VoiceMemoViewController: UITableViewController {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "namingCell", for: indexPath) as! RecordFileNamingTableViewCell
             return cell
-        case 3:
-            return UITableViewCell()
         default:
             
             return UITableViewCell()
@@ -75,5 +73,42 @@ class VoiceMemoViewController: UITableViewController {
             
         }
     }
+}
+
+extension VoiceMemoViewController: RecordCategoryTableViewCellProtocol {
+    func redButtonPressed() {
+        print("red button pressed")
+    }
     
+    func yellowButtonPressed() {
+        print("yellow button pressed")
+    }
+    
+    func greenButtonPressed() {
+        print("green button pressed")
+    }
+}
+
+extension VoiceMemoViewController: RecordFileNamingTableViewCellProtocol {
+    func doneButtonPressed() {
+        print("done button pressed")
+    }
+    
+    func sendFileName() {
+        print("sendFileName function")
+    }
+}
+
+extension VoiceMemoViewController: RecordInputTableViewCellProtocol {
+    func recordButtonPressed() {
+        print("record button pressed")
+    }
+    
+    func previewButtonPressed() {
+        print("preview button pressed")
+    }
+    
+    func sendRecordedFile() {
+        print("recorded File Function")
+    }
 }
