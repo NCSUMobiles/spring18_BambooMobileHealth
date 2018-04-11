@@ -8,8 +8,22 @@
 
 import UIKit
 
+protocol RecordCategoryTableViewCellProtocol: NSObjectProtocol {
+    func redButtonPressed()
+    func yellowButtonPressed()
+    func greenButtonPressed()
+}
+
 class RecordCategoryTableViewCell: UITableViewCell {
 
+    
+    @IBAction func redButtonAction(_ sender: Any) {
+    }
+    @IBAction func yellowButtonAction(_ sender: Any) {
+    }
+    @IBAction func greenButtonAction(_ sender: Any) {
+    }
+    var delegate: RecordCategoryTableViewCellProtocol!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

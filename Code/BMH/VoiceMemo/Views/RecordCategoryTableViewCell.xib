@@ -28,6 +28,9 @@
                         </constraints>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                         <state key="normal" image="red"/>
+                        <connections>
+                            <action selector="redButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qbh-8C-Du2"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPz-Jc-rMy">
                         <rect key="frame" x="107" y="0.0" width="107" height="87"/>
@@ -36,6 +39,9 @@
                             <constraint firstAttribute="width" constant="107" id="he2-zE-HH9"/>
                         </constraints>
                         <state key="normal" image="yellow"/>
+                        <connections>
+                            <action selector="yellowButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rLE-Tk-bC0"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dou-7w-xLJ">
                         <rect key="frame" x="213" y="0.0" width="107" height="87"/>
@@ -44,6 +50,9 @@
                             <constraint firstAttribute="height" constant="87" id="eQE-Qk-74u"/>
                         </constraints>
                         <state key="normal" image="green"/>
+                        <connections>
+                            <action selector="greenButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kWM-ZL-IMg"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

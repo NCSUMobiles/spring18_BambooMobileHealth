@@ -8,8 +8,21 @@
 
 import UIKit
 
+protocol RecordFileNamingTableViewCellProtocol: NSObjectProtocol {
+    func doneButtonPressed()
+    func sendFileName()
+}
+
 class RecordFileNamingTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var fileNameTextField: UITextField!
+    
+    @IBAction func voiceButtonAction(_ sender: Any) {
+    }
+    @IBAction func doneButtonAction(_ sender: Any) {
+    }
+    
+    var delegate:RecordFileNamingTableViewCellProtocol!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

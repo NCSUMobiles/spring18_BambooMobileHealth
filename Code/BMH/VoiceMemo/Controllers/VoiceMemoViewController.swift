@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class VoiceMemoViewController: UITableViewController {
     override func viewDidLoad() {
         tableView.delegate = self
@@ -68,7 +69,7 @@ class VoiceMemoViewController: UITableViewController {
         case 1:
             return 86.0
         case 2:
-            return 168.0
+            return 165.0
         default:
             return 50.0
             

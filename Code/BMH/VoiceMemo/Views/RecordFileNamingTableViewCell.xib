@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="164" id="KGk-i7-Jjw" customClass="RecordFileNamingTableViewCell" customModule="BMH" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="163.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name Memo" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1RA-Ez-x0H">
+                        <rect key="frame" x="16" y="26" width="198" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="198" id="QnO-mz-C6j"/>
+                        </constraints>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhn-I2-MDN">
+                        <rect key="frame" x="222" y="11" width="90" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="61" id="fho-tG-w46"/>
+                            <constraint firstAttribute="width" constant="90" id="uHt-iU-r2S"/>
+                        </constraints>
+                        <state key="normal" image="voice"/>
+                        <connections>
+                            <action selector="voiceButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6OA-3R-tsW"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaZ-lU-irl">
+                        <rect key="frame" x="0.0" y="87" width="320" height="66"/>
+                        <color key="backgroundColor" red="0.23529411759999999" green="0.56470588239999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="66" id="2fE-Bb-rSk"/>
+                        </constraints>
+                        <state key="normal" title="DONE">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="doneButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JWs-wP-kAb"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bhn-I2-MDN" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="107" id="27M-ws-RDm"/>
+                    <constraint firstAttribute="trailing" secondItem="JaZ-lU-irl" secondAttribute="trailing" id="6Th-OU-sJt"/>
+                    <constraint firstItem="1RA-Ez-x0H" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-45" id="Blc-ay-RP7"/>
+                    <constraint firstItem="JaZ-lU-irl" firstAttribute="top" secondItem="bhn-I2-MDN" secondAttribute="bottom" constant="15" id="JWb-JU-UXh"/>
+                    <constraint firstItem="JaZ-lU-irl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KPF-su-cXt"/>
+                    <constraint firstItem="JaZ-lU-irl" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="KeR-MK-0vn"/>
+                    <constraint firstItem="bhn-I2-MDN" firstAttribute="top" secondItem="1RA-Ez-x0H" secondAttribute="bottom" constant="-45" id="n0Y-1l-RCS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="fileNameTextField" destination="1RA-Ez-x0H" id="jHe-dH-yse"/>
+            </connections>
+            <point key="canvasLocation" x="224" y="-82"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="voice" width="171" height="171"/>
+    </resources>
+</document>
