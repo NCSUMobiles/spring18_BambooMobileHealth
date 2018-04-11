@@ -49,7 +49,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             labelCellReuseIdentifer = "History_ActivityViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
             
             activityDebugLabel = "activity"
-        }/*
+        }
         else if self.restorationIdentifier == "History_ExerciseViewController" {
             activities = appDelegate.exercises
             
@@ -58,7 +58,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             labelCellReuseIdentifer = "History_ExerciseViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
             
             activityDebugLabel = "exercise"
-        }*/
+        }
         
         self.tableView.register(UINib(nibName:"HistoryCell", bundle: nil), forCellReuseIdentifier: chartCellReuseIdentifier)
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
@@ -115,14 +115,16 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     
         // update the chart in third section first row
         // TODO: change to random data
-//        setChart(inCell: chartCell, dataEntryX: weekdays, dataEntryY: stepsTaken)
         setChart(inCell: chartCell, forActivity: selectedActivity)
         self.tableView.endUpdates()
     }
  
   
     // dummy data for now
+    var hours: [String]!
     var weekdays: [String]!
+    var months: [String]!
+    var years: [String]!
     var stepsTaken = [Int]()
     weak var axisFormatDelegate: IAxisValueFormatter?
     
@@ -130,18 +132,24 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     func setChart(inCell cell: HistoryCell, forActivity index: Int) {
         cell.barChartView.noDataText = "You need to provide data for the chart."
         
-        let activity = activities[index]
+        
+//        let activity = activities[index]
+//        cell.actEx = activity
         
         axisFormatDelegate = self as IAxisValueFormatter
+        hours = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
         weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        years = ["2018", "2019", "2020"]
+        
+        var sum = 0
         stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
         
         var dataEntries:[BarChartDataEntry] = []
         
         for i in 0..<weekdays.count{
-            // print(forX[i])
-            // let dataEntry = BarChartDataEntry(x: (forX[i] as NSString).doubleValue, y: Double(unitsSold[i]))
             let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
+            sum += stepsTaken[i]
             print(dataEntry)
             dataEntries.append(dataEntry)
         }
