@@ -45,7 +45,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             activities = appDelegate.activities
             
             selectionCellReuseIdentifer = "History_ActivitySelectionCell"
-            chartCellReuseIdentifier = "HistoryGraphView"
+            chartCellReuseIdentifier = "History_ActivityGraphView"
             labelCellReuseIdentifer = "History_ActivityViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
             
             activityDebugLabel = "activity"
@@ -54,7 +54,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             activities = appDelegate.exercises
             
             selectionCellReuseIdentifer = "History_ExerciseSelectionCell"
-            chartCellReuseIdentifier = "HistoryGraphView"
+            chartCellReuseIdentifier = "History_ExerciseGraphView"
             labelCellReuseIdentifer = "History_ExerciseViewCell" // must be the same identifier as that for the prototype cell in the Storyboard
             
             activityDebugLabel = "exercise"
@@ -232,7 +232,9 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             //(cell.barChartView).noDataText = "You need to provide data for the chart."
             cell.barChartView.maxVisibleCount = 10000
             cell.barChartView.chartDescription?.text = ""
-           
+            
+            cell.aggSwitch.addTarget(self, action: #selector(changeChart(sender:)), for: UIControlEvents.primaryActionTriggered)
+            
             if selectedActivity == -1 {
                 setChart(inCell: cell, forActivity: 0)
             }
@@ -323,7 +325,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         }
         
         if indexPath.section == 1 {
-            return 455;
+            return 500;
         }
     
         return 44;
@@ -339,11 +341,19 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     
     // Set the section footer height
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 2
-        }
+//        if section == 0 {
+//            return 2
+//        }
         return tableView.sectionFooterHeight
     }
+    
+    @IBAction func changeChart(sender: UISegmentedControl) {
+        
+        print ("self: ", self.restorationIdentifier!)
+        print ("index: ", sender.selectedSegmentIndex)
+        
+    }
+
     
     /*
     // Override to support conditional editing of the table view.

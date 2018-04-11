@@ -399,7 +399,7 @@
         <!--History_ActivityView-->
         <scene sceneID="MCl-qJ-Qwz">
             <objects>
-                <tableViewController storyboardIdentifier="History_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Scq-9l-cXf" userLabel="History_ActivityView" customClass="History_ActivityViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="History_ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Scq-9l-cXf" userLabel="History_ActivityView" customClass="HistoryTableViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="68d-4p-rWt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
