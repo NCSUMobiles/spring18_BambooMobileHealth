@@ -14,4 +14,5 @@ struct ActEx{
     var goalValue : Int = 0
     var goalUnits : String = ""
     var goalTime : String = "week"
+    var code : String = ""
 }

@@ -24,9 +24,7 @@ extension UIColor {
             blue:  CGFloat((rgb &     0xFF)      )/255.0,
             alpha: alpha)
     }
-}
-
-extension UIColor {
+    
     func toColor(_ color: UIColor, percentage: CGFloat) -> UIColor {
         let percentage = max(min(percentage, 100), 0) / 100
         switch percentage {

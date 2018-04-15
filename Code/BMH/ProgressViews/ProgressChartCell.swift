@@ -20,8 +20,13 @@ class ProgressChartCell: UITableViewCell {
     @IBOutlet weak var barChartToggle : UIButton!
     @IBOutlet weak var pieChartToggle : UIButton!
     
+    @IBOutlet weak var chartToggleButton : UISegmentedControl!
+    
     var progressValue : Int!
     var actEx : ActEx!
+    
+    var previousSegmentIndex : Int = -1
+    var currentSegmentIndex : Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()

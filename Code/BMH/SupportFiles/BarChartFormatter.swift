@@ -10,9 +10,9 @@ import Foundation
 import Charts
 
 class BarChartFormatter: NSObject, IAxisValueFormatter{
-    var months: [String]! = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    var daysOfWeek: [String]! = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return months[Int(value)]
+        return daysOfWeek[Int(value)]
     }
 }

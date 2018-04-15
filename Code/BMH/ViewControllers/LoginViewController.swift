@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    var username = "username"
+    var username = "PPV44"
     var password = "password"
     
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // eventually the login should happen against a back end.
     fileprivate func performLogin() {
         if(usernameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == username && passwordTextField.text == password) {
             LoginHelper.saveLogedInUser(userId: username)

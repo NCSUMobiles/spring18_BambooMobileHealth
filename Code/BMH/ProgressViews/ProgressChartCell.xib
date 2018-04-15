@@ -26,7 +26,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txv-XK-lVj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6a-iO-O7P">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JOP-CK-JPF">
+                                        <rect key="frame" x="50.5" y="10" width="218" height="29"/>
+                                        <segments>
+                                            <segment title="Summary"/>
+                                            <segment title="Day View"/>
+                                            <segment title="Bar Chart"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.24313725489999999" green="0.3921568627" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6a-iO-O7P">
                                         <rect key="frame" x="10" y="10" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="Lmy-eo-Bab"/>
@@ -34,7 +43,7 @@
                                         </constraints>
                                         <state key="normal" image="donut-multi"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-j7-M0H">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-j7-M0H">
                                         <rect key="frame" x="286" y="10" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="I9F-96-7sz"/>
@@ -61,6 +70,8 @@
                                     <constraint firstItem="GWV-B6-O9S" firstAttribute="height" secondItem="0bb-BM-fKr" secondAttribute="height" id="RRw-Na-AJs"/>
                                     <constraint firstItem="GWV-B6-O9S" firstAttribute="top" secondItem="0bb-BM-fKr" secondAttribute="top" id="S1h-w1-suC"/>
                                     <constraint firstItem="0bb-BM-fKr" firstAttribute="centerX" secondItem="txv-XK-lVj" secondAttribute="centerX" id="Wgc-u7-0zR"/>
+                                    <constraint firstItem="JOP-CK-JPF" firstAttribute="centerX" secondItem="txv-XK-lVj" secondAttribute="centerX" id="YhE-sp-cb3"/>
+                                    <constraint firstItem="JOP-CK-JPF" firstAttribute="top" secondItem="txv-XK-lVj" secondAttribute="top" constant="10" id="jfe-zq-biT"/>
                                     <constraint firstAttribute="trailing" secondItem="fxB-j7-M0H" secondAttribute="trailing" constant="10" id="lDY-ol-nXd"/>
                                     <constraint firstItem="0bb-BM-fKr" firstAttribute="width" secondItem="txv-XK-lVj" secondAttribute="width" id="n7c-KF-rEd"/>
                                     <constraint firstItem="GWV-B6-O9S" firstAttribute="trailing" secondItem="0bb-BM-fKr" secondAttribute="trailing" id="n9I-TN-2Ux"/>
@@ -133,6 +144,7 @@
             <connections>
                 <outlet property="barChartToggle" destination="fxB-j7-M0H" id="UfW-jM-MaN"/>
                 <outlet property="barChartView" destination="GWV-B6-O9S" id="0ws-L4-dUO"/>
+                <outlet property="chartToggleButton" destination="JOP-CK-JPF" id="GOu-XR-w44"/>
                 <outlet property="iconImage" destination="stQ-WN-h9X" id="4kj-n9-Lzv"/>
                 <outlet property="iconLabel" destination="Qif-zE-LUY" id="a9d-0j-09n"/>
                 <outlet property="pieChartToggle" destination="u6a-iO-O7P" id="zPs-vz-08X"/>

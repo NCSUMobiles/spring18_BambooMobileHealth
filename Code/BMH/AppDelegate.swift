@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.name = activity["name"]!
                     actEx.goalUnits = activity["units"]!
                     actEx.goalTime = activity["per"]!
+                    actEx.code = activity["code"]!
                     
                     // some dummy value -> should be updated from DB
                     actEx.goalValue = Int(arc4random_uniform(10001)) + 10000
@@ -90,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.name = exercise["name"]!
                     actEx.goalUnits = exercise["units"]!
                     actEx.goalTime = exercise["per"]!
+                    actEx.code = exercise["code"]!
                     
                     // some dummy value -> should be updated from DB
                     actEx.goalValue = Int(arc4random_uniform(30))  + 1
