@@ -20,6 +20,9 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var unitsLabel : UILabel!
     @IBOutlet weak var bottomLabel : UILabel!
     
+    var sumValue : Int!
+    var actEx : ActEx!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

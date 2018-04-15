@@ -19,17 +19,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     var selectionCellReuseIdentifer : String!
     var chartCellReuseIdentifier : String!
     var labelCellReuseIdentifer : String!
-    
-//    var activityList : [String] = ["Physical Therapy @ PT Clinic",
-//                                   "Physical Therapy @ Home Session",
-//                                   "Walking",
-//                                   "Running/Elliptical",
-//                                   "Swimming",
-//                                   "Strength Training",
-//                                   "Cycling/Hand Cycling",
-//                                   "Yoga/Pilates"]
-   
-    
+
     var activityDebugLabel : String = ""
     
     override func viewDidLoad() {
@@ -118,48 +108,6 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         setChart(inCell: chartCell, forActivity: selectedActivity)
         self.tableView.endUpdates()
     }
- 
-  
-    // dummy data for now
-    var hours: [String]!
-    var weekdays: [String]!
-    var months: [String]!
-    var years: [String]!
-    var stepsTaken = [Int]()
-    weak var axisFormatDelegate: IAxisValueFormatter?
-    
-//    func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
-    func setChart(inCell cell: HistoryCell, forActivity index: Int) {
-        cell.barChartView.noDataText = "You need to provide data for the chart."
-        
-        
-//        let activity = activities[index]
-//        cell.actEx = activity
-        
-        axisFormatDelegate = self as IAxisValueFormatter
-        hours = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
-        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        years = ["2018", "2019", "2020"]
-        
-        var sum = 0
-        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
-        
-        var dataEntries:[BarChartDataEntry] = []
-        
-        for i in 0..<weekdays.count{
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
-            sum += stepsTaken[i]
-            print(dataEntry)
-            dataEntries.append(dataEntry)
-        }
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
-        let chartData = BarChartData(dataSet: chartDataSet)
-        cell.barChartView.data = chartData
-        let xAxisValue = cell.barChartView.xAxis
-        xAxisValue.valueFormatter = axisFormatDelegate
-        
-    }
     
     // MARK: - Table view data source
 
@@ -242,56 +190,9 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                 setChart(inCell: cell, forActivity: selectedActivity)
             }
             
-            
-            // create some dummy data
-//            axisFormatDelegate = self as IAxisValueFormatter
-//            weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-//            stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
-            
-            // load that dummy data into our cell
-//            setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
             return cell
         }
-        
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
-//        (cell.barChartView).noDataText = "You need to provide data for the chart."
-//        (cell.barChartView).maxVisibleCount = 10000
-//        // create some dummy data
-//        axisFormatDelegate = self as IAxisValueFormatter
-//        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-//        stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
-//
-//        // load that dummy data into our cell
-//        setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
-//        return cell
-        
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryGraphView", for: indexPath) as! HistoryCell
-//        (cell.barChartView).noDataText = "You need to provide data for the chart."
-//        (cell.barChartView).drawGridBackgroundEnabled = true
-//        (cell.barChartView).maxVisibleCount = 10000
-        
-        // Configure the cell...
-        
-        /*
-        // create some dummy data
-        axisFormatDelegate = self as IAxisValueFormatter
-        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-        stepsTaken = [1733, 5896, 1617, 628, 4802, 3042, 5268]
-        
-        // load that dummy data into our cell
-        setChart(inCell: cell, dataEntryX: weekdays, dataEntryY: stepsTaken)
-        */
-//        return cell
-        
     }
-    
-/*
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 490
-    }
-*/
     
     // Set the title for each section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -327,7 +228,6 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         if indexPath.section == 1 {
             return 500;
         }
-    
         return 44;
     }
     
@@ -354,52 +254,92 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
     }
 
+    // MARK: - Custom functions
+    // dummy data for now
+    var hours: [String]!
+    var weekdays: [String]!
+    var months: [String]!
+    var years: [String]!
+    var stepsTaken = [Int]()
+    weak var axisFormatDelegate: IAxisValueFormatter?
     
+    // Create a chart
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func createChart(inCell cell: HistoryCell, forActivity index: Int) {
+        cell.barChartView.noDataText = "You need to provide data for the chart."
+        // Configure the cell...
+        // For this activity obtain weekly goal value and units
+        let activity = activities[index]
+        
+        // save activity into cell for futture use
+        cell.actEx = activity
+        
+        // Retrieve values for this week from Firebase
+        
+        // Update the chart to show the updated value
+        
+        // Set a dummy donut chart
+        setChart(inCell: cell, forActivity: )
+        
     }
     */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func updateSumValue(value: Int, inCell cell: HistoryCell) -> UIColor {
+        let activity = cell.actEx
+        
+        // Update the value label
+        
+       
+        return UIColor.black
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    // func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
+    func setChart(inCell cell: HistoryCell, forActivity index: Int) {
+//        cell.barChartView.noDataText = "You need to provide data for the chart."
+//        let activity = activities[index]
+//        cell.actEx = activity
+        
+        let valueColor = UIColor.blue
+        
+        axisFormatDelegate = self as IAxisValueFormatter
+        hours = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        years = ["2018", "2019", "2020"]
+        
+        var sum = 0
+        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
+        
+        var dataEntries:[BarChartDataEntry] = []
+        
+        for i in 0..<weekdays.count{
+            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
+            sum += stepsTaken[i]
+            print(dataEntry)
+            dataEntries.append(dataEntry)
+        }
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        
+        let xAxisValue = cell.barChartView.xAxis
+        xAxisValue.valueFormatter = axisFormatDelegate
+        chartDataSet.colors = [UIColor(hex: "#7000ff")]
+        
+        // update the sumValue, unit, bottomLabel
+        cell.valueLabel.text = String(sum)
+//        cell.unitsLabel
+        
+        // finally set the data
+        let chartData = BarChartData(dataSet: chartDataSet)
+        
+        // visualize
+        cell.barChartView.data = chartData
+        
+        // save the total steps
+        cell.sumValue = sum
+        let activity = cell.actEx
+        
+        
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension HistoryTableViewController: IAxisValueFormatter {
