@@ -345,6 +345,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            <connections>
+                                                <action selector="inputTextFieldTextChanged:" destination="TaR-no-nyd" eventType="editingChanged" id="Gl5-zF-Y9P"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="miles/week" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s0X-v3-GRP">
                                             <rect key="frame" x="292" y="15" width="75" height="14.5"/>
@@ -385,6 +388,11 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="182-2O-naj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="ceM-br-nPD">
+                            <connections>
+                                <action selector="saveButtonClicked:" destination="c5l-bZ-uiP" id="OOv-Ja-T19"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" style="done" id="gPw-Bq-bQk">
                             <connections>
                                 <action selector="logout" destination="c5l-bZ-uiP" id="8dW-1N-ljX"/>
