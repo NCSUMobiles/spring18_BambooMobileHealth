@@ -54,6 +54,10 @@ class SettingsViewController: UITableViewController {
         cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
         cell.nameLabel.text = currentDataElement.name
         cell.unitsLabel.text = currentDataElement.goalUnits + "/" + currentDataElement.goalTime
+        cell.inputTextField.text = String(currentDataElement.goalValue)
+        cell.sectionNo = indexPath.section
+        cell.indexNo = indexPath.row
+        cell.parent = self
         
         cell.inputTextField.borderStyle = .none
         cell.inputTextField.layer.backgroundColor = UIColor.white.cgColor
