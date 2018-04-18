@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,10 +33,10 @@
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhn-I2-MDN">
-                        <rect key="frame" x="222" y="11" width="90" height="61"/>
+                        <rect key="frame" x="234" y="11" width="78" height="61"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="61" id="fho-tG-w46"/>
-                            <constraint firstAttribute="width" constant="90" id="uHt-iU-r2S"/>
+                            <constraint firstAttribute="width" constant="78" id="uHt-iU-r2S"/>
                         </constraints>
                         <state key="normal" image="voice"/>
                         <connections>
@@ -58,7 +58,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bhn-I2-MDN" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="107" id="27M-ws-RDm"/>
+                    <constraint firstItem="bhn-I2-MDN" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="113" id="27M-ws-RDm"/>
                     <constraint firstAttribute="trailing" secondItem="JaZ-lU-irl" secondAttribute="trailing" id="6Th-OU-sJt"/>
                     <constraint firstItem="1RA-Ez-x0H" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-45" id="Blc-ay-RP7"/>
                     <constraint firstItem="JaZ-lU-irl" firstAttribute="top" secondItem="bhn-I2-MDN" secondAttribute="bottom" constant="15" id="JWb-JU-UXh"/>
@@ -70,6 +70,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="fileNameTextField" destination="1RA-Ez-x0H" id="jHe-dH-yse"/>
+                <outlet property="voiceButton" destination="bhn-I2-MDN" id="MAa-9h-dZk"/>
             </connections>
             <point key="canvasLocation" x="224" y="-82"/>
         </tableViewCell>

@@ -31,6 +31,8 @@
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
 		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
 		FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */; };
+		FA40E8BA2087A2EB00447F8B /* HashtagPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */; };
+		FA40E8BB2087A2EB00447F8B /* HashtagPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */; };
 		FAE3392A207DAF9C0053C227 /* MemoReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE33928207DAF9C0053C227 /* MemoReviewTableViewCell.xib */; };
 		FAE3392D207DD0BA0053C227 /* RecordCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3392B207DD0BA0053C227 /* RecordCategoryTableViewCell.swift */; };
 		FAE3392E207DD0BA0053C227 /* RecordCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */; };
@@ -70,6 +72,8 @@
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
 		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
+		FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagPickerTableViewCell.swift; sourceTree = "<group>"; };
+		FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashtagPickerTableViewCell.xib; sourceTree = "<group>"; };
 		FAE33928207DAF9C0053C227 /* MemoReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoReviewTableViewCell.xib; sourceTree = "<group>"; };
 		FAE3392B207DD0BA0053C227 /* RecordCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordCategoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 		FAE33925207DAF460053C227 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */,
 				FAE33934207E52D40053C227 /* RecordFileNamingTableViewCell.xib */,
 				FAE33930207DEC230053C227 /* RecordInputTableViewCell.xib */,
 				FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */,
@@ -226,6 +231,7 @@
 				FAE33933207E52D40053C227 /* RecordFileNamingTableViewCell.swift */,
 				FAE3392F207DEC230053C227 /* RecordInputTableViewCell.swift */,
 				FAE33937207E700F0053C227 /* MemoReviewTableViewCell.swift */,
+				FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
+				FA40E8BB2087A2EB00447F8B /* HashtagPickerTableViewCell.xib in Resources */,
 				EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */,
 				EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */,
 				FAE3392A207DAF9C0053C227 /* MemoReviewTableViewCell.xib in Resources */,
@@ -358,6 +365,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RSSelectionMenu/RSSelectionMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLCipher/SQLCipher.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
@@ -377,6 +385,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSSelectionMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLCipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
@@ -410,6 +419,7 @@
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
+				FA40E8BA2087A2EB00447F8B /* HashtagPickerTableViewCell.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
 				EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */,
 				EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */,
@@ -559,7 +569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V35ZP6VURV;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BMH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -576,7 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V35ZP6VURV;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BMH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

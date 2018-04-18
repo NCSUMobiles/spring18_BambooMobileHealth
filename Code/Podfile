@@ -18,5 +18,6 @@ target 'BMH' do
 	pod 'SQLite.swift/SQLCipher'
 	pod 'Locksmith'
     	pod 'Charts'
+	pod 'RSSelectionMenu', '~> 3.3'
     
 end
