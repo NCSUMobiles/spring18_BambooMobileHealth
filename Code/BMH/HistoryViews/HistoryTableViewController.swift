@@ -22,6 +22,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
 
     var activityDebugLabel : String = ""
     
+    // mocking data for one year
+    var yearData  = Array(repeating: Array(repeating: 0, count: 4), count: 12)
+    var monthData = Array(repeating: Array(repeating: 0, count: 7), count: 4)
+    var weekData =  Array(repeating: Array(repeating: 0, count: 24), count: 7)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -247,19 +252,25 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         return tableView.sectionFooterHeight
     }
     
+    var selectIndex : Int = 0 {
+        didSet{
+            // use stepperValue with your UIButton as you want
+        }
+    }
+    
     @IBAction func changeChart(sender: UISegmentedControl) {
-        
         print ("self: ", self.restorationIdentifier!)
         print ("index: ", sender.selectedSegmentIndex)
-        
+        selectIndex = Int(sender.selectedSegmentIndex)
+//        print("selectIndex is: ", selectIndex)
     }
 
     // MARK: - Custom functions
     // dummy data for now
-    var hours: [String]!
-    var weekdays: [String]!
-    var months: [String]!
-    var years: [String]!
+    var hoursLabel: [String]!
+    var weekLabel: [String]!
+    var monthLabel: [String]!
+    var yearLabel: [String]!
     var stepsTaken = [Int]()
     weak var axisFormatDelegate: IAxisValueFormatter?
     
@@ -284,41 +295,119 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     }
     */
     
-    func updateSumValue(value: Int, inCell cell: HistoryCell) -> UIColor {
-        let activity = cell.actEx
+    // generate daily mocking data
+    func createDailyData()-> Array<Int> {
+        return [Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(31)),
+            Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)),
+            Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(401)), Int(arc4random_uniform(401)),
+            Int(arc4random_uniform(301)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)),
+            Int(arc4random_uniform(401)), Int(arc4random_uniform(301)), Int(arc4random_uniform(401)), Int(arc4random_uniform(301))]
+    }
+    
+    // generate weekly mocking data
+    func createWeeklyData()-> Array<Int> {
+        for i in 0..<7 {
+            weekData[i] = createDailyData()
+        }
+        var oneWeekData = [Int]()
+        for i in 0..<weekData.count {
+            oneWeekData.append(weekData[i].reduce(0){$0 + $1})
+        }
         
-        // Update the value label
-        
-       
-        return UIColor.black
+        return oneWeekData
+    }
+    
+    // generate monthly mocking data
+    func createMonthlyData()-> Array<Int> {
+        for i in 0..<4 {
+            monthData[i] = createWeeklyData()
+        }
+        var oneMonthData = [Int]()
+        for i in 0..<monthData.count {
+            oneMonthData.append(monthData[i].reduce(0){$0 + $1})
+        }
+        return oneMonthData
+    }
+    
+    // generate yearly mocking data
+    func createYearlyData()-> Array<Int> {
+        for i in 0..<12 {
+            yearData[i] = createMonthlyData()
+        }
+        var oneYearData = [Int]()
+        for i in 0..<yearData.count {
+            oneYearData.append(yearData[i].reduce(0){$0 + $1})
+        }
+        return oneYearData
     }
     
     // func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
     func setChart(inCell cell: HistoryCell, forActivity index: Int) {
-//        cell.barChartView.noDataText = "You need to provide data for the chart."
-//        let activity = activities[index]
-//        cell.actEx = activity
-        
+
         let valueColor = UIColor.blue
+        let activity = activities[index]
+        cell.actEx = activity
+        
+        // mocking dataLabel
+        hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+        weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        yearLabel = ["2018"]
+        
+        
+        // TODO: pass dataset as a parameter
+        
+        for i in 0..<7 {
+            weekData[i] = createDailyData()
+        }
+//        print("Week data", weekData)
+        
+        var oneWeekData = [Int]()
+        for i in 0..<weekData.count {
+           oneWeekData.append(weekData[i].reduce(0){$0 + $1})
+        }
+        print(oneWeekData)
+        
+        
+        
+        var dataLabel: [String]!
+        var dataValue = [Int]()
+        
+        if selectIndex == 0 {
+            dataLabel = hoursLabel
+            // currently select first day of the week
+            dataValue = weekData[0]
+        }
+        else if selectIndex == 1 {
+            dataLabel = weekLabel
+          
+            dataValue = oneWeekData
+//            dataValue = monthData[0]
+        }
+        else if selectIndex == 2 {
+            dataLabel = monthLabel
+        }
+        else if selectIndex == 3 {
+            dataLabel = yearLabel
+        }
         
         axisFormatDelegate = self as IAxisValueFormatter
-        hours = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
-        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        years = ["2018", "2019", "2020"]
+      
         
         var sum = 0
-        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
+//        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
         
         var dataEntries:[BarChartDataEntry] = []
         
-        for i in 0..<weekdays.count{
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
-            sum += stepsTaken[i]
+        for i in 0..<dataLabel.count{
+            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(dataValue[i]) , data: dataLabel as AnyObject?)
+            sum += dataValue[i]
             print(dataEntry)
             dataEntries.append(dataEntry)
         }
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        var labelString = activity.goalUnits + " Count"
+//        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: labelString)
         
         let xAxisValue = cell.barChartView.xAxis
         xAxisValue.valueFormatter = axisFormatDelegate
@@ -336,7 +425,10 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         // save the total steps
         cell.sumValue = sum
-        let activity = cell.actEx
+        
+        // display the unit
+        cell.unitsLabel.text = (activity.goalUnits)
+        
         
         
     }
@@ -345,6 +437,18 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
 extension HistoryTableViewController: IAxisValueFormatter {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return weekdays[Int(value)]
+        if selectIndex == 0 {
+            return hoursLabel[Int(value)]
+        }
+        else if selectIndex == 1 {
+             return weekLabel[Int(value)]
+        }
+        else if selectIndex == 2 {
+             return monthLabel[Int(value)]
+        }
+        else {
+             return yearLabel[Int(value)]
+        }
+        
     }
 }
