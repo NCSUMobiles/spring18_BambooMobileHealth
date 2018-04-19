@@ -36,3 +36,6 @@ Pods/
 
 .DS_Store
 IDEWorkspaceChecks.plist
+
+# Node
+node_modules
