@@ -75,9 +75,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.name = activity["name"]!
                     actEx.goalUnits = activity["units"]!
                     actEx.goalTime = activity["per"]!
+                    actEx.code = activity["code"]!
                     
                     // some dummy value -> should be updated from DB
-                    actEx.goalValue = Int(arc4random_uniform(2000)) + 1
+                    actEx.goalValue = Int(arc4random_uniform(10001)) + 10000
                     
                     activities.append(actEx)
                 }
@@ -90,11 +91,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.name = exercise["name"]!
                     actEx.goalUnits = exercise["units"]!
                     actEx.goalTime = exercise["per"]!
+                    actEx.code = exercise["code"]!
                     
                     // some dummy value -> should be updated from DB
                     actEx.goalValue = Int(arc4random_uniform(30))  + 1
                     
                     exercises.append(actEx)
+                }
+                
+                if let activityExerciseGoals = SettingsHelper.getActivityExerciseGoalValues() as? [[String:Int]]{
+                    for i in 0..<activities.count{
+                        let element  = activities[i]
+                        if let val = activityExerciseGoals[0][element.name]{
+                            activities[i].goalValue = val
+                        }
+                    }
+                    
+                    for i in 0..<exercises.count{
+                        let element = exercises[i]
+                        if let val = activityExerciseGoals[1][element.name]{
+                            exercises[i].goalValue = val
+                        }
+                    }
+                    
                 }
                 
             } catch {

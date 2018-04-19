@@ -23,8 +23,61 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="unT-eK-vfB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txv-XK-lVj" customClass="PieChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txv-XK-lVj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JOP-CK-JPF">
+                                        <rect key="frame" x="50.5" y="10" width="218" height="29"/>
+                                        <segments>
+                                            <segment title="Summary"/>
+                                            <segment title="Day View"/>
+                                            <segment title="Bar Chart"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.24313725489999999" green="0.3921568627" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6a-iO-O7P">
+                                        <rect key="frame" x="10" y="10" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="Lmy-eo-Bab"/>
+                                            <constraint firstAttribute="height" constant="24" id="gX7-w8-uax"/>
+                                        </constraints>
+                                        <state key="normal" image="donut-multi"/>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxB-j7-M0H">
+                                        <rect key="frame" x="286" y="10" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="I9F-96-7sz"/>
+                                            <constraint firstAttribute="width" constant="24" id="N4O-Nk-zYG"/>
+                                        </constraints>
+                                        <state key="normal" image="bar-chart"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bb-BM-fKr" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="39" width="320" height="371"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWV-B6-O9S" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="39" width="320" height="371"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="bottom" secondItem="0bb-BM-fKr" secondAttribute="bottom" id="21J-pt-gis"/>
+                                    <constraint firstItem="u6a-iO-O7P" firstAttribute="top" secondItem="txv-XK-lVj" secondAttribute="top" constant="10" id="47R-Fw-OQY"/>
+                                    <constraint firstItem="fxB-j7-M0H" firstAttribute="top" secondItem="txv-XK-lVj" secondAttribute="top" constant="10" id="9xA-Y4-1Bf"/>
+                                    <constraint firstItem="0bb-BM-fKr" firstAttribute="top" secondItem="u6a-iO-O7P" secondAttribute="bottom" constant="5" id="Gbn-Dg-w6q"/>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="width" secondItem="0bb-BM-fKr" secondAttribute="width" id="Gd7-9Q-2O1"/>
+                                    <constraint firstAttribute="bottom" secondItem="0bb-BM-fKr" secondAttribute="bottom" id="MOs-zv-2iN"/>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="height" secondItem="0bb-BM-fKr" secondAttribute="height" id="RRw-Na-AJs"/>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="top" secondItem="0bb-BM-fKr" secondAttribute="top" id="S1h-w1-suC"/>
+                                    <constraint firstItem="0bb-BM-fKr" firstAttribute="centerX" secondItem="txv-XK-lVj" secondAttribute="centerX" id="Wgc-u7-0zR"/>
+                                    <constraint firstItem="JOP-CK-JPF" firstAttribute="centerX" secondItem="txv-XK-lVj" secondAttribute="centerX" id="YhE-sp-cb3"/>
+                                    <constraint firstItem="JOP-CK-JPF" firstAttribute="top" secondItem="txv-XK-lVj" secondAttribute="top" constant="10" id="jfe-zq-biT"/>
+                                    <constraint firstAttribute="trailing" secondItem="fxB-j7-M0H" secondAttribute="trailing" constant="10" id="lDY-ol-nXd"/>
+                                    <constraint firstItem="0bb-BM-fKr" firstAttribute="width" secondItem="txv-XK-lVj" secondAttribute="width" id="n7c-KF-rEd"/>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="trailing" secondItem="0bb-BM-fKr" secondAttribute="trailing" id="n9I-TN-2Ux"/>
+                                    <constraint firstItem="u6a-iO-O7P" firstAttribute="leading" secondItem="txv-XK-lVj" secondAttribute="leading" constant="10" id="pra-w3-WFI"/>
+                                    <constraint firstItem="GWV-B6-O9S" firstAttribute="leading" secondItem="0bb-BM-fKr" secondAttribute="leading" id="w15-FT-c0U"/>
+                                </constraints>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jue-bt-lVD">
                                 <rect key="frame" x="0.0" y="410" width="320" height="70"/>
@@ -89,11 +142,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="chartView" destination="txv-XK-lVj" id="622-1k-MSr"/>
+                <outlet property="barChartToggle" destination="fxB-j7-M0H" id="UfW-jM-MaN"/>
+                <outlet property="barChartView" destination="GWV-B6-O9S" id="0ws-L4-dUO"/>
+                <outlet property="chartToggleButton" destination="JOP-CK-JPF" id="GOu-XR-w44"/>
                 <outlet property="iconImage" destination="stQ-WN-h9X" id="4kj-n9-Lzv"/>
                 <outlet property="iconLabel" destination="Qif-zE-LUY" id="a9d-0j-09n"/>
+                <outlet property="pieChartToggle" destination="u6a-iO-O7P" id="zPs-vz-08X"/>
+                <outlet property="pieChartView" destination="0bb-BM-fKr" id="bzI-dV-8SG"/>
                 <outlet property="valueLabel" destination="CIt-qQ-SIn" id="Vhs-F8-8vO"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bar-chart" width="25" height="25"/>
+        <image name="donut-multi" width="25" height="25"/>
+    </resources>
 </document>

@@ -15,7 +15,9 @@ class LoginHelper{
     
     static func saveLogedInUser(userId : String){
         do{
-            try Locksmith.saveData(data: ["logedInUser": userId], forUserAccount: USER_ACCOUNT)
+            var dictionary = Locksmith.loadDataForUserAccount(userAccount: USER_ACCOUNT) as! [String:Any]
+            dictionary["logedInUser"] = userId
+            try Locksmith.updateData(data: dictionary, forUserAccount: USER_ACCOUNT)
         }catch{
             print(error)
         }
