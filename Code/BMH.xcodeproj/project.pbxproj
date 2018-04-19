@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
 		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
+		27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B758422079441400345804 /* HistoryMemoViewCell.swift */; };
+		27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B758432079441400345804 /* HistoryMemoViewCell.xib */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
@@ -42,6 +44,8 @@
 		1D1710C135088E5B384F48D3 /* Pods_BMH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
+		27B758422079441400345804 /* HistoryMemoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMemoViewCell.swift; sourceTree = "<group>"; };
+		27B758432079441400345804 /* HistoryMemoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryMemoViewCell.xib; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 				EA0A98E52071A9B400C7D253 /* HistoryCell.swift */,
 				EA0A98E42071A9B400C7D253 /* HistoryCell.xib */,
 				278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */,
+				27B758422079441400345804 /* HistoryMemoViewCell.swift */,
+				27B758432079441400345804 /* HistoryMemoViewCell.xib */,
 			);
 			path = HistoryViews;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
+				27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
 				EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */,
@@ -373,6 +380,7 @@
 				78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */,
 				786926DE20741346009CC203 /* LoginViewController.swift in Sources */,
 				FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */,
+				27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
