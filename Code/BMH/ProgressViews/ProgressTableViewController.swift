@@ -370,7 +370,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             valueColor = UIColor(hex: "#22AA03")
         }
         
-        var valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 24.0)!, NSAttributedStringKey.foregroundColor: valueColor]
+        var valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 24.0)!, NSAttributedStringKey.foregroundColor: valueColor] as [NSAttributedStringKey : Any]
         let valueString = NSMutableAttributedString(string: String(value), attributes: valueAttribute)
         
         valueAttribute = [NSAttributedStringKey.font: UIFont(name: "Hiragino Sans", size: 20.0)!, NSAttributedStringKey.foregroundColor: valueColor]
