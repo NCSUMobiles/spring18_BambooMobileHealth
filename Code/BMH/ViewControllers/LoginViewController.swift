@@ -31,6 +31,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     fileprivate func performLogin() {
         if(usernameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == username && passwordTextField.text == password) {
             LoginHelper.saveLogedInUser(userId: username)
+            let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
+            appDelegate.loadFromJSON()
             performSegue(withIdentifier: "loginToTabBar", sender: self)
         }
         else {
