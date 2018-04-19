@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         if(usernameTextField.text == username && passwordTextField.text == password){
             LoginHelper.saveLogedInUser(userId: username)
+            let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
+            appDelegate.loadFromJSON()
             performSegue(withIdentifier: "loginToTabBar", sender: self)
         }else{
             print("Incorrect Username Password")

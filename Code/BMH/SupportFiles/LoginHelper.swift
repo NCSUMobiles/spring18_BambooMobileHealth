@@ -15,9 +15,12 @@ class LoginHelper{
     
     static func saveLogedInUser(userId : String){
         do{
-            var dictionary = Locksmith.loadDataForUserAccount(userAccount: USER_ACCOUNT) as! [String:Any]
-            dictionary["logedInUser"] = userId
-            try Locksmith.updateData(data: dictionary, forUserAccount: USER_ACCOUNT)
+            if var dictionary = Locksmith.loadDataForUserAccount(userAccount: USER_ACCOUNT) as? [String:Any]{
+                dictionary["logedInUser"] = userId
+                try Locksmith.updateData(data: dictionary, forUserAccount: USER_ACCOUNT)
+            }else{
+                try Locksmith.saveData(data: ["logedInUser": userId], forUserAccount: USER_ACCOUNT)
+            }
         }catch{
             print(error)
         }
@@ -30,7 +33,11 @@ class LoginHelper{
     
     static func logOut(){
         do{
+            var goalsData = SettingsHelper.getActivityExerciseGoalValues() as? [[String:Int]]
             try Locksmith.deleteDataForUserAccount(userAccount: USER_ACCOUNT)
+            if let dict = goalsData{
+                try Locksmith.updateData(data: ["activityExerciseGoalValues" : dict], forUserAccount: USER_ACCOUNT)
+            }
         }catch{
             print(error)
         }
