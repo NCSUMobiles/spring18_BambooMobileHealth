@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
+		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
@@ -38,6 +39,7 @@
 		19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.release.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.release.xcconfig"; sourceTree = "<group>"; };
 		1D1710C135088E5B384F48D3 /* Pods_BMH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				EA1E53192074211F005A9F41 /* ActExList.json */,
 				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
 				EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */,
+				782B726A2087C63B008B0ED2 /* SettingsHelper.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
 				EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */,
 				278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */,

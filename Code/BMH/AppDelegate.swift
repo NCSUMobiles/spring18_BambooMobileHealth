@@ -97,6 +97,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     exercises.append(actEx)
                 }
                 
+                if let activityExerciseGoals = SettingsHelper.getActivityExerciseGoalValues() as? [[String:Int]]{
+                    for var i in 0..<activities.count{
+                        let element  = activities[i]
+                        if let val = activityExerciseGoals[0][element.name]{
+                            activities[i].goalValue = val
+                        }
+                    }
+                    
+                    for var i in 0..<exercises.count{
+                        let element = exercises[i]
+                        if let val = activityExerciseGoals[1][element.name]{
+                            exercises[i].goalValue = val
+                        }
+                    }
+                    
+                }
+                
             } catch {
                 // handle error
             }

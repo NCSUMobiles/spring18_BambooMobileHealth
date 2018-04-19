@@ -81,6 +81,9 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.sectionHeaderHeight
     }
+    @IBAction func saveButtonClicked(_ sender: UIBarButtonItem) {
+        SettingsHelper.saveActivityExerciseGoalValues(activityExerciseAndGoals: tableData)
+    }
     
     @IBAction func logout() {
         // logout
