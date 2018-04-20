@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
-		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
 		27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B758422079441400345804 /* HistoryMemoViewCell.swift */; };
 		27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B758432079441400345804 /* HistoryMemoViewCell.xib */; };
+		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
@@ -53,9 +53,9 @@
 		19F88A89D5B249BBE3627F3D /* Pods-BMH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.release.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.release.xcconfig"; sourceTree = "<group>"; };
 		1D1710C135088E5B384F48D3 /* Pods_BMH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
-		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		27B758422079441400345804 /* HistoryMemoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMemoViewCell.swift; sourceTree = "<group>"; };
 		27B758432079441400345804 /* HistoryMemoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryMemoViewCell.xib; sourceTree = "<group>"; };
+		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +79,7 @@
 		EA9F5C692078390F00339C1D /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartFormatter.swift; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMH-Bridging-Header.h"; sourceTree = "<group>"; };
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
 		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				EA9F5C692078390F00339C1D /* StringHelper.swift */,
 				EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */,
 				782B726A2087C63B008B0ED2 /* SettingsHelper.swift */,
+				EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -373,6 +375,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BMH/Pods-BMH-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -393,6 +396,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -527,6 +531,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -578,6 +583,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
