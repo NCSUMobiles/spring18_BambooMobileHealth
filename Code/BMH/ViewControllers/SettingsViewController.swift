@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SettingsViewController: UITableViewController {
 
@@ -86,6 +87,14 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func logout() {
+        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
         // logout
         LoginHelper.logOut()
         
