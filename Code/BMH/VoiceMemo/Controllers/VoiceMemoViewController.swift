@@ -11,6 +11,8 @@ import UIKit
 import AVFoundation
 import RSSelectionMenu
 import Speech
+import Firebase
+
 
 class VoiceMemoViewController: UITableViewController {
 
@@ -20,6 +22,10 @@ class VoiceMemoViewController: UITableViewController {
     var audioPlayer: AVAudioPlayer?
     let simpleDataArray = ["#Running","#Exercise","#Breathing"]
     var simpleSelectedArray = [String]()
+    var category:Int!
+    var audioFile:URL!
+    var fileName:String!
+    
     
     
     func showAsPopover(_ sender: UIView) {
@@ -150,6 +156,38 @@ class VoiceMemoViewController: UITableViewController {
             
         }
     }
+    
+    func saveAudioFile() {
+        print(LoginHelper.getLogedInUser())
+        
+        
+//        // Get a reference to the storage service using the default Firebase App
+//        let storage = Storage.storage()
+//        // Create a root reference
+//        let storageRef = storage.reference()
+//
+//
+//        // This is equivalent to creating the full reference
+//        let storagePath = "bamboomobile-9c643/images/space.jpg"
+//        var audioRef = storage.reference(forURL: storagePath)
+//
+//
+//
+//        // File located on disk
+//        let localFile = self.audioFile!
+//
+//
+//        // Upload the file to the path "images/rivers.jpg"
+//        let uploadTask = audioRef.putFile(from: localFile, metadata: nil) { metadata, error in
+//            if let error = error {
+//                // Uh-oh, an error occurred!
+//            } else {
+//                // Metadata contains file metadata such as size, content-type, and download URL.
+//                let downloadURL = metadata!.downloadURL()
+//            }
+//        }
+    }
+    
         
 }
 
@@ -162,6 +200,9 @@ extension VoiceMemoViewController: RecordCategoryTableViewCellProtocol {
 extension VoiceMemoViewController: RecordFileNamingTableViewCellProtocol {
     func doneButtonPressed() {
         print("done button pressed")
+        //do checks for data
+        self.saveAudioFile()
+        
     }
     
     func sendFileName(name: String) {
