@@ -4,37 +4,43 @@
                    "image": "walking",
                    "name": "Walking",
                    "units": "steps",
-                   "per": "week"
+                   "per": "week",
+                   "code": "WLK"
                    },
                    {
                    "image": "running",
                    "name": "Running/Elliptical",
                    "units": "miles",
-                   "per": "week"
+                   "per": "week",
+                   "code": "RNE"
                    },
                    {
                    "image": "swimming",
                    "name": "Swimming",
                    "units": "miles",
-                   "per": "week"
+                   "per": "week",
+                   "code": "SWM"
                    },
                    {
                    "image": "physical-therapy",
                    "name": "Physical Therapy @ PT Clinic",
                    "units": "sessions",
-                   "per": "week"
+                   "per": "week",
+                   "code": "PTC"
                    },
                    {
                    "image": "physical-therapy",
                    "name": "Physical Therapy @ Home Session",
                    "units": "sessions",
-                   "per": "week"
+                   "per": "week",
+                   "code": "PTH"
                    },
                    {
                    "image": "pilates",
                    "name": "Yoga/Pilates",
                    "units": "minutes",
-                   "per": "week"
+                   "per": "week",
+                   "code": "YGP"
                    }
                 ],
     "exercises": [
@@ -42,31 +48,36 @@
                   "image": "dumbbell",
                   "name": "Strength Training",
                   "units": "minutes",
-                  "per": "week"
+                  "per": "week",
+                  "code": "STR"
                   },
                   {
                   "image": "cycling",
                   "name": "Cycling/Hand Cycling",
                   "units": "miles",
-                  "per": "week"
+                  "per": "week",
+                  "code": "CYC"
                   },
                   {
                   "image": "exercise-general",
                   "name": "Exercise 3",
                   "units": "sessions",
-                  "per": "week"
+                  "per": "week",
+                  "code": "EX3"
                   },
                   {
                   "image": "exercise-general",
                   "name": "Exercise 4",
                   "units": "sessions",
-                  "per": "week"
+                  "per": "week",
+                  "code": "EX4"
                   },
                   {
                   "image": "exercise-general",
                   "name": "Exercise 5",
                   "units": "sessions",
-                  "per": "week"
+                  "per": "week",
+                  "code": "EX5"
                   }
                 ]
 }

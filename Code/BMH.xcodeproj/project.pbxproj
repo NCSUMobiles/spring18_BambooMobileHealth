@@ -10,6 +10,7 @@
 		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
 		27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B758422079441400345804 /* HistoryMemoViewCell.swift */; };
 		27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B758432079441400345804 /* HistoryMemoViewCell.xib */; };
+		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
 		78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */; };
 		786926DE20741346009CC203 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786926DD20741345009CC203 /* LoginViewController.swift */; };
@@ -29,10 +30,22 @@
 		EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */; };
 		EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */; };
 		EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */; };
+		EA9F5C6A2078390F00339C1D /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C692078390F00339C1D /* StringHelper.swift */; };
+		EA9F5C6C2078392D00339C1D /* BarChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
 		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
 		FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */; };
+		FA40E8BA2087A2EB00447F8B /* HashtagPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */; };
+		FA40E8BB2087A2EB00447F8B /* HashtagPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */; };
+		FAE3392A207DAF9C0053C227 /* MemoReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE33928207DAF9C0053C227 /* MemoReviewTableViewCell.xib */; };
+		FAE3392D207DD0BA0053C227 /* RecordCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3392B207DD0BA0053C227 /* RecordCategoryTableViewCell.swift */; };
+		FAE3392E207DD0BA0053C227 /* RecordCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */; };
+		FAE33931207DEC230053C227 /* RecordInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE3392F207DEC230053C227 /* RecordInputTableViewCell.swift */; };
+		FAE33932207DEC230053C227 /* RecordInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE33930207DEC230053C227 /* RecordInputTableViewCell.xib */; };
+		FAE33935207E52D40053C227 /* RecordFileNamingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE33933207E52D40053C227 /* RecordFileNamingTableViewCell.swift */; };
+		FAE33936207E52D40053C227 /* RecordFileNamingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE33934207E52D40053C227 /* RecordFileNamingTableViewCell.xib */; };
+		FAE33938207E700F0053C227 /* MemoReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE33937207E700F0053C227 /* MemoReviewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +55,7 @@
 		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		27B758422079441400345804 /* HistoryMemoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMemoViewCell.swift; sourceTree = "<group>"; };
 		27B758432079441400345804 /* HistoryMemoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryMemoViewCell.xib; sourceTree = "<group>"; };
+		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		786926DD20741345009CC203 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -62,10 +76,23 @@
 		EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionTableViewCell.xib; sourceTree = "<group>"; };
 		EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
+		EA9F5C692078390F00339C1D /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartFormatter.swift; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMH-Bridging-Header.h"; sourceTree = "<group>"; };
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
 		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
+		FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagPickerTableViewCell.swift; sourceTree = "<group>"; };
+		FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashtagPickerTableViewCell.xib; sourceTree = "<group>"; };
+		FAE33928207DAF9C0053C227 /* MemoReviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoReviewTableViewCell.xib; sourceTree = "<group>"; };
+		FAE3392B207DD0BA0053C227 /* RecordCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		FAE3392F207DEC230053C227 /* RecordInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInputTableViewCell.swift; sourceTree = "<group>"; };
+		FAE33930207DEC230053C227 /* RecordInputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordInputTableViewCell.xib; sourceTree = "<group>"; };
+		FAE33933207E52D40053C227 /* RecordFileNamingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordFileNamingTableViewCell.swift; sourceTree = "<group>"; };
+		FAE33934207E52D40053C227 /* RecordFileNamingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordFileNamingTableViewCell.xib; sourceTree = "<group>"; };
+		FAE33937207E700F0053C227 /* MemoReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReviewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +123,10 @@
 				EA1E53192074211F005A9F41 /* ActExList.json */,
 				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
 				EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */,
+				EA9F5C692078390F00339C1D /* StringHelper.swift */,
+				EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */,
+				782B726A2087C63B008B0ED2 /* SettingsHelper.swift */,
+				EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -122,6 +153,7 @@
 		EA29CDB9206B22DF00B016FE /* BMH */ = {
 			isa = PBXGroup;
 			children = (
+				FAE33924207DAF150053C227 /* VoiceMemo */,
 				EA1E531420741EA9005A9F41 /* SupportFiles */,
 				EA4A98A5206BF6CE004C0957 /* SupportViews */,
 				EA4A98A3206BF66D004C0957 /* ViewControllers */,
@@ -165,7 +197,6 @@
 				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
 				78428CC8206D1450004A6342 /* SettingsViewController.swift */,
 				786926DD20741345009CC203 /* LoginViewController.swift */,
-				FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +217,40 @@
 				1D1710C135088E5B384F48D3 /* Pods_BMH.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAE33924207DAF150053C227 /* VoiceMemo */ = {
+			isa = PBXGroup;
+			children = (
+				FAE33926207DAF4E0053C227 /* Controllers */,
+				FAE33925207DAF460053C227 /* Views */,
+			);
+			path = VoiceMemo;
+			sourceTree = "<group>";
+		};
+		FAE33925207DAF460053C227 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA40E8B92087A2EB00447F8B /* HashtagPickerTableViewCell.xib */,
+				FAE33934207E52D40053C227 /* RecordFileNamingTableViewCell.xib */,
+				FAE33930207DEC230053C227 /* RecordInputTableViewCell.xib */,
+				FAE3392C207DD0BA0053C227 /* RecordCategoryTableViewCell.xib */,
+				FAE33928207DAF9C0053C227 /* MemoReviewTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FAE33926207DAF4E0053C227 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */,
+				FAE3392B207DD0BA0053C227 /* RecordCategoryTableViewCell.swift */,
+				FAE33933207E52D40053C227 /* RecordFileNamingTableViewCell.swift */,
+				FAE3392F207DEC230053C227 /* RecordInputTableViewCell.swift */,
+				FAE33937207E700F0053C227 /* MemoReviewTableViewCell.swift */,
+				FA40E8B82087A2EB00447F8B /* HashtagPickerTableViewCell.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,15 +315,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE3392E207DD0BA0053C227 /* RecordCategoryTableViewCell.xib in Resources */,
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
 				27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
+				FA40E8BB2087A2EB00447F8B /* HashtagPickerTableViewCell.xib in Resources */,
 				EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */,
 				EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */,
+				FAE3392A207DAF9C0053C227 /* MemoReviewTableViewCell.xib in Resources */,
 				EA29CDC4206B22DF00B016FE /* Assets.xcassets in Resources */,
 				EA29CDC2206B22DF00B016FE /* Main.storyboard in Resources */,
 				EA1E531A2074211F005A9F41 /* ActExList.json in Resources */,
+				FAE33936207E52D40053C227 /* RecordFileNamingTableViewCell.xib in Resources */,
+				FAE33932207DEC230053C227 /* RecordInputTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +375,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BMH/Pods-BMH-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -313,6 +384,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RSSelectionMenu/RSSelectionMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLCipher/SQLCipher.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
@@ -324,6 +396,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -332,6 +405,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSSelectionMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLCipher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
@@ -353,15 +427,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */,
+				FAE33935207E52D40053C227 /* RecordFileNamingTableViewCell.swift in Sources */,
 				EA29CDBF206B22DF00B016FE /* HistoryViewController.swift in Sources */,
 				EA1E531620741F19005A9F41 /* ActivityExercise.swift in Sources */,
+				FAE33931207DEC230053C227 /* RecordInputTableViewCell.swift in Sources */,
 				278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */,
 				EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */,
+				EA9F5C6A2078390F00339C1D /* StringHelper.swift in Sources */,
+				FAE33938207E700F0053C227 /* MemoReviewTableViewCell.swift in Sources */,
+				FAE3392D207DD0BA0053C227 /* RecordCategoryTableViewCell.swift in Sources */,
 				EA0810202075E2580059C0DD /* ProgressTableViewController.swift in Sources */,
 				EA29CDBB206B22DF00B016FE /* AppDelegate.swift in Sources */,
 				EA31488F206C33A7006F712A /* SelectionTableViewCell.swift in Sources */,
 				EA29CDBD206B22DF00B016FE /* ProgressViewController.swift in Sources */,
+				FA40E8BA2087A2EB00447F8B /* HashtagPickerTableViewCell.swift in Sources */,
 				78428CCB206D1778004A6342 /* SettingsTableViewCell.swift in Sources */,
+				EA9F5C6C2078392D00339C1D /* BarChartFormatter.swift in Sources */,
 				EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */,
 				EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */,
 				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
@@ -449,6 +531,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -500,6 +583,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
