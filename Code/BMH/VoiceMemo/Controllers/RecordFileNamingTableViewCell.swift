@@ -37,6 +37,7 @@ class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate
     }
     @IBAction func doneButtonAction(_ sender: Any) {
         guard self.delegate != nil else { return }
+        self.delegate.doneButtonPressed()
     }
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))  //1
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
