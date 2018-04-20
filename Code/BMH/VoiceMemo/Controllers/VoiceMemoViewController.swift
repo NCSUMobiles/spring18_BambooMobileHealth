@@ -57,11 +57,13 @@ class VoiceMemoViewController: UITableViewController {
         do {
             try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try recordingSession.setActive(true)
+            try self.recordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
             recordingSession.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
                     if allowed {
                         print("granted recording permission")
                         //Allow recording
+                        
                     } else {
                         // failed to record!
                     }
