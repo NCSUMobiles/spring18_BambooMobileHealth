@@ -127,7 +127,19 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     
         // update the chart in third section first row
         // TODO: change to random data
-        createChart(inCell: chartCell, forActivity: selectedActivity, withData: hoursLabel, withData: createDailyData())
+        if selectedSegment == 2 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: weekLabel, withData: createWeeklyData())
+        }
+        else if selectedSegment == 3 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+        }
+        else if selectedSegment == 4 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: yearLabel, withData: [Int(20001)+107000])
+        }
+        else {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: hoursLabel, withData: createDailyData())
+        }
+        //createChart(inCell: chartCell, forActivity: selectedActivity, withData: hoursLabel, withData: createDailyData())
 //        createChart(inCell: chartCell, forActivity: selectedActivity)
 //        setChart(inCell: chartCell, forActivity: selectedActivity)
         self.tableView.endUpdates()
