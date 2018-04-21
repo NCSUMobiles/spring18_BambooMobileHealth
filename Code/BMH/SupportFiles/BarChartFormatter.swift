@@ -15,4 +15,5 @@ class BarChartFormatter: NSObject, IAxisValueFormatter{
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return daysOfWeek[Int(value)]
     }
+    
 }

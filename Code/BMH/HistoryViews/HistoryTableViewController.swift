@@ -430,19 +430,75 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         var dataEntries:[BarChartDataEntry] = []
         let activity = cell.actEx
         
+        let chartView = cell.barChartView!
+        let d_formatter: DayFormatter = DayFormatter()
+        let w_formatter: WeekFormatter = WeekFormatter()
+        let m_formatter: MonthFormatter = MonthFormatter()
+        let y_formatter: YearFormatter = YearFormatter()
+        
+        axisFormatDelegate = self as IAxisValueFormatter
+        
+        
+      
+        
         for i in 0..<dataLabel_.count{
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]) , data: dataLabel_ as AnyObject?)
+//            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]) , data: dataLabel_ as AnyObject?)
             sum += dataValue_[i]
+//            dataValue_.append(dataValue[i])
+           
             //            print(dataEntry)
-            dataEntries.append(dataEntry)
+//            dataEntries.append(dataEntry)
         }
+        
+        // default set selectedSegment as 1 before user click other seg
+        dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+            _ = d_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+            return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+        }
+        
+        print("Before select", dataEntries)
+        if selectedSegment == 1 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = d_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+            print("After", dataEntries)
+        } else if selectedSegment == 2 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = w_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        } else if selectedSegment == 3 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = m_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        } else {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = y_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        }
+        
+        
+        let xAxisValue = cell.barChartView.xAxis
+        xAxisValue.valueFormatter = axisFormatDelegate
+        xAxisValue.labelPosition = .bottom
+        xAxisValue.granularityEnabled = true
+        xAxisValue.drawGridLinesEnabled = false
+        xAxisValue.labelCount = 24
+        xAxisValue.granularity = 1
+        xAxisValue.drawLabelsEnabled = true
+        xAxisValue.drawLimitLinesBehindDataEnabled = true
+        xAxisValue.avoidFirstLastClippingEnabled = false
+        
         print("Unit is: ", (activity?.goalUnits)!)
         var labelString = (activity?.goalUnits)! + " Count"
         //        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
         let chartDataSet = BarChartDataSet(values: dataEntries, label: labelString)
         
-        let xAxisValue = cell.barChartView.xAxis
-        xAxisValue.valueFormatter = axisFormatDelegate
+        
+        
         chartDataSet.colors = [UIColor(hex: "#7000ff")]
         
         // update the sumValue, unit, bottomLabel
@@ -564,17 +620,35 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
 extension HistoryTableViewController: IAxisValueFormatter {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if selectIndex == 0 {
+        var hoursLabel: [String]!
+        var weekLabel: [String]!
+        var monthLabel: [String]!
+        var yearLabel: [String]!
+        
+        hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+        weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        yearLabel = ["2018"]
+        
+        if selectedSegment == 1 {
+            print("select 1")
             return hoursLabel[Int(value)]
         }
-        else if selectIndex == 1 {
+        else if selectedSegment == 2 {
+            print("select 2")
              return weekLabel[Int(value)]
         }
-        else if selectIndex == 2 {
+        else if selectedSegment == 3 {
+            print("select 3")
              return monthLabel[Int(value)]
         }
+        else if selectedSegment == 4 {
+            return yearLabel[Int(value)]
+        }
         else {
-             return yearLabel[Int(value)]
+            print("default")
+             return hoursLabel[Int(value)]
+            
         }
         
     }
