@@ -70,6 +70,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 self.passwordTextField.isEnabled = true
                                 self.activityIndicator.stopAnimating()
                                 
+                                // print the new idToken for debugging
+                                Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+                                    if (error == nil) {
+                                        print(token)
+                                    }
+                                    else {
+                                        print(error)
+                                    }
+                                })
+                                
                                 // Authentication successful, proceed forward
                                 LoginHelper.saveLogedInUser(userId: self.username)
                                 let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
