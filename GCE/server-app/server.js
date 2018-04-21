@@ -1,8 +1,19 @@
 const express    = require("express");
-const login      = require('./authentication/login');
+const login      = require('./authentication/main');
+const progress   = require('./progress/main');
 const bodyParser = require('body-parser');
+const globals    = require('./globals.js');
+
 const app        = express();
 const port       = 80;
+
+// initialize firebaseadmin
+globals.firebaseadmin.initializeApp({
+  credential: globals.firebaseadmin.credential.cert(globals.serviceAccount),
+  databaseURL: 'https://bamboomobile-9c643.firebaseio.com'
+});
+
+//globals.firebase.initializeApp(globals.firebaseconfig);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,11 +27,14 @@ var router = express.Router();
 
 // test route
 router.get('/', function(req, res) {
-    res.json({ message: 'Hello World!' });
+    res.json({ message: 'Hello World from BMH API!' });
 });
 
-//route to handle user login
+// route to handle user login
 router.post('/login',login.login)
+
+// route to handle requests for progress tab
+router.get('/progress', progress.progress)
 
 // route everything udner /api to router
 app.use('/api', router);
@@ -77,9 +91,3 @@ function shutdown() {
     });
   });
 }
-
-
-
-
-
-
