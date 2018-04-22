@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import CoreMotion
 
-class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
     
     var showPickerView : Bool = false
     var activities : [ActEx]!
@@ -22,6 +22,23 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
 
     var activityDebugLabel : String = ""
     
+    // declare dummy data for now
+    var hoursLabel: [String]!
+    var weekLabel: [String]!
+    var monthLabel: [String]!
+    var yearLabel: [String]!
+    var stepsTaken = [Int]()
+    weak var axisFormatDelegate: IAxisValueFormatter?
+    
+    var selectedSegment = 1
+    // mocking data for one year
+    var yearData  = Array(repeating: Array(repeating: 0, count: 4), count: 12)
+    var monthData = Array(repeating: Array(repeating: 0, count: 7), count: 4)
+    var weekData =  Array(repeating: Array(repeating: 0, count: 24), count: 7)
+    
+    var dataLabel: [String]!
+    var dataValue = [Int]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +47,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         // load the activity list and register custom nibs depending on the scene
         activities = []
-        
+        hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+        weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        yearLabel = ["2018"]
+
         if self.restorationIdentifier == "History_ActivityViewController" {
             activities = appDelegate.activities
             
@@ -105,7 +126,24 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     
         // update the chart in third section first row
         // TODO: change to random data
-        setChart(inCell: chartCell, forActivity: selectedActivity)
+       
+        if selectedSegment == 2 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: weekLabel, withData: createWeeklyData())
+            
+        }
+        else if selectedSegment == 3 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+            
+        }
+        else if selectedSegment == 4 {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: yearLabel, withData: [Int(20001)+107000])
+          
+        }
+        else {
+            createChart(inCell: chartCell, forActivity: selectedActivity, withData: hoursLabel, withData: createDailyData())
+            
+        }
+        //createChart(inCell: chartCell, forActivity: selectedActivity, withData: hoursLabel, withData: createDailyData())
         self.tableView.endUpdates()
     }
     
@@ -177,17 +215,42 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: chartCellReuseIdentifier, for: indexPath) as! HistoryCell
+            
             //(cell.barChartView).noDataText = "You need to provide data for the chart."
             cell.barChartView.maxVisibleCount = 10000
             cell.barChartView.chartDescription?.text = ""
             
             cell.aggSwitch.addTarget(self, action: #selector(changeChart(sender:)), for: UIControlEvents.primaryActionTriggered)
+            cell.aggSwitch.addTarget(self, action: #selector(updateChart(sender:)), for: .valueChanged)
+            
             
             if selectedActivity == -1 {
-                setChart(inCell: cell, forActivity: 0)
+                if selectedSegment == 2 {
+                    createChart(inCell: cell, forActivity: 0, withData: weekLabel, withData: createWeeklyData())
+                }
+                else if selectedSegment == 3 {
+                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+                }
+                else if selectedSegment == 4 {
+                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(20001)+107000])
+                }
+                else {
+                    createChart(inCell: cell, forActivity: 0, withData: hoursLabel, withData: createDailyData())
+                }
             }
             else {
-                setChart(inCell: cell, forActivity: selectedActivity)
+                if selectedSegment == 2 {
+                    createChart(inCell: cell, forActivity: 0, withData: weekLabel, withData: createWeeklyData())
+                }
+                else if selectedSegment == 3 {
+                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+                }
+                else if selectedSegment == 4 {
+                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(20001)+107000])
+                }
+                else {
+                    createChart(inCell: cell, forActivity: 0, withData: hoursLabel, withData: createDailyData())
+                }
             }
             
             return cell
@@ -247,86 +310,167 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         return tableView.sectionFooterHeight
     }
     
+    var selectIndex : Int = 0 {
+        didSet{
+            // use stepperValue with your UIButton as you want
+        }
+    }
+    
     @IBAction func changeChart(sender: UISegmentedControl) {
-        
-        print ("self: ", self.restorationIdentifier!)
-        print ("index: ", sender.selectedSegmentIndex)
+//        print ("self: ", self.restorationIdentifier!)
+//        print ("index: ", sender.selectedSegmentIndex)
+        selectIndex = Int(sender.selectedSegmentIndex)
+//        print("selectIndex is: ", selectIndex)
         
     }
 
     // MARK: - Custom functions
-    // dummy data for now
-    var hours: [String]!
-    var weekdays: [String]!
-    var months: [String]!
-    var years: [String]!
-    var stepsTaken = [Int]()
-    weak var axisFormatDelegate: IAxisValueFormatter?
+   
+    // generate daily mocking data
+    func createDailyData()-> Array<Int> {
+        return [Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(31)),
+            Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)),
+            Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(401)), Int(arc4random_uniform(401)),
+            Int(arc4random_uniform(301)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)),
+            Int(arc4random_uniform(401)), Int(arc4random_uniform(301)), Int(arc4random_uniform(401)), Int(arc4random_uniform(301))]
+    }
+    
+    // generate weekly mocking data
+    func createWeeklyData()-> Array<Int> {
+        for i in 0..<7 {
+            weekData[i] = createDailyData()
+        }
+        var oneWeekData = [Int]()
+        for i in 0..<weekData.count {
+            oneWeekData.append(weekData[i].reduce(0){$0 + $1})
+        }
+        
+        return oneWeekData
+    }
+    
+    // generate monthly mocking data
+    func createMonthlyData()-> Array<Int> {
+        for i in 0..<4 {
+            monthData[i] = createWeeklyData()
+        }
+        var oneMonthData = [Int]()
+        for i in 0..<monthData.count {
+            oneMonthData.append(monthData[i].reduce(0){$0 + $1})
+        }
+        return oneMonthData
+    }
+    
+    // generate yearly mocking data
+    func createYearlyData()-> Array<Int> {
+        for i in 0..<12 {
+            yearData[i] = createMonthlyData()
+        }
+        var oneYearData = [Int]()
+        for i in 0..<yearData.count {
+            oneYearData.append(yearData[i].reduce(0){$0 + $1})
+        }
+        return oneYearData
+    }
+    
+    @objc func updateChart(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            selectedSegment = 1
+        }
+        else if sender.selectedSegmentIndex == 1 {
+            selectedSegment = 2
+        }
+        else if sender.selectedSegmentIndex == 2 {
+            selectedSegment = 3
+        }
+        else {
+            selectedSegment = 4
+        }
+        self.tableView.reloadData()
+    }
     
     // Create a chart
-    /*
-    func createChart(inCell cell: HistoryCell, forActivity index: Int) {
-        cell.barChartView.noDataText = "You need to provide data for the chart."
-        // Configure the cell...
-        // For this activity obtain weekly goal value and units
+    func createChart(inCell cell: HistoryCell, forActivity index: Int, withData x: [String], withData y: [Int]) {
+        let index = selectedActivity == -1 ? 0 : selectedActivity
         let activity = activities[index]
         
-        // save activity into cell for futture use
         cell.actEx = activity
         
-        // Retrieve values for this week from Firebase
+        // drawChart with dummy data
+        drawChart(inCell: cell, withData: x, withData: y)
         
-        // Update the chart to show the updated value
-        
-        // Set a dummy donut chart
-        setChart(inCell: cell, forActivity: )
-        
-    }
-    */
-    
-    func updateSumValue(value: Int, inCell cell: HistoryCell) -> UIColor {
-        let activity = cell.actEx
-        
-        // Update the value label
-        
-       
-        return UIColor.black
+        cell.barChartView.delegate = self
     }
     
-    // func setChart(inCell cell: HistoryCell, dataEntryX forX:[String],dataEntryY forY: [Int]) {
-    func setChart(inCell cell: HistoryCell, forActivity index: Int) {
-//        cell.barChartView.noDataText = "You need to provide data for the chart."
-//        let activity = activities[index]
-//        cell.actEx = activity
+    func drawChart(inCell cell: HistoryCell, withData data_Label: [String], withData data_Value: [Int]) {
+        var dataLabel_: [String]!
+        var dataValue_ = [Int]()
         
-        let valueColor = UIColor.blue
-        
-        axisFormatDelegate = self as IAxisValueFormatter
-        hours = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
-        weekdays = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        years = ["2018", "2019", "2020"]
+        dataLabel_ = data_Label
+        dataValue_ = data_Value
         
         var sum = 0
-        stepsTaken = [Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001)), Int(arc4random_uniform(7001))]
-        
         var dataEntries:[BarChartDataEntry] = []
         
-        for i in 0..<weekdays.count{
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(stepsTaken[i]) , data: weekdays as AnyObject?)
-            sum += stepsTaken[i]
-            print(dataEntry)
-            dataEntries.append(dataEntry)
+        let activity = cell.actEx
+        // TODO: only get Walking activity here
+//        print("activity", activity)
+        let chartView = cell.barChartView!
+        let d_formatter: DayFormatter = DayFormatter()
+        let w_formatter: WeekFormatter = WeekFormatter()
+        let m_formatter: MonthFormatter = MonthFormatter()
+        let y_formatter: YearFormatter = YearFormatter()
+        
+        axisFormatDelegate = self as IAxisValueFormatter
+    
+        for i in 0..<dataLabel_.count{
+//            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]) , data: dataLabel_ as AnyObject?)
+            sum += dataValue_[i]
+//            dataValue_.append(dataValue[i])
+//            dataEntries.append(dataEntry)
         }
-        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        
+        if selectedSegment == 1 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = d_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        } else if selectedSegment == 2 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = w_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        } else if selectedSegment == 3 {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = m_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        } else {
+            dataEntries = (0..<dataValue_.count).map { (i) -> BarChartDataEntry in
+                _ = y_formatter.stringForValue(Double(i), axis: chartView.xAxis)
+                return BarChartDataEntry(x: Double(i), y: Double(dataValue_[i]))
+            }
+        }
         
         let xAxisValue = cell.barChartView.xAxis
         xAxisValue.valueFormatter = axisFormatDelegate
+        xAxisValue.labelPosition = .bottom
+        xAxisValue.granularityEnabled = true
+        xAxisValue.drawGridLinesEnabled = false
+        xAxisValue.labelCount = 12
+        xAxisValue.granularity = 1
+        xAxisValue.drawLabelsEnabled = true
+        xAxisValue.drawLimitLinesBehindDataEnabled = true
+        xAxisValue.avoidFirstLastClippingEnabled = false
+        
+        var labelString = (activity?.goalUnits)! + " Count"
+        //        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: labelString)
+        
         chartDataSet.colors = [UIColor(hex: "#7000ff")]
         
         // update the sumValue, unit, bottomLabel
         cell.valueLabel.text = String(sum)
-//        cell.unitsLabel
+        //        cell.unitsLabel
         
         // finally set the data
         let chartData = BarChartData(dataSet: chartDataSet)
@@ -336,15 +480,43 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         // save the total steps
         cell.sumValue = sum
-        let activity = cell.actEx
         
+        // display the unit
+        cell.unitsLabel.text = (activity?.goalUnits)!
         
     }
+    
 }
 
 extension HistoryTableViewController: IAxisValueFormatter {
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return weekdays[Int(value)]
+        var hoursLabel: [String]!
+        var weekLabel: [String]!
+        var monthLabel: [String]!
+        var yearLabel: [String]!
+        
+        hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+        weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+        monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        yearLabel = ["2018"]
+        
+        if selectedSegment == 1 {
+            return hoursLabel[Int(value)]
+        }
+        else if selectedSegment == 2 {
+             return weekLabel[Int(value)]
+        }
+        else if selectedSegment == 3 {
+             return monthLabel[Int(value)]
+        }
+        else if selectedSegment == 4 {
+            return yearLabel[Int(value)]
+        }
+        else {
+             return hoursLabel[Int(value)]
+            
+        }
+        
     }
 }
