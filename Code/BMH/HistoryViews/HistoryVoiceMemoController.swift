@@ -16,7 +16,6 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     
     var selectionCellReuseIdentifer : String!
     var memoCellReuseIdentifer : String!
-    var labelCellReuseIdentifer : String!
 
     var activityDebugLabel : String = ""
     
@@ -75,9 +74,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         
         if self.restorationIdentifier == "History_AudioViewController" {
             selectionCellReuseIdentifer = "History_AudioSelectionCell"
-            memoCellReuseIdentifer = "History_memoView"
-            labelCellReuseIdentifer = "History_AudioViewCell"
-            
+            memoCellReuseIdentifer = "History_AudioViewCell"
             activityDebugLabel = "memo"
         }
         
@@ -111,10 +108,17 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             cell.layoutSubviews()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       if indexPath.section == 1 {
+            return 116;
+        }
+        return 44;
+    }
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
-        if (indexPath.section == 0 && indexPath.row == 1) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
             cell = tableView.dequeueReusableCell(withIdentifier: selectionCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
@@ -142,8 +146,8 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             selectedActivity = (pickerView?.selectedRow(inComponent: 0))!
 //            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         }
-        else if (indexPath.section == 0 && indexPath.row == 0) {
-            cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
+        else if (indexPath.section == 1 && indexPath.row == 0) {
+            cell = tableView.dequeueReusableCell(withIdentifier: memoCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
             // Set the label either as a default value or based on what the user selected in picker.
