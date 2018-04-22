@@ -13,20 +13,92 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="312" id="KGk-i7-Jjw" customClass="HistoryMemoViewCell" customModule="BMH" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="235" height="312"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="235" height="311.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="139.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ahj-CM-nRx">
-                        <rect key="frame" x="0.0" y="0.0" width="235" height="312"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </stackView>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="o7b-cT-iuz" userLabel="timeSlider">
+                        <rect key="frame" x="101" y="55" width="118" height="31"/>
+                    </slider>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc4-TW-6dT">
+                        <rect key="frame" x="16" y="101" width="28" height="25"/>
+                        <state key="normal" title="playButton" image="playButton2"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vF-En-koO">
+                        <rect key="frame" x="277" y="101" width="27" height="25"/>
+                        <state key="normal" title="trashButton" image="trash2"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TagLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djv-wn-tMR">
+                        <rect key="frame" x="125" y="103" width="70" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Sd-KGk">
+                        <rect key="frame" x="16" y="11" width="69" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:31" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWV-19-Bnh" userLabel="remainTime">
+                        <rect key="frame" x="262" y="59" width="30" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiQ-q8-g1V" userLabel="playTime">
+                        <rect key="frame" x="16" y="59" width="46" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04/22/2018 10:02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uOm-aT-XDi" userLabel="dateTime">
+                        <rect key="frame" x="167" y="11" width="137" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="o7b-cT-iuz" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="3bi-D5-nsz"/>
+                    <constraint firstAttribute="trailing" secondItem="o7b-cT-iuz" secondAttribute="trailing" constant="103" id="62d-4i-VxJ"/>
+                    <constraint firstItem="uOm-aT-XDi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="B3W-P9-DpJ"/>
+                    <constraint firstItem="SWV-19-Bnh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="D1W-lX-cgs"/>
+                    <constraint firstItem="o7b-cT-iuz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="103" id="JVm-JW-7ky"/>
+                    <constraint firstItem="o7b-cT-iuz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OHb-DW-Vad"/>
+                    <constraint firstAttribute="bottom" secondItem="6vF-En-koO" secondAttribute="bottom" constant="13.5" id="Q2c-kN-yZC"/>
+                    <constraint firstItem="bc4-TW-6dT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="S1L-FX-B7P"/>
+                    <constraint firstItem="Rbg-Sd-KGk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Xba-bI-Hap"/>
+                    <constraint firstItem="o7b-cT-iuz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="55" id="aMQ-tO-b1B"/>
+                    <constraint firstAttribute="trailing" secondItem="6vF-En-koO" secondAttribute="trailing" constant="16" id="acf-FB-5Ia"/>
+                    <constraint firstAttribute="trailing" secondItem="uOm-aT-XDi" secondAttribute="trailing" constant="16" id="cCC-Dc-KJ9"/>
+                    <constraint firstItem="iiQ-q8-g1V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cTb-l6-Ot2"/>
+                    <constraint firstItem="Djv-wn-tMR" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="d2p-WS-2m0"/>
+                    <constraint firstItem="iiQ-q8-g1V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e23-pj-OLO"/>
+                    <constraint firstAttribute="bottom" secondItem="bc4-TW-6dT" secondAttribute="bottom" constant="13.5" id="mPu-6i-Yl7"/>
+                    <constraint firstAttribute="trailing" secondItem="SWV-19-Bnh" secondAttribute="trailing" constant="28" id="uQl-Ea-c4A"/>
+                    <constraint firstItem="Rbg-Sd-KGk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="vNV-mS-Rvv"/>
+                    <constraint firstAttribute="bottom" secondItem="Djv-wn-tMR" secondAttribute="bottom" constant="15.5" id="zj0-eJ-yok"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="24.5" y="93"/>
+            <connections>
+                <outlet property="dateTime" destination="uOm-aT-XDi" id="RFa-yj-chV"/>
+                <outlet property="filename" destination="Rbg-Sd-KGk" id="2OJ-0l-T9N"/>
+                <outlet property="playButton" destination="bc4-TW-6dT" id="o0c-4C-Gqm"/>
+                <outlet property="playTime" destination="iiQ-q8-g1V" id="Wtf-sE-uG8"/>
+                <outlet property="remainTime" destination="SWV-19-Bnh" id="gju-5q-gBW"/>
+                <outlet property="tagLabel" destination="Djv-wn-tMR" id="J1L-BH-CH7"/>
+                <outlet property="timeSlider" destination="o7b-cT-iuz" id="GMl-NB-Aft"/>
+                <outlet property="trashButton" destination="6vF-En-koO" id="fi8-NA-6DZ"/>
+            </connections>
+            <point key="canvasLocation" x="166" y="42"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="playButton2" width="25" height="25"/>
+        <image name="trash2" width="25" height="25"/>
+    </resources>
 </document>
