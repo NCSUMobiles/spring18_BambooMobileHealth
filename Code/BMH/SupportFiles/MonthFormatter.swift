@@ -11,7 +11,8 @@ import Foundation
 import Charts
 
 class MonthFormatter: NSObject, IAxisValueFormatter {
-    var monthLabel: [String]! = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+//    var monthLabel: [String]! = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    var monthLabel: [String]! = ["April"]
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return monthLabel[Int(value)]

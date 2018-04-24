@@ -22,6 +22,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     var selectedActivity : Int = -1
     
     var selectionCellReuseIdentifer : String!
+    var labelCellReuseIdentifer : String!
     var memoCellReuseIdentifer : String!
 
     var activityDebugLabel : String = ""
@@ -30,6 +31,36 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     weak var isPlayingCell : HistoryVoiceMemoViewCell?
     var audioPlayer: AVAudioPlayer?
     var updater : CADisplayLink! = nil
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // get the app delegate
+        //        _ = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // load the activity list and register custom nibs depending on the scene
+        activities = []
+        
+        if self.restorationIdentifier == "History_AudioViewController" {
+            activities = appDelegate.activities
+            
+            selectionCellReuseIdentifer = "History_AudioSelectionCell"
+            memoCellReuseIdentifer = "History_AudioMemoViewCell"
+            labelCellReuseIdentifer = "History_AudioViewCell"
+            activityDebugLabel = "memo"
+        }
+        
+        self.tableView.register(UINib(nibName:"HistoryMemoViewCell", bundle: nil), forCellReuseIdentifier: memoCellReuseIdentifer)
+        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -92,6 +123,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.tableView.beginUpdates()
         selectedActivity = row
         print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         
@@ -101,31 +133,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         // remove any existing selection
         _ =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryVoiceMemoViewCell)
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        // get the app delegate
-        _ = UIApplication.shared.delegate as! AppDelegate
-        
-        // load the activity list and register custom nibs depending on the scene
-        activities = []
-        
-        if self.restorationIdentifier == "History_AudioViewController" {
-            selectionCellReuseIdentifer = "History_AudioSelectionCell"
-            memoCellReuseIdentifer = "History_AudioViewCell"
-            activityDebugLabel = "memo"
-        }
-        
-        self.tableView.register(UINib(nibName:"HistoryMemoViewCell", bundle: nil), forCellReuseIdentifier: memoCellReuseIdentifer)
-        self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
+        self.tableView.endUpdates()
         
     }
 
@@ -143,8 +151,11 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if self.showPickerView && section == 0 {
-            return 2
+        if section == 0 {
+            if (self.showPickerView) {
+                return 2
+            }
+            return 1
         }
         return memosArray.count
     }
@@ -156,7 +167,10 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       if indexPath.section == 1 {
+        if indexPath.section == 0 && indexPath.row == 1{
+            return 160;
+        }
+        if indexPath.section == 1 {
             return 116;
         }
         return 44;
@@ -164,7 +178,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
-        if (indexPath.section == 0 && indexPath.row == 0) {
+        if (indexPath.section == 0 && indexPath.row == 1) {
             // SOMETHING IS WRONG HERE
             cell = tableView.dequeueReusableCell(withIdentifier: selectionCellReuseIdentifer, for: indexPath)
             
@@ -191,7 +205,16 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             }
             
             selectedActivity = (pickerView?.selectedRow(inComponent: 0))!
-//            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
+            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
+        }
+        else if (indexPath.section == 0 && indexPath.row == 0) {
+            cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
+            if  selectedActivity == -1 {
+                cell.textLabel?.text = activities[0].name
+            }
+            else {
+                cell.textLabel?.text = activities[selectedActivity].name
+            }
         }
         else if (indexPath.section == 1) {
             cell = tableView.dequeueReusableCell(withIdentifier: memoCellReuseIdentifer, for: indexPath)
@@ -211,21 +234,50 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         
         return cell
     }
+    
+    // Set the section header height
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return CGFloat.leastNormalMagnitude
+        }
+        return tableView.sectionHeaderHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        //        if section == 0 {
+        //            return 2
+        //        }
+        return tableView.sectionFooterHeight
+    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if (indexPath.section == 0) {
-            return;
+        // dynamically insert or remove rows
+        if indexPath.section == 0 {
+            
+            self.tableView.beginUpdates()
+            
+            self.showPickerView = !self.showPickerView
+            if self.showPickerView {
+                self.tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .top)
+            }
+            else {
+                self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .top)
+            }
+
+            self.tableView.endUpdates()
+            
+            return
         }
-        
+      
         if self.selectedAudioRow == indexPath.row {
             return
         }
         
         self.stopAudio()
-        self.tableView.beginUpdates()
+        //self.tableView.beginUpdates()
         self.selectedAudioRow = indexPath.row
-        self.tableView.endUpdates()
+        //self.tableView.endUpdates()
+ 
     }
     
     // MARK: IBActions
