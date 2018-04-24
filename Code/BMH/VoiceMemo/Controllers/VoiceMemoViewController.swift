@@ -158,7 +158,7 @@ class VoiceMemoViewController: UITableViewController {
     }
     
     func saveAudioFile() {
-        print(LoginHelper.getLogedInUser())
+        print(LoginHelper.getLoggedInUser())
         
         
 //        // Get a reference to the storage service using the default Firebase App

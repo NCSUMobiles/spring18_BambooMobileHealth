@@ -1,6 +1,7 @@
 const express    = require("express");
 const login      = require('./authentication/main');
 const progress   = require('./progress/main');
+const history    = require('./history/main');
 const bodyParser = require('body-parser');
 const globals    = require('./globals.js');
 
@@ -35,6 +36,9 @@ router.post('/login',login.login)
 
 // route to handle requests for progress tab
 router.get('/progress', progress.progress)
+
+// route to handle requests for history tab
+router.get('/history', history.history)
 
 // route everything udner /api to router
 app.use('/api', router);

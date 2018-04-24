@@ -1,18 +1,22 @@
 const globals = require('../globals.js');
 const moment  = require('moment');
 
-exports.progress = function(req, res) {
-  var username  = req.query.uname;
-  var token     = req.query.token;
-  var isActivity= req.query.act == undefined ? undefined : req.query.act == 1 ? true : false;
-  var actName   = req.query.name;
+exports.history = function(req, res) {
+  var username   = req.query.uname;
+  var token      = req.query.token;
+  var granularity= req.query.gran;
+  var range      = req.query.range;
+  var isActivity = req.query.act == undefined ? undefined : req.query.act == 1 ? true : false;
+  var actName    = req.query.name;
 
   console.log("username:", username);
   console.log("token:", token);
+  console.log("granularity:", granularity);
+  console.log("range:", range);
   console.log("isActivity:", isActivity);
   console.log("actName:", actName);
 
-  if (username == undefined || token == undefined || username == "" || token == "" || isActivity == undefined || actName == undefined) {
+  if (username == undefined || token == undefined || username == "" || token == "" || granularity == undefined || range == undefined || isActivity == undefined || actName == undefined) {
     res.status(400).send("Bad Request");
   }
   else {
@@ -35,12 +39,65 @@ exports.progress = function(req, res) {
             // successfully authenticated. Now we can perform the queries
           const db = globals.firebaseadmin.firestore(); 
           
-          var startOfWeek = moment().startOf('week');
-          const endOfWeek   = moment().endOf('week');
+          if (granularity == "d") {
+            // day as "MM-DD-YY" string
+            console.log("Requested data for", range);
+          }
+          else if (granularity == "w") {
+            // week as "MM-DD-YY MM-DD-YY" string
+            console.log("Requested data for", range);
+            // break the range around " "
+            var startOfRange = moment(range.split(" ")[0], "MM-DD-YY");
+            var endOfRange   = moment(range.split(" ")[1], "MM-DD-YY");
+
+            while (startOfRange <= endOfRange) {
+              var dateStr = startOfRange.format("MM-DD-YY");
+              console.log (dateStr);
+              startOfRange.add(1, 'days');
+            } 
+
+          }
+          else if (granularity == "m") {
+            // month as "MM-YY" string
+            console.log("Requested data for", range);
+
+            var startOfRange = moment(range+"-01", "MM-YY-DD");
+            var endOfRange   = parseInt(range.split("-")[0]) < moment().month()+1 ? moment(range+"-01", "MM-YY-DD").endOf("month") : moment();
+
+            while (startOfRange <= endOfRange) {
+              var dateStr = startOfRange.format("MM-DD-YY");
+              console.log (dateStr);
+              startOfRange.add(1, 'days');
+            } 
+          }
+          else if (granularity == "y") {
+            // year as "YYYY" string
+            console.log("Requested data for", range);
+
+            var startOfRange = moment("01-01-" + range, "MM-DD-YYYY");
+            var endOfRange   = parseInt(range) < moment().year() ? moment("12-31-" + range, "MM-DD-YYYY") : moment();
+
+            while (startOfRange <= endOfRange) {
+              var dateStr = startOfRange.format("MM-DD-YY");
+              console.log (dateStr);
+              startOfRange.add(1, 'days');
+            } 
+          }
+          else {
+            console.log("Invalid granularity:", granularity);
+            res.status(400).send("Bad Request");
+          }
+
+          res.status(200).json("Completed"); 
+
+          /*
+          var startOfRange = moment().startOf('week');
+          const endOfRange   = moment().endOf('week');
           var res_json = {"Sun": 0, "Mon": 0, "Tue": 0, "Wed": 0, "Thu": 0, "Fri": 0, "Sat": 0};
 
-          while (startOfWeek <= endOfWeek) {
-            var dateStr = startOfWeek.format("MM-DD-YY")
+          while (startOfRange <= endOfRange) {
+            var dateStr = startOfRange.format("MM-DD-YY")
+           
             
             db.collection('user').doc(uid).collection(activity_name)
             .doc(actName).collection(dateStr).doc(dateStr).get()
@@ -107,8 +164,9 @@ exports.progress = function(req, res) {
               return;
             });
 
-            startOfWeek.add(1, 'days');
+            startOfRange.add(1, 'days');
           } 
+          */
         } 
         else {
           res.status(403).send("Unauthorized User");
