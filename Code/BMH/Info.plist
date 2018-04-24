@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Speech recognition will be used to determine which words you speak into this devices microphone.</string>
+	<string>Speech recognition will be used to determine which words you speak into this device&apos;s microphone.</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>

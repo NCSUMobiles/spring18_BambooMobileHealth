@@ -53,7 +53,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             activityIndicator.startAnimating()
             
             Alamofire.request(
-                URL(string: "http://35.196.193.243/api/login")!,
+                URL(string: "http://" + (UIApplication.shared.delegate as! AppDelegate).serverIP + "/api/login")!,
                 method: .post,
                 parameters: ["username": username, "password": password.sha256()])
                 .responseJSON { (response) -> Void in
@@ -73,10 +73,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 // print the new idToken for debugging
                                 Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
                                     if (error == nil) {
-                                        print(token)
+                                        print("Token is \(String(describing: token))")
                                     }
                                     else {
-                                        print(error)
+                                        print("Error occurred ingetting IDToken: \(String(describing: error))")
                                     }
                                 })
                                 
