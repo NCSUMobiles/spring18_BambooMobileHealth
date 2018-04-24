@@ -15,7 +15,7 @@ import Firebase
 
 
 class VoiceMemoViewController: UITableViewController {
-
+    
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
@@ -81,7 +81,7 @@ class VoiceMemoViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 2 {
             let cell = tableView.cellForRow(at: indexPath) as! HashtagPickerTableViewCell
@@ -139,7 +139,7 @@ class VoiceMemoViewController: UITableViewController {
             return 50.0
             
         }
-
+        
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch(indexPath.section){
@@ -161,49 +161,49 @@ class VoiceMemoViewController: UITableViewController {
         guard LoginHelper.getLogedInUser() != nil else { return }
         print(SettingsHelper.getActivityExerciseGoalValues())
         
-
-//        // Get a reference to the storage service using the default Firebase App
-//        let storage = Storage.storage()
-//        // Create a root reference
-//        let storageRef = storage.reference()
-//
-//
-//        // This is equivalent to creating the full reference
-//        let storagePath = "gs://bamboomobile-9c643.appspot.com/\(LoginHelper.getLogedInUser()! as! String)/recording_\(Date())"
-//        var audioRef = storage.reference(forURL: storagePath)
-//
-//
-//        let metadata = [
-//                "filename": "Yosemite, CA, USA",
-//                "activity": "Hiking",
-//                "status": "good",
-//                "Tags": "#fun#good#love"
-//            ]
-//        let customMetadata = StorageMetadata.init(dictionary: metadata)
-//
-//        // File located on disk
-//        let localFile = self.audioFile!
-//
-//
-//        // Upload the file to the path "images/rivers.jpg"
-//        let uploadTask = audioRef.putFile(from: localFile, metadata: customMetadata) { metadata, error in
-//            if error != nil {
-//                // Uh-oh, an error occurred!
-//                 AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
-//            } else {
-//                // Metadata contains file metadata such as size, content-type, and download URL.
-//                let downloadURL = metadata!.downloadURL()
-//                 AlertHelper.showBasicAlertInVC(self, title: "Success", message: "Your voice memo has been saved.")
-//                self.simpleSelectedArray.removeAll()
-//                self.tableView.reloadData()
-//            }
-//        }
+        
+        //        // Get a reference to the storage service using the default Firebase App
+        //        let storage = Storage.storage()
+        //        // Create a root reference
+        //        let storageRef = storage.reference()
+        //
+        //
+        //        // This is equivalent to creating the full reference
+        //        let storagePath = "gs://bamboomobile-9c643.appspot.com/\(LoginHelper.getLogedInUser()! as! String)/recording_\(Date())"
+        //        var audioRef = storage.reference(forURL: storagePath)
+        //
+        //
+        //        let metadata = [
+        //                "filename": "Yosemite, CA, USA",
+        //                "activity": "Hiking",
+        //                "status": "good",
+        //                "Tags": "#fun#good#love"
+        //            ]
+        //        let customMetadata = StorageMetadata.init(dictionary: metadata)
+        //
+        //        // File located on disk
+        //        let localFile = self.audioFile!
+        //
+        //
+        //        // Upload the file to the path "images/rivers.jpg"
+        //        let uploadTask = audioRef.putFile(from: localFile, metadata: customMetadata) { metadata, error in
+        //            if error != nil {
+        //                // Uh-oh, an error occurred!
+        //                 AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
+        //            } else {
+        //                // Metadata contains file metadata such as size, content-type, and download URL.
+        //                let downloadURL = metadata!.downloadURL()
+        //                 AlertHelper.showBasicAlertInVC(self, title: "Success", message: "Your voice memo has been saved.")
+        //                self.simpleSelectedArray.removeAll()
+        //                self.tableView.reloadData()
+        //            }
+        //        }
     }
     
     
     func checkForm() {
-//        var fileName:String!
-
+        //        var fileName:String!
+        
         //check if audio record file present
         guard self.audioFile != nil else {
             AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Please record a memo first.")
@@ -220,7 +220,7 @@ class VoiceMemoViewController: UITableViewController {
             AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Please add some hastags.")
             var indexPath = IndexPath.init(row: 0, section: 2)
             if let cell = tableView.cellForRow(at: indexPath) as? HashtagPickerTableViewCell {
-            showAsPopover(cell)
+                showAsPopover(cell)
             }
             return
         }
@@ -234,7 +234,7 @@ class VoiceMemoViewController: UITableViewController {
         self.saveAudioFile()
     }
     
-        
+    
 }
 
 extension VoiceMemoViewController: RecordCategoryTableViewCellProtocol {
@@ -269,3 +269,4 @@ extension VoiceMemoViewController: RecordInputTableViewCellProtocol {
         self.audioFile = url
     }
 }
+
