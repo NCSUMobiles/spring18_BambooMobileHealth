@@ -13,7 +13,7 @@
 		2734C313208AC50C00433F42 /* YearFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734C312208AC50C00433F42 /* YearFormatter.swift */; };
 		2734C317208B8AEC00433F42 /* HistoryVoiceMemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734C316208B8AEC00433F42 /* HistoryVoiceMemoController.swift */; };
 		278A4A5F206D4EAF00D0F040 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */; };
-		27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B758422079441400345804 /* HistoryMemoViewCell.swift */; };
+		27B758442079441400345804 /* HistoryVoiceMemoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B758422079441400345804 /* HistoryVoiceMemoViewCell.swift */; };
 		27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B758432079441400345804 /* HistoryMemoViewCell.xib */; };
 		782B726B2087C63B008B0ED2 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782B726A2087C63B008B0ED2 /* SettingsHelper.swift */; };
 		78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78428CC8206D1450004A6342 /* SettingsViewController.swift */; };
@@ -38,6 +38,9 @@
 		EA9F5C6A2078390F00339C1D /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C692078390F00339C1D /* StringHelper.swift */; };
 		EA9F5C6C2078392D00339C1D /* BarChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
+		EAC453BA208EAE3700D213E8 /* VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */; };
+		EAC453BC208EB1E500D213E8 /* bensound-ukulele.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */; };
+		EAD05CF8208EBADE00B7B661 /* bensound-dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */; };
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
 		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
 		FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */; };
@@ -63,7 +66,7 @@
 		2734C312208AC50C00433F42 /* YearFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearFormatter.swift; sourceTree = "<group>"; };
 		2734C316208B8AEC00433F42 /* HistoryVoiceMemoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVoiceMemoController.swift; sourceTree = "<group>"; };
 		278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
-		27B758422079441400345804 /* HistoryMemoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMemoViewCell.swift; sourceTree = "<group>"; };
+		27B758422079441400345804 /* HistoryVoiceMemoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVoiceMemoViewCell.swift; sourceTree = "<group>"; };
 		27B758432079441400345804 /* HistoryMemoViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryMemoViewCell.xib; sourceTree = "<group>"; };
 		782B726A2087C63B008B0ED2 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		78428CC8206D1450004A6342 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +92,10 @@
 		EA9F5C692078390F00339C1D /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartFormatter.swift; sourceTree = "<group>"; };
 		EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "BMH/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemo.swift; sourceTree = "<group>"; };
+		EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-ukulele.mp3"; sourceTree = "<group>"; };
 		EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMH-Bridging-Header.h"; sourceTree = "<group>"; };
+		EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-dubstep.mp3"; sourceTree = "<group>"; };
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
 		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 				2734C30E208AC45700433F42 /* WeekFormatter.swift */,
 				2734C310208AC4CC00433F42 /* MonthFormatter.swift */,
 				2734C312208AC50C00433F42 /* YearFormatter.swift */,
+				EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -175,6 +182,8 @@
 				EA4A98A1206BF639004C0957 /* ProgressViews */,
 				EA29CDBA206B22DF00B016FE /* AppDelegate.swift */,
 				EA29CDC3206B22DF00B016FE /* Assets.xcassets */,
+				EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */,
+				EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */,
 				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
 				EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */,
 				EA29CDC8206B22DF00B016FE /* Info.plist */,
@@ -198,7 +207,7 @@
 				EA0A98E52071A9B400C7D253 /* HistoryCell.swift */,
 				EA0A98E42071A9B400C7D253 /* HistoryCell.xib */,
 				278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */,
-				27B758422079441400345804 /* HistoryMemoViewCell.swift */,
+				27B758422079441400345804 /* HistoryVoiceMemoViewCell.swift */,
 				27B758432079441400345804 /* HistoryMemoViewCell.xib */,
 				2734C316208B8AEC00433F42 /* HistoryVoiceMemoController.swift */,
 			);
@@ -332,7 +341,9 @@
 			files = (
 				FAE3392E207DD0BA0053C227 /* RecordCategoryTableViewCell.xib in Resources */,
 				EA0A98E62071A9B400C7D253 /* HistoryCell.xib in Resources */,
+				EAC453BC208EB1E500D213E8 /* bensound-ukulele.mp3 in Resources */,
 				27B758452079441400345804 /* HistoryMemoViewCell.xib in Resources */,
+				EAD05CF8208EBADE00B7B661 /* bensound-dubstep.mp3 in Resources */,
 				EA314890206C33A7006F712A /* SelectionTableViewCell.xib in Resources */,
 				EA29CDC7206B22DF00B016FE /* LaunchScreen.storyboard in Resources */,
 				FA40E8BB2087A2EB00447F8B /* HashtagPickerTableViewCell.xib in Resources */,
@@ -466,11 +477,12 @@
 				EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */,
 				EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */,
 				78428CC9206D1450004A6342 /* SettingsViewController.swift in Sources */,
+				EAC453BA208EAE3700D213E8 /* VoiceMemo.swift in Sources */,
 				78DDD33820742C8E00A870F6 /* LoginHelper.swift in Sources */,
 				786926DE20741346009CC203 /* LoginViewController.swift in Sources */,
 				2734C30D208ABDBB00433F42 /* DayFormatter.swift in Sources */,
 				FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */,
-				27B758442079441400345804 /* HistoryMemoViewCell.swift in Sources */,
+				27B758442079441400345804 /* HistoryVoiceMemoViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
