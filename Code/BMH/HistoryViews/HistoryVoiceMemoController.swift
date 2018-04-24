@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
-class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+protocol VoiceMemoAudioPlayerDelegate: class {
+    func playAudioForCell(_ cell: HistoryVoiceMemoViewCell)
+    func isPlaying() -> Bool
+}
+
+class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, VoiceMemoAudioPlayerDelegate {
     
+    var memosArray : Array<VoiceMemo> = []
     var showPickerView : Bool = false
     var activities : [ActEx]!
     var selectedActivity : Int = -1
@@ -18,14 +25,46 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     var memoCellReuseIdentifer : String!
 
     var activityDebugLabel : String = ""
+
+    var selectedAudioRow : Int = -1
+    weak var isPlayingCell : HistoryVoiceMemoViewCell?
+    var audioPlayer: AVAudioPlayer?
+    var updater : CADisplayLink! = nil
     
-    var isPlaying = false {             // keep track of when the memo is playing
-        didSet {                        // This is a computed property. Changing the value
-//            setButtonState()            // invokes the didSet block
-//            playPauseAudio()
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadVoiceMemos()
     }
     
+    func reloadVoiceMemos(_clearAll : Bool = true) {
+        
+        // at some point load this from backend
+        
+        if _clearAll == true {
+            memosArray.removeAll()
+        }
+        
+        var voiceMemo = VoiceMemo.init()
+        voiceMemo.title = "Cheerful"
+        voiceMemo.fileName = Bundle.main.path(forResource: "bensound-ukulele", ofType: "mp3")!
+        voiceMemo.date = Date.init().description
+        voiceMemo.tags = "Tag 1, Tag 2, Tag 3"
+        
+        memosArray.append(voiceMemo)
+        
+        voiceMemo = VoiceMemo.init()
+        voiceMemo.title = "Psychedelic"
+        voiceMemo.fileName = Bundle.main.path(forResource: "bensound-dubstep", ofType: "mp3")!
+        voiceMemo.date = Date.init().description
+        voiceMemo.tags = "Tag 1, Tag 2, Tag 3"
+        
+        memosArray.append(voiceMemo)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.stopAudio()
+    }
     
     // MARK: - Picker view data source and delegates
     // number of sections
@@ -60,7 +99,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
         
         // remove any existing selection
-        let memoCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryMemoViewCell)
+        _ =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryVoiceMemoViewCell)
         
     }
     
@@ -74,7 +113,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // get the app delegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        _ = UIApplication.shared.delegate as! AppDelegate
         
         // load the activity list and register custom nibs depending on the scene
         activities = []
@@ -107,7 +146,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         if self.showPickerView && section == 0 {
             return 2
         }
-        return 1
+        return memosArray.count
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -126,6 +165,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell = .init()
         if (indexPath.section == 0 && indexPath.row == 0) {
+            // SOMETHING IS WRONG HERE
             cell = tableView.dequeueReusableCell(withIdentifier: selectionCellReuseIdentifer, for: indexPath)
             
             // Configure the cell...
@@ -153,26 +193,15 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             selectedActivity = (pickerView?.selectedRow(inComponent: 0))!
 //            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         }
-        else if (indexPath.section == 1 && indexPath.row == 0) {
+        else if (indexPath.section == 1) {
             cell = tableView.dequeueReusableCell(withIdentifier: memoCellReuseIdentifer, for: indexPath)
             
-            // Configure the cell...
-            // Set the label either as a default value or based on what the user selected in picker.
-            if  selectedActivity == -1 {
-//                cell.textLabel?.text = activities[0].name
-            }
-            else {
-//                cell.textLabel?.text = activities[selectedActivity].name
-            }
-        }
-//        else if (indexPath.section == 1){
-//            cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
-//
-//            // Configure the cell...
-//
-//        }
-        else {
-            // display voice memo cell
+            let voiceMemo = memosArray[indexPath.row]
+            (cell as! HistoryVoiceMemoViewCell).populate(memo: voiceMemo)
+            
+            (cell as! HistoryVoiceMemoViewCell).setAudioTag(tag: indexPath.row + 500)
+            
+            (cell as! HistoryVoiceMemoViewCell).playerDelegate = self
             
         }
         
@@ -183,12 +212,139 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         return cell
     }
 
-    // MARK: IBActions
-    @IBAction func playButtonTapped(sender: UIButton) {
-        // Set the didSet block.
-        // Setting this value will play or pause the memo
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        isPlaying = !isPlaying
+        if (indexPath.section == 0) {
+            return;
+        }
+        
+        if self.selectedAudioRow == indexPath.row {
+            return
+        }
+        
+        self.stopAudio()
+        self.tableView.beginUpdates()
+        self.selectedAudioRow = indexPath.row
+        self.tableView.endUpdates()
+    }
+    
+    // MARK: IBActions
+    @IBAction func stopAudio () {
+        if let audioPlayer = audioPlayer {
+            if audioPlayer.isPlaying {
+                updater.invalidate()
+                updater = nil
+                audioPlayer.stop()
+                isPlayingCell?.resetCell()
+            }
+        }
+    }
+    
+    @IBAction func togglePlayAudio () {
+        if let audioPlayer = audioPlayer {
+            if audioPlayer.isPlaying {
+                // was already playing, pause it
+                audioPlayer.stop()
+                isPlayingCell?.playButton.setImage(UIImage.init(named: "play"), for: .normal)
+            }
+            else {
+                // was already paused, play it.
+                isPlayingCell?.playButton.setImage(UIImage.init(named: "pause"), for: .normal)
+                audioPlayer.play()
+            }
+        }
+    }
+    
+    func isPlaying() -> Bool {
+        if let audioPlayer = audioPlayer {
+            return audioPlayer.isPlaying
+        }
+        return false
+    }
+    
+    func playAudioForCell(_ cell: HistoryVoiceMemoViewCell) {
+        
+        let audioRow = cell.playButton.tag - 500;
+        let audio = memosArray[audioRow]
+        
+        if isPlayingCell == cell {
+            // existing cell
+            //performSelector(onMainThread: #selector(self.updateAudioProgressView), with: nil, waitUntilDone: true)
+            self.togglePlayAudio()
+            return
+        }
+        
+        // stop any existing audio
+        self.stopAudio()
+        isPlayingCell?.resetCell()
+        isPlayingCell = nil
+        
+        var url : URL
+        url = URL(fileURLWithPath: audio.fileName)
+
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setActive(true)
+        } catch let error as NSError {
+            print("audioSession error: \(error.localizedDescription)")
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+            isPlayingCell = cell
+            cell.playButton.setImage(UIImage.init(named: "pause"), for: .normal)
+            updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
+            updater.preferredFramesPerSecond = 1
+            updater.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        } catch {
+            // couldn't load file :(
+            let alert = UIAlertController.init(title: nil, message: "Couldn't play audio file.", preferredStyle: UIAlertControllerStyle.alert)
+            let cancelAction = UIAlertAction(title: "Okay",
+                                             style: .cancel, handler: nil)
+            
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @objc func updateAudioProgressView ()
+    {
+        if let audioPlayer = audioPlayer, let isPlayingCell = isPlayingCell {
+            
+            isPlayingCell.timeSlider.minimumValue = 0.0
+            isPlayingCell.timeSlider.maximumValue = Float(audioPlayer.duration)
+            
+            var current_time = 0
+            var remaining_time = 0
+            
+            if audioPlayer.isPlaying
+            {
+                // Update progress
+                
+                isPlayingCell.timeSlider.setValue(Float(audioPlayer.currentTime), animated: true)
+                
+                current_time = Int(audioPlayer.currentTime)
+                remaining_time = Int(audioPlayer.duration-audioPlayer.currentTime)
+                
+            }
+            else {
+                // isPlayingCell.resetCell()
+                // current_time = 0
+                // remaining_time = Int(audioPlayer.duration)
+                
+                current_time = Int(audioPlayer.currentTime)
+                remaining_time = Int(audioPlayer.duration-audioPlayer.currentTime)
+            }
+            
+            isPlayingCell.playTime.text = String(format:"%02d", current_time/60) + ":" + String(format:"%02d", current_time%60)
+            isPlayingCell.endTime.text = String(format:"%02d", remaining_time/60) + ":" + String(format:"%02d", remaining_time%60)
+            isPlayingCell.timeSlider.setValue(Float(current_time), animated: true)
+            
+        }
     }
     
     
