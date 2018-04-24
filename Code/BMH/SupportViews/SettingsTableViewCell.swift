@@ -23,11 +23,26 @@ class SettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
     @IBAction func inputTextFieldTextChanged(_ sender: UITextField) {
         if let value = Int(sender.text!){
             parent.tableData[sectionNo][indexNo].goalValue = value
         }else{
             sender.text = ""
+        }
+    }
+    
+    @IBAction func inputTextFieldDidBeginEditing(_ sender: UITextField) {
+        let value = Int(sender.text!)
+        if value == 0 {
+            sender.text = ""
+        }
+        parent.lastTextField = sender
+    }
+    
+    @IBAction func inputTextFieldDidEndEditing(_ sender: UITextField) {
+        if sender.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            sender.text = "0"
         }
     }
     

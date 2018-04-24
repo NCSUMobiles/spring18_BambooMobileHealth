@@ -14,14 +14,17 @@ class SettingsViewController: UITableViewController {
     var tableData : [[ActEx]]!
     let tableSections = ["Activity","Exercise"]
     
+    var lastTextField : UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // check if we came in here for the first time
+        if (LoginHelper.getLoginCount(userId: LoginHelper.getLoggedInUser() as! String) <= 1) {
+            // hide the settings button
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+            self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+        }
         
         // get the activies and exercises data from app delegate
         let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
@@ -52,6 +55,7 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! SettingsTableViewCell
         let currentDataElement = tableData[indexPath.section][indexPath.row];
+        
         cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
         cell.nameLabel.text = currentDataElement.name
         cell.unitsLabel.text = currentDataElement.goalUnits + "/" + currentDataElement.goalTime
@@ -83,7 +87,25 @@ class SettingsViewController: UITableViewController {
         return tableView.sectionHeaderHeight
     }
     @IBAction func saveButtonClicked(_ sender: UIBarButtonItem) {
+        lastTextField.resignFirstResponder()
+        
         SettingsHelper.saveActivityExerciseGoalValues(activityExerciseAndGoals: tableData)
+        
+        let alert = UIAlertController(title: "Success!", message: "Your preferences have been saved.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+        if (LoginHelper.getLoginCount(userId: LoginHelper.getLoggedInUser() as! String) <= 1) {
+            // increment the login count
+            LoginHelper.setLoginCount(userId: LoginHelper.getLoggedInUser() as! String, loginCount: 2)
+            
+            // now show the settings button
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
+            
+            // and segue to the main view
+            self.performSegue(withIdentifier: "showTabBar", sender: self)
+        }
     }
     
     @IBAction func logout() {

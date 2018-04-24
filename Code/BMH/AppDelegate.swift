@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Locksmith
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,16 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        do {
+//            try Locksmith.deleteDataForUserAccount(userAccount: "BMH")
+//        } catch {
+//            
+//        }
+        
         // configure firebase
         FirebaseApp.configure()
-	
+        
         // load activities and exercises from JSON
         loadFromJSON()
         
-        // also update goal values by reading from DB if available
-        updateFromDB()
-        
-        if LoginHelper.getLogedInUser() != nil{
+        if LoginHelper.getLoggedInUser() != nil{
             let tabBarController = setViewControllerOnWindowFromId(storyBoardId: "tabBarController")
             initialTabConterllerSetup(rootTabBarController: tabBarController)
         }else{
@@ -78,9 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.goalUnits = activity["units"]!
                     actEx.goalTime = activity["per"]!
                     actEx.code = activity["code"]!
-                    
-                    // some dummy value -> should be updated from DB
-                    actEx.goalValue = Int(arc4random_uniform(10001)) + 10000
+                    actEx.goalValue = 0
                     
                     activities.append(actEx)
                 }
@@ -94,14 +96,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     actEx.goalUnits = exercise["units"]!
                     actEx.goalTime = exercise["per"]!
                     actEx.code = exercise["code"]!
-                    
-                    // some dummy value -> should be updated from DB
-                    actEx.goalValue = Int(arc4random_uniform(30))  + 1
+                    actEx.goalValue = 0
                     
                     exercises.append(actEx)
                 }
                 
-                if let activityExerciseGoals = SettingsHelper.getActivityExerciseGoalValues() as? [[String:Int]]{
+                let activityExerciseGoals = SettingsHelper.getActivityExerciseGoalValues()
+                guard activityExerciseGoals.count == 0 else {
                     for i in 0..<activities.count{
                         let element  = activities[i]
                         if let val = activityExerciseGoals[0][element.name]{
@@ -115,16 +116,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             exercises[i].goalValue = val
                         }
                     }
-                    
+                    return
                 }
-                
             } catch {
-                // handle error
+                print ("loadFromJSON error: \(error)")
             }
         }
-    }
-    
-    func updateFromDB() {
     }
     
     func setViewControllerOnWindowFromId(storyBoardId : String) -> UIViewController{
@@ -140,12 +137,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // customize the color of the page control
         let violetColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
         let purpleColor = UIColor.init(red: 178/255.0, green: 58/255.0, blue: 251/255.0, alpha: 1)
-    
+        
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = violetColor
         pageControl.currentPageIndicatorTintColor = purpleColor
         pageControl.backgroundColor = UIColor.clear
-    
+        
         // set the custom images for selected item
         let tabBarController = rootTabBarController as! UITabBarController
         let tabBar = tabBarController.tabBar
@@ -153,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBar.items![1].selectedImage = UIImage(named: "history")?.withRenderingMode(.alwaysOriginal)
         tabBar.items![2].selectedImage = UIImage(named: "record")?.withRenderingMode(.alwaysOriginal)
         tabBar.items![3].selectedImage = UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal)
-    
+        
         // set the tint of text
         tabBar.tintColor = violetColor
     }

@@ -217,6 +217,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             <connections>
+                                                <action selector="inputTextFieldDidBeginEditing:" destination="TaR-no-nyd" eventType="editingDidBegin" id="oLI-4L-enK"/>
+                                                <action selector="inputTextFieldDidEndEditing:" destination="TaR-no-nyd" eventType="editingDidEnd" id="xLq-4K-Shp"/>
                                                 <action selector="inputTextFieldTextChanged:" destination="TaR-no-nyd" eventType="editingChanged" id="Gl5-zF-Y9P"/>
                                             </connections>
                                         </textField>
@@ -259,17 +261,22 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="182-2O-naj">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="ceM-br-nPD">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="save" id="ceM-br-nPD">
+                            <color key="tintColor" red="0.24313725490196078" green="0.39215686274509803" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="saveButtonClicked:" destination="c5l-bZ-uiP" id="OOv-Ja-T19"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" style="done" id="gPw-Bq-bQk">
+                            <color key="tintColor" red="0.24313725490196078" green="0.39215686274509803" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout" destination="c5l-bZ-uiP" id="8dW-1N-ljX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="showTabBar" id="BPG-Ga-ZPW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXw-iQ-oPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -490,6 +497,7 @@
                         <outlet property="passwordTextField" destination="ym1-EW-wW4" id="Swq-OK-4fc"/>
                         <outlet property="usernameTextField" destination="l4F-A1-fJl" id="ohK-kS-LUM"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="loginToTabBar" id="AIh-S4-qTo"/>
+                        <segue destination="jtb-2X-4Ej" kind="show" identifier="firstTimeSettings" id="4jI-VW-EcK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RkY-Pm-OK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -504,4 +512,8 @@
         <image name="record" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="AxO-xJ-Ky4"/>
+        <segue reference="BPG-Ga-ZPW"/>
+    </inferredMetricsTieBreakers>
 </document>

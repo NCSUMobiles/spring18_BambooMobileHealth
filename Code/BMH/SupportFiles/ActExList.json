@@ -57,27 +57,6 @@
                   "units": "miles",
                   "per": "week",
                   "code": "CYC"
-                  },
-                  {
-                  "image": "exercise-general",
-                  "name": "Exercise 3",
-                  "units": "sessions",
-                  "per": "week",
-                  "code": "EX3"
-                  },
-                  {
-                  "image": "exercise-general",
-                  "name": "Exercise 4",
-                  "units": "sessions",
-                  "per": "week",
-                  "code": "EX4"
-                  },
-                  {
-                  "image": "exercise-general",
-                  "name": "Exercise 5",
-                  "units": "sessions",
-                  "per": "week",
-                  "code": "EX5"
                   }
                 ]
 }

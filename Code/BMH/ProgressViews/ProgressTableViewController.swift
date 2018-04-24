@@ -72,6 +72,28 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
 //        tap.numberOfTapsRequired = 2
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // reload the goals
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.loadFromJSON()
+        
+        if self.restorationIdentifier == "Progress_ActivityViewController" {
+            activities = appDelegate.activities
+        }
+        else if self.restorationIdentifier == "Progress_ExerciseViewController" {
+            activities = appDelegate.exercises
+        }
+        
+        // redraw the chart
+        // remove any existing selection
+        let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        chartCell.pieChartView.clear()
+        
+        // update the chart in third section first row
+        createChart(inCell: chartCell)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -416,7 +438,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         let db = Firestore.firestore()
         
-        let docRefBase = db.collection("users").document(LoginHelper.getLogedInUser() as! String).collection("activities").document(code)
+        let docRefBase = db.collection("users").document(LoginHelper.getLoggedInUser() as! String).collection("activities").document(code)
         var docRef = docRefBase
         
         // get date for each day in this week.

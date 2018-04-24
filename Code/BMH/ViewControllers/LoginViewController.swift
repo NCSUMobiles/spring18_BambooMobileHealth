@@ -81,10 +81,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 })
                                 
                                 // Authentication successful, proceed forward
-                                LoginHelper.saveLogedInUser(userId: self.username)
-                                let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
-                                appDelegate.loadFromJSON()
-                                self.performSegue(withIdentifier: "loginToTabBar", sender: self)
+                                LoginHelper.saveLoggedInUser(userId: self.username)
+                                
+                                // check if the user has logged in for the first time
+                                // if yes force profile creation
+                                if (LoginHelper.getLoginCount(userId: self.username) == 1) {
+                                    let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
+                                    appDelegate.loadFromJSON()
+                                    self.performSegue(withIdentifier: "firstTimeSettings", sender: self)
+                                }
+                                else {
+                                    // else proceed to main view
+                                    let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
+                                    appDelegate.loadFromJSON()
+                                    self.performSegue(withIdentifier: "loginToTabBar", sender: self)
+                                }
                             }
                             else {
                                 print ("Error authenticating with Firebase")
@@ -126,7 +137,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         /*
          if(usernameTextField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == username && passwordTextField.text == password) {
-         LoginHelper.saveLogedInUser(userId: username)
+         LoginHelper.saveLoggedInUser(userId: username)
          let appDelegate  = (UIApplication.shared.delegate) as! AppDelegate
          appDelegate.loadFromJSON()
          performSegue(withIdentifier: "loginToTabBar", sender: self)
