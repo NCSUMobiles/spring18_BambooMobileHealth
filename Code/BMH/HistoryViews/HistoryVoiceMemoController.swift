@@ -11,13 +11,20 @@ import UIKit
 class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var showPickerView : Bool = false
-//    var activities : [ActEx]!
+    var activities : [ActEx]!
     var selectedActivity : Int = -1
     
     var selectionCellReuseIdentifer : String!
     var memoCellReuseIdentifer : String!
 
     var activityDebugLabel : String = ""
+    
+    var isPlaying = false {             // keep track of when the memo is playing
+        didSet {                        // This is a computed property. Changing the value
+//            setButtonState()            // invokes the didSet block
+//            playPauseAudio()
+        }
+    }
     
     
     // MARK: - Picker view data source and delegates
@@ -28,8 +35,8 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     
     // number of items
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return activities.count
-        return 0
+        return activities.count
+//        return 0
     }
     
     // size the text in each row of pickerview
@@ -38,7 +45,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         let labelRow = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
         
         pickerLabel.textColor = UIColor.black
-//        pickerLabel.text = activities[row].name
+        pickerLabel.text = activities[row].name
         pickerLabel.font = labelRow?.textLabel?.font
         pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
@@ -47,10 +54,10 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     // if select any row, force update the table view
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedActivity = row
-//        print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
+        print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
         
         // update the text in first section first row
-//        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
         
         // remove any existing selection
         let memoCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryMemoViewCell)
@@ -67,10 +74,10 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // get the app delegate
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // load the activity list and register custom nibs depending on the scene
-//        activities = []
+        activities = []
         
         if self.restorationIdentifier == "History_AudioViewController" {
             selectionCellReuseIdentifer = "History_AudioSelectionCell"
@@ -176,4 +183,13 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         return cell
     }
 
+    // MARK: IBActions
+    @IBAction func playButtonTapped(sender: UIButton) {
+        // Set the didSet block.
+        // Setting this value will play or pause the memo
+        
+        isPlaying = !isPlaying
+    }
+    
+    
 }
