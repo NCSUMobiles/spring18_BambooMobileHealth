@@ -23,6 +23,7 @@ class RecordInputTableViewCell: UITableViewCell, AVAudioRecorderDelegate, AVAudi
             
         }
     }
+    @IBOutlet weak var recordedLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton! {
         didSet{
             recordButton.setImage(UIImage(named: "stopRecordButton"), for: UIControlState.selected)
@@ -125,8 +126,10 @@ class RecordInputTableViewCell: UITableViewCell, AVAudioRecorderDelegate, AVAudi
             runTimer()
             seconds = 60
             timeLabel.text = timeString(time: TimeInterval(seconds))
+            recordedLabel.text = timeString(time: TimeInterval(0))
         } else {
-           
+            recordedLabel.text = timeString(time: TimeInterval(-(seconds - 60)))
+            timeLabel.text = timeString(time: TimeInterval(0))
             finishRecording(success: true)
         }
     }
@@ -173,6 +176,7 @@ class RecordInputTableViewCell: UITableViewCell, AVAudioRecorderDelegate, AVAudi
         } else {
             seconds -= 1
             timeLabel.text = timeString(time: TimeInterval(seconds))
+            recordedLabel.text = timeString(time: TimeInterval((60 - seconds)))
         }
     }
     
