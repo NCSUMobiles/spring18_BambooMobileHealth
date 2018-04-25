@@ -205,6 +205,7 @@ class VoiceMemoViewController: UITableViewController {
         
         let cell = tableView(self.tableView, cellForRowAt: IndexPath.init(row: 0, section: 3)) as! RecordFileNamingTableViewCell
         cell.fileNameTextField.resignFirstResponder()
+        cell.endEditing(true)
         
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()

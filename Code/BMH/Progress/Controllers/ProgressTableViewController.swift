@@ -529,17 +529,16 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                         else {
                             self.activityView.removeFromSuperview()
                             AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
-                            self.activityView.removeFromSuperview()
                             self.drawChart(inCell: cell, withData: dataArr) // show no data available message
                         }
                 }
             }
             else {
-                print("Error occurred ingetting IDToken: \(String(describing: error))")
+                print("Error occurred in getting IDToken: \(String(describing: error))")
                 // remove the spinner
                 self.activityView.removeFromSuperview()
+                AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
                 self.drawChart(inCell: cell, withData: dataArr) // show no data available message
-                return
             }
         })
     }

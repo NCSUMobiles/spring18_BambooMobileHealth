@@ -22,6 +22,7 @@ class HistoryVoiceMemoViewCell: UITableViewCell {
     
     weak var playerDelegate : VoiceMemoAudioPlayerDelegate?
     var audioDuration : Int = 0
+    var url : URL?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,13 +36,21 @@ class HistoryVoiceMemoViewCell: UITableViewCell {
     }
     
     func populate(memo : VoiceMemo) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         
-        let url = URL(fileURLWithPath: memo.URL)
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateStyle = .short
+        outputFormatter.timeStyle = .short
+        outputFormatter.doesRelativeDateFormatting = true
         
-        let audioAsset = AVURLAsset.init(url : url, options: nil)
+        url = URL(string: memo.URL)
+        
+        let audioAsset = AVURLAsset.init(url : url!, options: nil)
         audioDuration = Int(CMTimeGetSeconds(audioAsset.duration))
         
         filename.text = memo.title
+        dateTime.text = outputFormatter.string(from: dateFormatter.date(from: memo.date)!)
         endTime.text = String(format:"%02d", audioDuration/60) + ":" + String(format:"%02d", audioDuration%60)
         tagLabel.text = memo.status
         
