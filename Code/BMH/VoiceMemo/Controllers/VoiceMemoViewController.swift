@@ -255,7 +255,7 @@ class VoiceMemoViewController: UITableViewController {
             // Create the data to be saved
             var memo = VoiceMemo()
             memo.date = String(fname.split(separator: "_")[1])
-            memo.status = self.category! == 0 ? "Bad" : self.category! == 0 ? "Okay" : "Good"
+            memo.status = self.category! == 0 ? "Bad" : self.category! == 1 ? "Okay" : "Good"
             memo.title = self.fileName
             memo.URL = downloadURL
             
