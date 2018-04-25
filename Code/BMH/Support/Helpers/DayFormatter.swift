@@ -11,7 +11,7 @@ import Foundation
 import Charts
 
 class DayFormatter: NSObject, IAxisValueFormatter{
-    var hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
+    var hoursLabel = ["12A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12P", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return hoursLabel[Int(value)]
     }

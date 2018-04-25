@@ -41,6 +41,7 @@
 		EAC453BA208EAE3700D213E8 /* VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */; };
 		EAC453BC208EB1E500D213E8 /* bensound-ukulele.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */; };
 		EAD05CF8208EBADE00B7B661 /* bensound-dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */; };
+		EAEF8A6520904066004A54DB /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEF8A6420904066004A54DB /* UserRecord.swift */; };
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
 		EAF7B74F2071ADFE002C55AF /* ProgressChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */; };
 		FA040ABE206CAC850083D44E /* VoiceMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */; };
@@ -97,6 +98,7 @@
 		EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-ukulele.mp3"; sourceTree = "<group>"; };
 		EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMH-Bridging-Header.h"; sourceTree = "<group>"; };
 		EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-dubstep.mp3"; sourceTree = "<group>"; };
+		EAEF8A6420904066004A54DB /* UserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
 		EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressChartCell.xib; sourceTree = "<group>"; };
 		FA040ABD206CAC850083D44E /* VoiceMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemoViewController.swift; sourceTree = "<group>"; };
@@ -134,25 +136,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EA1E531420741EA9005A9F41 /* SupportFiles */ = {
+		EA1E531420741EA9005A9F41 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				EA1E531520741F19005A9F41 /* ActivityExercise.swift */,
-				EA1E53192074211F005A9F41 /* ActExList.json */,
-				FA40E8D0208B5E2800447F8B /* AlertHelper.swift */,
-				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
-				EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */,
-				EA9F5C692078390F00339C1D /* StringHelper.swift */,
-				EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */,
-				782B726A2087C63B008B0ED2 /* SettingsHelper.swift */,
-				EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */,
-				2734C30C208ABDBB00433F42 /* DayFormatter.swift */,
-				2734C30E208AC45700433F42 /* WeekFormatter.swift */,
-				2734C310208AC4CC00433F42 /* MonthFormatter.swift */,
-				2734C312208AC50C00433F42 /* YearFormatter.swift */,
-				EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */,
+				EAEF8A6320904025004A54DB /* DataStructs */,
+				EAEF8A6220904001004A54DB /* Helpers */,
+				EAEF8A6120903FDA004A54DB /* Views */,
+				EAEF8A6020903FCC004A54DB /* Controllers */,
 			);
-			path = SupportFiles;
+			path = Support;
 			sourceTree = "<group>";
 		};
 		EA29CDAE206B22DF00B016FE = {
@@ -177,65 +169,172 @@
 		EA29CDB9206B22DF00B016FE /* BMH */ = {
 			isa = PBXGroup;
 			children = (
-				FAE33924207DAF150053C227 /* VoiceMemo */,
-				EA1E531420741EA9005A9F41 /* SupportFiles */,
-				EA4A98A5206BF6CE004C0957 /* SupportViews */,
-				EA4A98A3206BF66D004C0957 /* ViewControllers */,
-				EA4A98A2206BF648004C0957 /* HistoryViews */,
-				EA4A98A1206BF639004C0957 /* ProgressViews */,
+				EA29CDC8206B22DF00B016FE /* Info.plist */,
 				EA29CDBA206B22DF00B016FE /* AppDelegate.swift */,
 				EA29CDC3206B22DF00B016FE /* Assets.xcassets */,
-				EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */,
-				EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */,
-				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
-				EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */,
-				EA29CDC8206B22DF00B016FE /* Info.plist */,
+				EA4A98A2206BF648004C0957 /* History */,
+				EAEF8A5D20903F77004A54DB /* Login */,
+				EA4A98A1206BF639004C0957 /* Progress */,
+				EAEF8A6620904095004A54DB /* Resources */,
+				EA4A98A3206BF66D004C0957 /* Settings */,
+				EAEF8A67209040E6004A54DB /* Storyboards */,
+				EA1E531420741EA9005A9F41 /* Support */,
+				FAE33924207DAF150053C227 /* VoiceMemo */,
 			);
 			path = BMH;
 			sourceTree = "<group>";
 		};
-		EA4A98A1206BF639004C0957 /* ProgressViews */ = {
+		EA4A98A1206BF639004C0957 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
-				EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */,
-				EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */,
-				EA08101F2075E2580059C0DD /* ProgressTableViewController.swift */,
+				EAEF8A5C20903F4A004A54DB /* Views */,
+				EAEF8A5B20903F40004A54DB /* Controllers */,
 			);
-			path = ProgressViews;
+			path = Progress;
 			sourceTree = "<group>";
 		};
-		EA4A98A2206BF648004C0957 /* HistoryViews */ = {
+		EA4A98A2206BF648004C0957 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				EAEF8A5A20903F13004A54DB /* Views */,
+				EAEF8A5920903F08004A54DB /* Controllers */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		EA4A98A3206BF66D004C0957 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */,
+				78428CC8206D1450004A6342 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EAEF8A5920903F08004A54DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				EA0A98E52071A9B400C7D253 /* HistoryCell.swift */,
-				EA0A98E42071A9B400C7D253 /* HistoryCell.xib */,
 				278A4A5E206D4EAF00D0F040 /* HistoryTableViewController.swift */,
 				27B758422079441400345804 /* HistoryVoiceMemoViewCell.swift */,
-				27B758432079441400345804 /* HistoryMemoViewCell.xib */,
 				2734C316208B8AEC00433F42 /* HistoryVoiceMemoController.swift */,
+				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
 			);
-			path = HistoryViews;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		EA4A98A3206BF66D004C0957 /* ViewControllers */ = {
+		EAEF8A5A20903F13004A54DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
-				EA29CDBE206B22DF00B016FE /* HistoryViewController.swift */,
-				78428CC8206D1450004A6342 /* SettingsViewController.swift */,
-				786926DD20741345009CC203 /* LoginViewController.swift */,
+				EA0A98E42071A9B400C7D253 /* HistoryCell.xib */,
+				27B758432079441400345804 /* HistoryMemoViewCell.xib */,
 			);
-			path = ViewControllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		EA4A98A5206BF6CE004C0957 /* SupportViews */ = {
+		EAEF8A5B20903F40004A54DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */,
+				EA08101F2075E2580059C0DD /* ProgressTableViewController.swift */,
+				EA29CDBC206B22DF00B016FE /* ProgressViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EAEF8A5C20903F4A004A54DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EAF7B74D2071ADFE002C55AF /* ProgressChartCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EAEF8A5D20903F77004A54DB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EAEF8A5F20903F88004A54DB /* Views */,
+				EAEF8A5E20903F82004A54DB /* Controllers */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		EAEF8A5E20903F82004A54DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				786926DD20741345009CC203 /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EAEF8A5F20903F88004A54DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EAEF8A6020903FCC004A54DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				EA31488D206C33A7006F712A /* SelectionTableViewCell.swift */,
-				EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */,
-				78428CCA206D1778004A6342 /* SettingsTableViewCell.swift */,
 			);
-			path = SupportViews;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EAEF8A6120903FDA004A54DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EA31488E206C33A7006F712A /* SelectionTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EAEF8A6220904001004A54DB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA40E8D0208B5E2800447F8B /* AlertHelper.swift */,
+				EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */,
+				EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */,
+				2734C30C208ABDBB00433F42 /* DayFormatter.swift */,
+				78DDD33720742C8E00A870F6 /* LoginHelper.swift */,
+				2734C310208AC4CC00433F42 /* MonthFormatter.swift */,
+				782B726A2087C63B008B0ED2 /* SettingsHelper.swift */,
+				EA9F5C692078390F00339C1D /* StringHelper.swift */,
+				EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */,
+				2734C30E208AC45700433F42 /* WeekFormatter.swift */,
+				2734C312208AC50C00433F42 /* YearFormatter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EAEF8A6320904025004A54DB /* DataStructs */ = {
+			isa = PBXGroup;
+			children = (
+				EA1E531520741F19005A9F41 /* ActivityExercise.swift */,
+				EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */,
+				EAEF8A6420904066004A54DB /* UserRecord.swift */,
+			);
+			path = DataStructs;
+			sourceTree = "<group>";
+		};
+		EAEF8A6620904095004A54DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */,
+				EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */,
+				EA1E53192074211F005A9F41 /* ActExList.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EAEF8A67209040E6004A54DB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EA29CDC5206B22DF00B016FE /* LaunchScreen.storyboard */,
+				EA29CDC0206B22DF00B016FE /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		EB89E9CA20796AAA3FF51249 /* Frameworks */ = {
@@ -465,6 +564,7 @@
 				EA0A98E72071A9B400C7D253 /* HistoryCell.swift in Sources */,
 				2734C313208AC50C00433F42 /* YearFormatter.swift in Sources */,
 				2734C317208B8AEC00433F42 /* HistoryVoiceMemoController.swift in Sources */,
+				EAEF8A6520904066004A54DB /* UserRecord.swift in Sources */,
 				2734C311208AC4CC00433F42 /* MonthFormatter.swift in Sources */,
 				EA9F5C6A2078390F00339C1D /* StringHelper.swift in Sources */,
 				FAE33938207E700F0053C227 /* MemoReviewTableViewCell.swift in Sources */,
@@ -567,7 +667,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/Support/Helpers/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -619,7 +719,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "BMH/SupportFiles/BMH-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BMH/Support/Helpers/BMH-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};

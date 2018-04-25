@@ -11,10 +11,9 @@ import Foundation
 import Charts
 
 class YearFormatter: NSObject, IAxisValueFormatter {
-//    var yearLabel: [String]! = ["2018"]
-    var yearLabel: [String]! = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    var monthLabel: [String]! = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return yearLabel[Int(value)]
+        return monthLabel[Int(value)]
     }
 }

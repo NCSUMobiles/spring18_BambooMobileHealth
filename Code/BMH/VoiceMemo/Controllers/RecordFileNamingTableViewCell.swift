@@ -15,15 +15,14 @@ protocol RecordFileNamingTableViewCellProtocol: NSObjectProtocol {
 }
 
 class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate {
-
+    @IBOutlet weak var fileNameTextField: UITextField!
     @IBAction func editEnded(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
-    @IBOutlet weak var fileNameTextField: UITextField!
-    
     @IBAction func fileNameTextFieldBeginAction(_ sender: Any) {
         
     }
+    
     @IBOutlet weak var voiceButton: UIButton!
     @IBAction func voiceButtonAction(_ sender: Any) {
         guard self.delegate != nil else { return }
@@ -42,16 +41,24 @@ class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate
         guard self.delegate != nil else { return }
         self.delegate.doneButtonPressed()
     }
+    
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))  //1
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
     var delegate:RecordFileNamingTableViewCellProtocol!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-      
+        fileNameTextField.borderStyle = .none
+        fileNameTextField.layer.backgroundColor = UIColor.white.cgColor
+        fileNameTextField.layer.masksToBounds = false
+        fileNameTextField.layer.shadowColor = UIColor.gray.cgColor
+        fileNameTextField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        fileNameTextField.layer.shadowOpacity = 1.0
+        fileNameTextField.layer.shadowRadius = 0.0
     }
     override func layoutSubviews() {
         voiceButton.isEnabled = false  //2
@@ -83,10 +90,10 @@ class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate
             }
         }
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -156,7 +163,6 @@ class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate
         }
         
         fileNameTextField.text = "Say something, I'm listening!"
-        
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
@@ -166,5 +172,4 @@ class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate
             voiceButton.isEnabled = false
         }
     }
-    
 }

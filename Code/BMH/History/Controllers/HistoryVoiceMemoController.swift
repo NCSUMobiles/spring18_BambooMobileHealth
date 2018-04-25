@@ -18,7 +18,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     
     var memosArray : Array<VoiceMemo> = []
     var showPickerView : Bool = false
-    var activities : [ActEx]!
+    var activities : [String]!
     var selectedActivity : Int = -1
     
     var selectionCellReuseIdentifer : String!
@@ -41,16 +41,18 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // get the app delegate
-        //        _ = UIApplication.shared.delegate as! AppDelegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
         // load the activity list and register custom nibs depending on the scene
+        let dictionary = SettingsHelper.getActivityExerciseGoalValues()
+        
         activities = []
+        for pairArray in dictionary {
+            for key in pairArray.keys {
+                activities.append(key)
+            }
+        }
+        activities.sort()
         
         if self.restorationIdentifier == "History_AudioViewController" {
-            activities = appDelegate.activities
-            
             selectionCellReuseIdentifer = "History_AudioSelectionCell"
             memoCellReuseIdentifer = "History_AudioMemoViewCell"
             labelCellReuseIdentifer = "History_AudioViewCell"
@@ -115,7 +117,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         let labelRow = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
         
         pickerLabel.textColor = UIColor.black
-        pickerLabel.text = activities[row].name
+        pickerLabel.text = activities[row]
         pickerLabel.font = labelRow?.textLabel?.font
         pickerLabel.textAlignment = NSTextAlignment.center
         return pickerLabel
@@ -125,10 +127,10 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.tableView.beginUpdates()
         selectedActivity = row
-        print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
+        print("Selected \(activityDebugLabel) \"\(activities[selectedActivity])\"")
         
         // update the text in first section first row
-        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
+        (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity]
         
         // remove any existing selection
         _ =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryVoiceMemoViewCell)
@@ -205,15 +207,15 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             }
             
             selectedActivity = (pickerView?.selectedRow(inComponent: 0))!
-            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity].name)\"")
+            print("Selected \(activityDebugLabel) \"\(activities[selectedActivity])\"")
         }
         else if (indexPath.section == 0 && indexPath.row == 0) {
             cell = tableView.dequeueReusableCell(withIdentifier: labelCellReuseIdentifer, for: indexPath)
             if  selectedActivity == -1 {
-                cell.textLabel?.text = activities[0].name
+                cell.textLabel?.text = activities[0]
             }
             else {
-                cell.textLabel?.text = activities[selectedActivity].name
+                cell.textLabel?.text = activities[selectedActivity]
             }
         }
         else if (indexPath.section == 1) {
@@ -233,6 +235,15 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         cell.layoutMargins = UIEdgeInsets.zero
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Choose a Tag"
+        default:
+            return ""
+        }
     }
     
     // Set the section header height

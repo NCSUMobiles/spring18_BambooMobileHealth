@@ -242,7 +242,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Choose an Activity"
+            return self.restorationIdentifier == "Progress_ExerciseViewController" ? "Choose an Exercise" : "Choose an Activity"
         case 1:
             return "Showing Week of:"
         default:
@@ -649,6 +649,10 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         chartView.xAxis.granularity = 1
         chartView.xAxis.labelCount = values.count
         chartView.xAxis.valueFormatter = formatter
+        
+        chartView.drawBordersEnabled = true
+        chartView.borderColor = UIColor.init(hex: "#777777")
+        cell.barChartView.borderLineWidth = 0.5
         
         // customize the legend
         let legend = chartView.legend

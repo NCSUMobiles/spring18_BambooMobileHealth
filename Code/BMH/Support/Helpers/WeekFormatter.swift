@@ -11,7 +11,7 @@ import Foundation
 import Charts
 
 class WeekFormatter: NSObject, IAxisValueFormatter {
-    var weekLabel: [String]! = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
+    var weekLabel: [String]! = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return weekLabel[Int(value)]

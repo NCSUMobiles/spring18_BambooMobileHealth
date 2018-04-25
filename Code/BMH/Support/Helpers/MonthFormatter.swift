@@ -11,10 +11,15 @@ import Foundation
 import Charts
 
 class MonthFormatter: NSObject, IAxisValueFormatter {
-//    var monthLabel: [String]! = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    var monthLabel: [String]! = ["April"]
+    var dateLabel: [String] = []
+    
+    public override init() {
+        for i in 1...31 {
+            dateLabel.append(i.description)
+        }
+    }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return monthLabel[Int(value)]
+        return dateLabel[Int(value)]
     }
 }

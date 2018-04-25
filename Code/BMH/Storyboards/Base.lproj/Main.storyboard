@@ -53,7 +53,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTE-Q6-BXV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="-998"/>
+            <point key="canvasLocation" x="1590" y="-772"/>
         </scene>
         <!--Progress_ExerciseView-->
         <scene sceneID="2RM-J9-5Ph">
@@ -94,7 +94,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tM-Hd-IPx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2417" y="-998"/>
+            <point key="canvasLocation" x="2417" y="-772"/>
         </scene>
         <!--Progress-->
         <scene sceneID="MEp-bM-IUN">
@@ -105,7 +105,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qtu-lr-jBl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="-998"/>
+            <point key="canvasLocation" x="780" y="-772"/>
         </scene>
         <!--History-->
         <scene sceneID="X1B-V9-KEe">
@@ -115,7 +115,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W42-A2-gOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="593"/>
+            <point key="canvasLocation" x="780" y="771"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -142,7 +142,7 @@
         <scene sceneID="r1n-Vq-5Lp">
             <objects>
                 <tableViewController id="Ah0-GN-bg5" customClass="VoiceMemoViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mHW-NG-Ve1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mHW-NG-Ve1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,7 +156,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zVX-Ml-3GQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-898.39999999999998" y="1369.5652173913045"/>
+            <point key="canvasLocation" x="-1" y="770"/>
         </scene>
         <!--Settings-->
         <scene sceneID="n3A-dv-RYi">
@@ -175,14 +175,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCj-aD-BEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="1370"/>
+            <point key="canvasLocation" x="-2367" y="0.0"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Weekly Goals-->
         <scene sceneID="0d8-E1-U3k">
             <objects>
                 <tableViewController modalPresentationStyle="currentContext" id="c5l-bZ-uiP" customClass="SettingsViewController" customModule="BMH" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ekr-Vv-oYa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -199,22 +199,23 @@
                                                 <constraint firstAttribute="width" secondItem="G00-l8-FMf" secondAttribute="height" multiplier="1:1" id="4dc-Hu-9dS"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Running" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-2S-cwb">
-                                            <rect key="frame" x="49" y="14" width="152" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Running" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-2S-cwb">
+                                            <rect key="frame" x="49" y="13" width="150" height="19.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="tJK-eY-pab"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5a0-vB-HUI">
-                                            <rect key="frame" x="209" y="14" width="75" height="17"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="5a0-vB-HUI">
+                                            <rect key="frame" x="207" y="10.5" width="75" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="75" id="LSZ-Xq-GI3"/>
+                                                <constraint firstAttribute="height" constant="24" id="RZi-ze-qRb"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             <connections>
                                                 <action selector="inputTextFieldDidBeginEditing:" destination="TaR-no-nyd" eventType="editingDidBegin" id="oLI-4L-enK"/>
@@ -222,12 +223,12 @@
                                                 <action selector="inputTextFieldTextChanged:" destination="TaR-no-nyd" eventType="editingChanged" id="Gl5-zF-Y9P"/>
                                             </connections>
                                         </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="miles/week" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s0X-v3-GRP">
-                                            <rect key="frame" x="292" y="15" width="75" height="14.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="miles" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s0X-v3-GRP">
+                                            <rect key="frame" x="290" y="12.5" width="75" height="19.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="wzE-Db-PcC"/>
+                                                <constraint firstAttribute="width" constant="75" id="wzE-Db-PcC"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -240,9 +241,9 @@
                                         <constraint firstItem="G00-l8-FMf" firstAttribute="height" secondItem="dME-xe-Izc" secondAttribute="height" multiplier="0.75" id="Pmx-i2-Noo"/>
                                         <constraint firstItem="s0X-v3-GRP" firstAttribute="leading" secondItem="5a0-vB-HUI" secondAttribute="trailing" constant="8" id="SJj-cl-kFe"/>
                                         <constraint firstItem="G00-l8-FMf" firstAttribute="centerY" secondItem="dME-xe-Izc" secondAttribute="centerY" id="VoE-Hn-0AX"/>
-                                        <constraint firstItem="5a0-vB-HUI" firstAttribute="leading" secondItem="MHj-2S-cwb" secondAttribute="trailing" constant="8" id="axw-NF-pmO"/>
+                                        <constraint firstItem="MHj-2S-cwb" firstAttribute="trailing" secondItem="5a0-vB-HUI" secondAttribute="leading" constant="-8" id="c4v-WW-Mrf"/>
                                         <constraint firstItem="5a0-vB-HUI" firstAttribute="centerY" secondItem="MHj-2S-cwb" secondAttribute="centerY" id="h57-qg-Tyd"/>
-                                        <constraint firstAttribute="trailing" secondItem="s0X-v3-GRP" secondAttribute="trailing" constant="8" id="py5-6L-Mgc"/>
+                                        <constraint firstAttribute="trailing" secondItem="s0X-v3-GRP" secondAttribute="trailing" constant="10" id="py5-6L-Mgc"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -260,7 +261,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="182-2O-naj">
+                    <navigationItem key="navigationItem" title="Weekly Goals" id="182-2O-naj">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="save" id="ceM-br-nPD">
                             <color key="tintColor" red="0.24313725490196078" green="0.39215686274509803" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -280,7 +281,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXw-iQ-oPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1094" y="1370"/>
+            <point key="canvasLocation" x="-1234" y="0.0"/>
         </scene>
         <!--History_ActivityView-->
         <scene sceneID="MCl-qJ-Qwz">
@@ -319,7 +320,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDy-LZ-jhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1589.5999999999999" y="591.45427286356824"/>
+            <point key="canvasLocation" x="1590" y="770"/>
         </scene>
         <!--History_ExerciseView-->
         <scene sceneID="69q-o7-Bp9">
@@ -358,7 +359,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ImD-cs-k1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2418" y="592"/>
+            <point key="canvasLocation" x="2417" y="770"/>
         </scene>
         <!--History_AudioView-->
         <scene sceneID="30p-HD-b7d">
@@ -397,7 +398,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tCY-mc-Y4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3271" y="592"/>
+            <point key="canvasLocation" x="3270" y="770"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ccv-ZZ-GhO">
@@ -502,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RkY-Pm-OK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-898" y="0.0"/>
+            <point key="canvasLocation" x="-1234" y="-772"/>
         </scene>
     </scenes>
     <resources>
@@ -513,7 +514,7 @@
         <image name="settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AxO-xJ-Ky4"/>
+        <segue reference="4jI-VW-EcK"/>
         <segue reference="BPG-Ga-ZPW"/>
     </inferredMetricsTieBreakers>
 </document>

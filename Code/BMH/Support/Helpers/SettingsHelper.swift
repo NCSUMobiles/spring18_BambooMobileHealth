@@ -30,7 +30,7 @@ class SettingsHelper{
             var dictionary = Locksmith.loadDataForUserAccount(userAccount: USER_ACCOUNT)
             
             // get the user record for the currently logged in user
-            var userRecord = (dictionary![(dictionary!["loggedInUser"] as? String)!] as? UserRecord)
+            let userRecord = (dictionary![(dictionary!["loggedInUser"] as? String)!] as? UserRecord)
             
             // update the goals and values
             userRecord?.actGoals = actGoals

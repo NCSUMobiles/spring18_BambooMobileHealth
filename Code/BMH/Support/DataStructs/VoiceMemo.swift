@@ -16,7 +16,6 @@ struct VoiceMemo : Codable {
     var tags : String
     
     init() {
-        
         title = ""
         date = ""
         fileName = ""

@@ -58,7 +58,7 @@ class SettingsViewController: UITableViewController {
         
         cell.leftImageView.image = UIImage(named: currentDataElement.imageName);
         cell.nameLabel.text = currentDataElement.name
-        cell.unitsLabel.text = currentDataElement.goalUnits + "/" + currentDataElement.goalTime
+        cell.unitsLabel.text = currentDataElement.goalUnits // + "/" + currentDataElement.goalTime
         cell.inputTextField.text = String(currentDataElement.goalValue)
         cell.sectionNo = indexPath.section
         cell.indexNo = indexPath.row
@@ -68,7 +68,7 @@ class SettingsViewController: UITableViewController {
         cell.inputTextField.layer.backgroundColor = UIColor.white.cgColor
         cell.inputTextField.layer.masksToBounds = false
         cell.inputTextField.layer.shadowColor = UIColor.gray.cgColor
-        cell.inputTextField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        cell.inputTextField.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
         cell.inputTextField.layer.shadowOpacity = 1.0
         cell.inputTextField.layer.shadowRadius = 0.0
         

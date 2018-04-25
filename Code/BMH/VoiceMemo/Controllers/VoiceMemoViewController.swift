@@ -25,12 +25,12 @@ class VoiceMemoViewController: UITableViewController {
         var dictionary = SettingsHelper.getActivityExerciseGoalValues()
         
         for pairArray in dictionary {
-            
             for key in pairArray.keys {
                 array.append(key)
             }
         }
         
+        array.sort()
         
         return array
     }()

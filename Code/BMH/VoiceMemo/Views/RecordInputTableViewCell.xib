@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,19 +42,19 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-kX-2LT">
-                        <rect key="frame" x="92" y="115" width="137" height="134"/>
+                        <rect key="frame" x="92" y="112" width="137" height="137"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="137" id="0Rs-Ya-rAT"/>
+                            <constraint firstAttribute="width" secondItem="3Yt-kX-2LT" secondAttribute="height" multiplier="1:1" id="q1x-jn-eTh"/>
                         </constraints>
                         <state key="normal" image="recordButton"/>
                         <connections>
                             <action selector="recordButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dxY-tV-HWs"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoF-Um-ElM">
-                        <rect key="frame" x="119" y="263" width="82" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoF-Um-ElM">
+                        <rect key="frame" x="125" y="263" width="70" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="82" id="Tv9-we-8fi"/>
                             <constraint firstAttribute="height" constant="21" id="s2T-l9-a28"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -62,18 +63,17 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3Yt-kX-2LT" firstAttribute="top" secondItem="PSq-LM-6TO" secondAttribute="bottom" constant="-2" id="1Rq-eE-49F"/>
                     <constraint firstItem="UoF-Um-ElM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="AaZ-SY-y1B"/>
-                    <constraint firstAttribute="bottom" secondItem="NqM-EO-Xwl" secondAttribute="bottom" constant="23.666666666666686" id="Avz-Hh-th3"/>
+                    <constraint firstAttribute="bottom" secondItem="NqM-EO-Xwl" secondAttribute="bottom" constant="23" id="Avz-Hh-th3"/>
                     <constraint firstAttribute="trailing" secondItem="NqM-EO-Xwl" secondAttribute="trailing" constant="16" id="CMb-j5-jFh"/>
-                    <constraint firstAttribute="bottom" secondItem="UoF-Um-ElM" secondAttribute="bottom" constant="15.666666666666686" id="Jek-6F-1HH"/>
+                    <constraint firstAttribute="bottom" secondItem="UoF-Um-ElM" secondAttribute="bottom" constant="15" id="Jek-6F-1HH"/>
                     <constraint firstItem="PSq-LM-6TO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LS7-VL-mmy"/>
                     <constraint firstItem="PSq-LM-6TO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="W7A-Tm-erS"/>
                     <constraint firstItem="UoF-Um-ElM" firstAttribute="top" secondItem="3Yt-kX-2LT" secondAttribute="bottom" constant="14" id="nrS-ZC-3Od"/>
+                    <constraint firstItem="3Yt-kX-2LT" firstAttribute="top" secondItem="PSq-LM-6TO" secondAttribute="bottom" constant="-5" id="wIK-1U-W5y"/>
                     <constraint firstItem="3Yt-kX-2LT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="yyp-r4-reG"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.9500473947441691" green="1" blue="0.95612824882982095" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="previewButton" destination="NqM-EO-Xwl" id="04n-g0-oJj"/>
