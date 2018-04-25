@@ -50,7 +50,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
         weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
         monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        yearLabel = ["2018"]
+        yearLabel = ["April"]
 
         if self.restorationIdentifier == "History_ActivityViewController" {
             activities = appDelegate.activities
@@ -132,11 +132,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             
         }
         else if selectedSegment == 3 {
-            createChart(inCell: chartCell, forActivity: selectedActivity, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
-            
+            createChart(inCell: chartCell, forActivity: 0, withData: yearLabel, withData: [Int(arc4random_uniform(3001)+87500)])
         }
         else if selectedSegment == 4 {
-            createChart(inCell: chartCell, forActivity: selectedActivity, withData: yearLabel, withData: [Int(20001)+107000])
+            createChart(inCell: chartCell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(5000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(2000)+87000)])
+            
           
         }
         else {
@@ -229,10 +229,10 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                     createChart(inCell: cell, forActivity: 0, withData: weekLabel, withData: createWeeklyData())
                 }
                 else if selectedSegment == 3 {
-                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(arc4random_uniform(3001)+87500)])
                 }
                 else if selectedSegment == 4 {
-                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(20001)+107000])
+                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(5000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(2000)+87000)])
                 }
                 else {
                     createChart(inCell: cell, forActivity: 0, withData: hoursLabel, withData: createDailyData())
@@ -243,10 +243,10 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                     createChart(inCell: cell, forActivity: 0, withData: weekLabel, withData: createWeeklyData())
                 }
                 else if selectedSegment == 3 {
-                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000), Int(arc4random_uniform(1001)+7000)])
+                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(arc4random_uniform(3001)+87500)])
                 }
                 else if selectedSegment == 4 {
-                    createChart(inCell: cell, forActivity: 0, withData: yearLabel, withData: [Int(20001)+107000])
+                    createChart(inCell: cell, forActivity: 0, withData: monthLabel, withData: [Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(5000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(2000)+87000)])
                 }
                 else {
                     createChart(inCell: cell, forActivity: 0, withData: hoursLabel, withData: createDailyData())
@@ -328,9 +328,9 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
    
     // generate daily mocking data
     func createDailyData()-> Array<Int> {
-        return [Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(31)),
-            Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)),
-            Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(401)), Int(arc4random_uniform(401)),
+        return [Int(arc4random_uniform(21)), Int(arc4random_uniform(11)), Int(arc4random_uniform(11)), Int(arc4random_uniform(21)), Int(arc4random_uniform(11)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(31)),
+            Int(arc4random_uniform(501)), Int(arc4random_uniform(401)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)),
+            Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)),
             Int(arc4random_uniform(301)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)),
             Int(arc4random_uniform(401)), Int(arc4random_uniform(301)), Int(arc4random_uniform(401)), Int(arc4random_uniform(301))]
     }
@@ -452,6 +452,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         }
         
         let xAxisValue = cell.barChartView.xAxis
+        
         xAxisValue.valueFormatter = axisFormatDelegate
         xAxisValue.labelPosition = .bottom
         xAxisValue.granularityEnabled = true
@@ -462,9 +463,16 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         xAxisValue.drawLimitLinesBehindDataEnabled = true
         xAxisValue.avoidFirstLastClippingEnabled = false
         
+        cell.barChartView.leftAxis.drawGridLinesEnabled = false
+        cell.barChartView.rightAxis.drawGridLinesEnabled = false
+   
         var labelString = (activity?.goalUnits)! + " Count"
         //        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Steps Count")
         let chartDataSet = BarChartDataSet(values: dataEntries, label: labelString)
+        
+        // customize the data set
+        chartDataSet.drawIconsEnabled = false
+//        chartDataSet.drawValuesEnabled = false // hides the value of each day
         
         chartDataSet.colors = [UIColor(hex: "#7000ff")]
         
@@ -483,7 +491,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         // display the unit
         cell.unitsLabel.text = (activity?.goalUnits)!
-        
+        cell.barChartView.setScaleEnabled(false)
     }
     
 }
@@ -499,7 +507,7 @@ extension HistoryTableViewController: IAxisValueFormatter {
         hoursLabel = ["12A", "1A", "2A", "3A", "4A", "5A", "6A", "7A", "8A", "9A", "10A", "11A", "12P", "1P", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "11P"]
         weekLabel = ["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"]
         monthLabel = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        yearLabel = ["2018"]
+        yearLabel = ["April"]
         
         if selectedSegment == 1 {
             return hoursLabel[Int(value)]
@@ -508,10 +516,10 @@ extension HistoryTableViewController: IAxisValueFormatter {
              return weekLabel[Int(value)]
         }
         else if selectedSegment == 3 {
-             return monthLabel[Int(value)]
+             return yearLabel[Int(value)]
         }
         else if selectedSegment == 4 {
-            return yearLabel[Int(value)]
+            return monthLabel[Int(value)]
         }
         else {
              return hoursLabel[Int(value)]
