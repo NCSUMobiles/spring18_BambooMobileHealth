@@ -21,6 +21,11 @@ class RecordCategoryTableViewCell: UITableViewCell {
             redButton.setImage(UIImage(named: "red"), for: .selected)
         }
     }
+    func resetButtons() {
+        self.greenButton.isSelected = false
+        self.redButton.isSelected = false
+        self.yellowButton.isSelected = false
+    }
     @IBAction func redButtonAction(_ sender: Any) {
         guard self.delegate != nil else { return }
         self.greenButton.isSelected = false

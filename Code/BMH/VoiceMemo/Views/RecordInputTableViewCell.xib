@@ -50,13 +50,26 @@
                             <action selector="recordButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dxY-tV-HWs"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoF-Um-ElM">
+                        <rect key="frame" x="119" y="263" width="82" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="82" id="Tv9-we-8fi"/>
+                            <constraint firstAttribute="height" constant="21" id="s2T-l9-a28"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="3Yt-kX-2LT" firstAttribute="top" secondItem="PSq-LM-6TO" secondAttribute="bottom" constant="-2" id="1Rq-eE-49F"/>
+                    <constraint firstItem="UoF-Um-ElM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="AaZ-SY-y1B"/>
                     <constraint firstAttribute="bottom" secondItem="NqM-EO-Xwl" secondAttribute="bottom" constant="23.666666666666686" id="Avz-Hh-th3"/>
                     <constraint firstAttribute="trailing" secondItem="NqM-EO-Xwl" secondAttribute="trailing" constant="16" id="CMb-j5-jFh"/>
+                    <constraint firstAttribute="bottom" secondItem="UoF-Um-ElM" secondAttribute="bottom" constant="15.666666666666686" id="Jek-6F-1HH"/>
                     <constraint firstItem="PSq-LM-6TO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LS7-VL-mmy"/>
                     <constraint firstItem="PSq-LM-6TO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="W7A-Tm-erS"/>
+                    <constraint firstItem="UoF-Um-ElM" firstAttribute="top" secondItem="3Yt-kX-2LT" secondAttribute="bottom" constant="14" id="nrS-ZC-3Od"/>
                     <constraint firstItem="3Yt-kX-2LT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="yyp-r4-reG"/>
                 </constraints>
             </tableViewCellContentView>
@@ -65,9 +78,10 @@
             <connections>
                 <outlet property="previewButton" destination="NqM-EO-Xwl" id="04n-g0-oJj"/>
                 <outlet property="recordButton" destination="3Yt-kX-2LT" id="jli-y0-1pN"/>
+                <outlet property="recordedLabel" destination="UoF-Um-ElM" id="4bV-eg-S2Z"/>
                 <outlet property="timeLabel" destination="PSq-LM-6TO" id="Bmk-pl-kM4"/>
             </connections>
-            <point key="canvasLocation" x="34" y="246.5"/>
+            <point key="canvasLocation" x="34" y="246"/>
         </tableViewCell>
     </objects>
     <resources>
