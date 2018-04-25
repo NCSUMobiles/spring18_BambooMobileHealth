@@ -27,7 +27,7 @@
                         </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                         <connections>
                             <action selector="editEnded:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="9ge-bi-aRe"/>
                             <action selector="fileNameTextFieldBeginAction:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="17c-G6-aF5"/>

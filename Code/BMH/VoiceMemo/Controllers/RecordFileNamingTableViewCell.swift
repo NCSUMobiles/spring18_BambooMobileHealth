@@ -16,7 +16,8 @@ protocol RecordFileNamingTableViewCellProtocol: NSObjectProtocol {
 
 class RecordFileNamingTableViewCell: UITableViewCell, SFSpeechRecognizerDelegate {
 
-    @IBAction func editEnded(_ sender: Any) {
+    @IBAction func editEnded(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     @IBOutlet weak var fileNameTextField: UITextField!
     
