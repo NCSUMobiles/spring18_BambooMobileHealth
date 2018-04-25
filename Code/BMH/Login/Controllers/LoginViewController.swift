@@ -57,7 +57,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 method: .post,
                 parameters: ["username": username, "password": password.sha256()])
                 .responseJSON { (response) -> Void in
-                    
                     if response.response?.statusCode == 200 {
                         // read token here
                         let customToken = (response.result.value as? [String: Any])?["token"] as? String

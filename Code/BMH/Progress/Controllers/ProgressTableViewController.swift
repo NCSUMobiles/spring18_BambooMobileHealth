@@ -9,6 +9,8 @@
 import UIKit
 import Charts
 import Firebase
+import Alamofire
+import FirebaseAuth
 
 class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
     
@@ -18,6 +20,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     
     var activities : [ActEx]!
     var selectedActivity : Int = -1
+    var activityData : [String : [Int]]!
     
     var selectionCellReuseIdentifer : String!
     var chartCellReuseIdentifier : String!
@@ -28,6 +31,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     let chartColors = [UIColor(red: 18.0/255.0, green: 121.0/255.0, blue: 201.0/255.0, alpha: 1.0), UIColor.lightGray]
     
     var tap : UITapGestureRecognizer!
+    let activityView = UIView()
     
     var activityDebugLabel : String = ""
     
@@ -45,6 +49,8 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // load the activity list and register custom nibs depending on the scene
         activities = []
+        activityData = [:]
+        
         if self.restorationIdentifier == "Progress_ActivityViewController" {
             activities = appDelegate.activities
             
@@ -67,9 +73,30 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         self.tableView.register(UINib(nibName:"SelectionTableViewCell", bundle: nil), forCellReuseIdentifier: selectionCellReuseIdentifer)
         self.tableView.register(UINib(nibName:"ProgressChartCell", bundle: nil), forCellReuseIdentifier: chartCellReuseIdentifier)
         
+        activityView.frame = self.tableView.frame
+        activityView.center = self.tableView.center
+        activityView.backgroundColor = UIColor(hex: "#ffffff", alpha: 0.3)
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.tableView.center
+        loadingView.backgroundColor = UIColor(hex: "#444444", alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        let actInd = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
+        actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        actInd.center = CGPoint(x: loadingView.frame.size.width / 2,
+                                y: loadingView.frame.size.height / 2);
+        loadingView.addSubview(actInd)
+        activityView.addSubview(loadingView)
+        actInd.startAnimating()
+        
         // custom double tap gesture which is added and removed at will
-//        tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapGesture))
-//        tap.numberOfTapsRequired = 2
+        //        tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapGesture))
+        //        tap.numberOfTapsRequired = 2
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -226,7 +253,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             
             // associate custom handler for touch up inside the toggle buttons in our chart cells
             //(cell as! ProgressChartCell).pieChartToggle.addTarget(self, action: #selector(togglePieChartType(button:)), for: UIControlEvents.touchUpInside)
-            //(cell as! ProgressChartCell).barChartToggle.addTarget(self, action: #selector(toggleChartType(button:)), for: UIControlEvents.touchUpInside)
+            (cell as! ProgressChartCell).barChartToggle.addTarget(self, action: #selector(toggleChartType(button:)), for: UIControlEvents.touchUpInside)
             
             (cell as! ProgressChartCell).chartToggleButton.addTarget(self, action: #selector(chartTypeChanged(button:)), for: UIControlEvents.primaryActionTriggered)
         }
@@ -411,13 +438,6 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             
             // set chart delegate to self
             cell.pieChartView.delegate = self
-            
-            // custom double tap gesture if not showing slices
-//            if !showSlicedPieChart {
-//                cell.pieChartView.addGestureRecognizer(tap)
-//            } else {
-//                cell.pieChartView.removeGestureRecognizer(tap)
-//            }
         }
         else {
             // Create a bar chart
@@ -436,33 +456,92 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         let activity = activities[index]
         let code = activity.code
         
-        let db = Firestore.firestore()
-        
-        let docRefBase = db.collection("users").document(LoginHelper.getLoggedInUser() as! String).collection("activities").document(code)
-        var docRef = docRefBase
-        
-        // get date for each day in this week.
-        let weekDays = daysOfWeekString(shortFormat: true)
-        
-        for var dayString in weekDays {
-            dayString = dayString.replacingOccurrences(of: "/", with: "-")
-            print ("Trying to find data for \(dayString)")
-            
-            docRef = docRefBase.collection(dayString).document(dayString)
-            
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
-                } else {
-                    print("Document does not exist")
-                }
-            }
+        if activityData[code] != nil {
+            self.drawChart(inCell: cell, withData: activityData[code]!)
+            return
         }
         
-        dataArr = createDummyData()
+        // start the spinner
+        self.tableView.addSubview(self.activityView)
         
-        drawChart(inCell: cell, withData: dataArr)
+        var idToken = ""
+        // get current ID Token
+        Auth.auth().currentUser?.getIDToken(completion: { (token, error) in
+            if (error == nil) {
+                idToken = token!
+                
+                let params = ["uname": LoginHelper.getLoggedInUser() as! String,
+                              "token": idToken,
+                              "act"  : self.restorationIdentifier == "Progress_ActivityViewController" ? 1 : 0,
+                              "name" : code] as [String : Any]
+                
+                // make a request to API
+                Alamofire.request(
+                    URL(string: "http://" + (UIApplication.shared.delegate as! AppDelegate).serverIP + "/api/progress")!,
+                    method: .get,
+                    parameters: params)
+                    .responseJSON { (response) -> Void in
+                        let ret_code = response.response?.statusCode
+                        if ret_code == 200 {
+                            self.activityView.removeFromSuperview()
+                            var res_json = response.result.value as? [String: Int]
+                            for i in self.initDaysOfWeek {
+                                dataArr.append(res_json![i] ?? 0)
+                            }
+                            self.activityData[code] = dataArr
+                            self.drawChart(inCell: cell, withData: dataArr)
+                        }
+                        else if ret_code == 403 {
+                            self.activityView.removeFromSuperview()
+                            // unauthorized user. log the user out
+                            AlertHelper.showBasicAlertInVC(self, title: "Unauthorized", message: "You are not authorized to retrieve this content. Please sign in using appropriate credentials and try agian.")
+                            
+                            let firebaseAuth = Auth.auth()
+                            do {
+                                try firebaseAuth.signOut()
+                            } catch let signOutError as NSError {
+                                print ("Error signing out: %@", signOutError)
+                            }
+                            
+                            // logout
+                            LoginHelper.logOut()
+                            
+                            // now go back to login screen
+                            _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
+                        }
+                        else if ret_code == 401 {
+                            self.activityView.removeFromSuperview()
+                            AlertHelper.showBasicAlertInVC(self, title: "Session Expired", message: "Please sign in again to retrieve the latest data from the server.")
+                            
+                            let firebaseAuth = Auth.auth()
+                            do {
+                                try firebaseAuth.signOut()
+                            } catch let signOutError as NSError {
+                                print ("Error signing out: %@", signOutError)
+                            }
+                            
+                            // logout
+                            LoginHelper.logOut()
+                            
+                            // now go back to login screen
+                            _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
+                        }
+                        else {
+                            self.activityView.removeFromSuperview()
+                            AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
+                            self.activityView.removeFromSuperview()
+                            self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                        }
+                }
+            }
+            else {
+                print("Error occurred ingetting IDToken: \(String(describing: error))")
+                // remove the spinner
+                self.activityView.removeFromSuperview()
+                self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                return
+            }
+        })
     }
     
     // Create a chart inside the specified cell, creating data as necessary
@@ -471,28 +550,21 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // For this activity obtain weekly goal value and units
         let index = selectedActivity == -1 ? 0 : selectedActivity
         let activity = activities[index]
-        var dataArr : [Int] = []
         
         // save activity into cell for futture use
         cell.actEx = activity
-        
-        // Retrieve values for this week from Firebase
-        if (self.restorationIdentifier == "Progress_ActivityViewController") {
-            if selectedActivity == -1 {
-                retrieveDataAndDrawChart(inCell: cell)
-            }
-            else {
-                retrieveDataAndDrawChart(inCell: cell)
-            }
-        }
-        else {
-            dataArr = createDummyData()
-            drawChart(inCell: cell, withData: dataArr)
-        }
+
+        retrieveDataAndDrawChart(inCell: cell)
     }
     
     // draw a pie chart
     func drawPieChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+        
+        if initValues.count == 0 {
+            cell.pieChartView!.data = nil
+            return
+        }
+        
         // get the activity object for this cell
         let activity = cell.actEx
         
@@ -593,6 +665,12 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     
     // draw a bar chart
     func drawBarChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+        
+        if initValues.count == 0 {
+            cell.barChartView!.data = nil
+            return
+        }
+        
         // get the activity object for this cell
         let activity = cell.actEx
         
@@ -693,33 +771,19 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             if (cell.currentSegmentIndex == 1) {
                 // toggle the state of Pie Chart
                 showSlicedPieChart = true
+                cell.barChartToggle.isHidden = false
                 togglePieChartType(button: button)
-            }
-            else if (cell.currentSegmentIndex == 2) {
-                // toggle the state of Pie Chart
-                showPieChart = false
-                toggleChartType(button: button)
             }
         }
         else if (cell.previousSegmentIndex == 1) {
             if (cell.currentSegmentIndex == 0) {
                 showSlicedPieChart = false
+                if (!showPieChart){
+                    toggleChartType(button: cell.barChartToggle)
+                }
+                cell.barChartToggle.isHidden = true
                 togglePieChartType(button: button)
             }
-            else if (cell.currentSegmentIndex == 2) {
-                showPieChart = false
-                toggleChartType(button: button)
-            }
-        }
-        else if (cell.previousSegmentIndex == 2) {
-            if (cell.currentSegmentIndex == 0) {
-                showSlicedPieChart = false
-            }
-            else if (cell.currentSegmentIndex == 1) {
-                showSlicedPieChart = true
-            }
-            showPieChart = true
-            toggleChartType(button: button)
         }
     }
     
@@ -749,13 +813,16 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     }
     
     // toggle between pie chart and bar chart
-    @objc func toggleChartType(button : UISegmentedControl) {
+    @objc func toggleChartType(button : UIButton) {
         let cell = ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+        
+        // toggle the state of Pie Chart
+        showPieChart = !showPieChart
         
         if (showPieChart) {
             // switch the image for the button
-            // button.setImage(UIImage(named: "bar-chart"), for: UIControlState.normal)
-            // button.imageEdgeInsets = UIEdgeInsetsMake(4,4,4,4) // hack because we don't have padding for the bar chart icon
+            button.setImage(UIImage(named: "bar-chart"), for: UIControlState.normal)
+            button.imageEdgeInsets = UIEdgeInsetsMake(4,4,4,4) // hack because we don't have padding for the bar chart icon
             print ("Now showing pie chart")
             
             // update the chartview visibility
@@ -765,13 +832,9 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         }
         else {
             // switch the image for the button
-//            if (showSlicedPieChart) {
-//                button.setImage(UIImage(named: "donut-multi"), for: UIControlState.normal)
-//            }
-//            else {
-//                button.setImage(UIImage(named: "donut-single"), for: UIControlState.normal)
-//            }
-//            button.imageEdgeInsets = UIEdgeInsetsMake(2,2,2,2)
+            
+            button.setImage(UIImage(named: "donut-multi"), for: UIControlState.normal)
+            button.imageEdgeInsets = UIEdgeInsetsMake(2,2,2,2)
             print ("Now showing bar chart")
             
             // update the chartview visibility
