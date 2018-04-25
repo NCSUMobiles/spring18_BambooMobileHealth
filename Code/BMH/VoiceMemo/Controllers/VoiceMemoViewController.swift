@@ -15,8 +15,6 @@ import Firebase
 
 
 class VoiceMemoViewController: UITableViewController {
-    
-    
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer?
@@ -39,7 +37,7 @@ class VoiceMemoViewController: UITableViewController {
     var audioFile:URL!
     var fileName:String!
     
-    
+    let activityView = UIView()
     
     func showAsPopover(_ sender: UIView) {
         
@@ -70,6 +68,27 @@ class VoiceMemoViewController: UITableViewController {
         tableView.register(UINib(nibName: "MemoReviewTableViewCell" , bundle: nil), forCellReuseIdentifier: "memoCell")
         tableView.register(UINib(nibName: "RecordInputTableViewCell" , bundle: nil), forCellReuseIdentifier: "recordCell")
         tableView.register(UINib(nibName: "HashtagPickerTableViewCell" , bundle: nil), forCellReuseIdentifier: "hashtagCell")
+        
+        activityView.frame = self.tableView.frame
+        activityView.center = self.tableView.center
+        activityView.backgroundColor = UIColor(hex: "#ffffff", alpha: 0.3)
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.tableView.center
+        loadingView.backgroundColor = UIColor(hex: "#444444", alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        let actInd = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
+        actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        actInd.center = CGPoint(x: loadingView.frame.size.width / 2,
+                                y: loadingView.frame.size.height / 2);
+        loadingView.addSubview(actInd)
+        activityView.addSubview(loadingView)
+        actInd.startAnimating()
         
         recordingSession = AVAudioSession.sharedInstance()
         do {
@@ -182,6 +201,8 @@ class VoiceMemoViewController: UITableViewController {
     func saveAudioFile() {
         guard LoginHelper.getLoggedInUser() != nil else { return }
         
+        self.tableView.addSubview(self.activityView)
+        
         let cell = tableView(self.tableView, cellForRowAt: IndexPath.init(row: 0, section: 3)) as! RecordFileNamingTableViewCell
         cell.fileNameTextField.resignFirstResponder()
         
@@ -190,9 +211,10 @@ class VoiceMemoViewController: UITableViewController {
         // Create a root reference
         _ = storage.reference()
         
+        let fname = "recording_\(Date())"
         
         // This is equivalent to creating the full reference
-        let storagePath = "gs://bamboomobile-9c643.appspot.com/\(LoginHelper.getLoggedInUser()! as! String)/recording_\(Date())"
+        let storagePath = "gs://bamboomobile-9c643.appspot.com/\(LoginHelper.getLoggedInUser()! as! String)/\(fname)"
         let audioRef = storage.reference(forURL: storagePath)
         
         
@@ -204,27 +226,69 @@ class VoiceMemoViewController: UITableViewController {
         
         let customMetadata = StorageMetadata.init()
         customMetadata.customMetadata = metadata as? [String : String]
-        //        let metadata = [
-        //            "customMetadata": [
-        //                "location": "Yosemite, CA, USA",
-        //                "activity": "Hiking"
-        //            ]
-        //        ]
         
         // File located on disk
         let localFile = self.audioFile!
         
-        
         // Upload the file to the path "images/rivers.jpg"
-        _ = audioRef.putFile(from: localFile, metadata: customMetadata) { metadata, error in
-            if error != nil {
+        let _ = audioRef.putFile(from: localFile, metadata: customMetadata) { metadata, error in
+            guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
-                AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
-            } else {
-                // Metadata contains file metadata such as size, content-type, and download URL.
-                _ = metadata!.downloadURL()
+                self.activityView.removeFromSuperview()
                 self.resetForm()
-                AlertHelper.showBasicAlertInVC(self, title: "Success", message: "Your voice memo has been saved.")                
+                AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
+                return
+            }
+            guard error == nil else {
+                // Uh-oh, an error occurred!
+                self.activityView.removeFromSuperview()
+                self.resetForm()
+                AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
+                return
+            }
+            
+            // Metadata contains file metadata such as size, content-type, and download URL.
+            let downloadURL = metadata.downloadURLs![0].absoluteString
+            print (downloadURL)
+            
+            // Create the data to be saved
+            var memo = VoiceMemo()
+            memo.date = String(fname.split(separator: "_")[1])
+            memo.status = self.category! == 0 ? "Bad" : self.category! == 0 ? "Okay" : "Good"
+            memo.title = self.fileName
+            memo.URL = downloadURL
+            
+            for i in self.simpleDataArray {
+                memo.tags[i] = false
+            }
+            
+            for i in self.simpleSelectedArray {
+                memo.tags[i] = true
+            }
+            
+            let docData: [String: Any] = [
+                "date" : memo.date,
+                "status" : memo.status,
+                "title" : memo.title,
+                "URL" : memo.URL,
+                "tags" : memo.tags
+            ]
+            
+            // Now attempt to upload user profile on server
+            let db = Firestore.firestore()
+            db.collection("user").document(LoginHelper.getLoggedInUser()! as! String)
+                .collection("memos").document(fname).setData(docData) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                        self.activityView.removeFromSuperview()
+                        self.resetForm()
+                        AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Unable to save Memo. Try Again later.")
+                    } else {
+                        print("Document successfully written!")
+                        self.activityView.removeFromSuperview()
+                        self.resetForm()
+                        AlertHelper.showBasicAlertInVC(self, title: "Success", message: "Your voice memo has been saved.")
+                    }
             }
         }
     }
@@ -261,7 +325,6 @@ class VoiceMemoViewController: UITableViewController {
         }
         guard self.fileName != nil && !self.fileName.isEmpty else {
             AlertHelper.showBasicAlertInVC(self, title: "Oops", message: "Please name your memo.")
-            
             return
         }
         

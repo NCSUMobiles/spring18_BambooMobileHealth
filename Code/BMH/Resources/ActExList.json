@@ -9,7 +9,7 @@
                    },
                    {
                    "image": "running",
-                   "name": "Running/Elliptical",
+                   "name": "Running-Elliptical",
                    "units": "miles",
                    "per": "week",
                    "code": "RNE"
@@ -37,7 +37,7 @@
                    },
                    {
                    "image": "pilates",
-                   "name": "Yoga/Pilates",
+                   "name": "Yoga-Pilates",
                    "units": "minutes",
                    "per": "week",
                    "code": "YGP"
@@ -53,7 +53,7 @@
                   },
                   {
                   "image": "cycling",
-                  "name": "Cycling/Hand Cycling",
+                  "name": "Cycling-Hand Cycling",
                   "units": "miles",
                   "per": "week",
                   "code": "CYC"

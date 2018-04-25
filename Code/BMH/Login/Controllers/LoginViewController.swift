@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.present(alert, animated: true, completion: nil)
                     } else {
                         print ("Some other error on server")
-                        let alert = UIAlertController(title: "Network Error", message: "Couldn't connect to authentication server. Please try again later.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Oops!", message: "Something went wrong or invalid credentials. Please try again later.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }

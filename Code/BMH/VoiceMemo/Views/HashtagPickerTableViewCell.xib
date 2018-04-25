@@ -20,11 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap To Tag!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TU6-PJ-D7Y">
-                        <rect key="frame" x="0.0" y="-3" width="320" height="55.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="320" id="BHl-2B-g63"/>
-                            <constraint firstAttribute="height" constant="55" id="kWe-vd-GGr"/>
-                        </constraints>
+                        <rect key="frame" x="0.0" y="8" width="320" height="33.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

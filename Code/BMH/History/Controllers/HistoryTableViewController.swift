@@ -257,7 +257,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return self.restorationIdentifier == "Progress_ExerciseViewController" ? "Choose an Exercise" : "Choose an Activity"
+            return self.restorationIdentifier == "History_ExerciseViewController" ? "Choose an Exercise" : "Choose an Activity"
         default:
             return ""
         }

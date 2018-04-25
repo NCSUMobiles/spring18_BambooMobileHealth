@@ -79,17 +79,17 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         
         var voiceMemo = VoiceMemo.init()
         voiceMemo.title = "Cheerful"
-        voiceMemo.fileName = Bundle.main.path(forResource: "bensound-ukulele", ofType: "mp3")!
+        voiceMemo.URL = Bundle.main.path(forResource: "bensound-ukulele", ofType: "mp3")!
         voiceMemo.date = Date.init().description
-        voiceMemo.tags = "Tag 1, Tag 2, Tag 3"
+        voiceMemo.status = "Good"
         
         memosArray.append(voiceMemo)
         
         voiceMemo = VoiceMemo.init()
         voiceMemo.title = "Psychedelic"
-        voiceMemo.fileName = Bundle.main.path(forResource: "bensound-dubstep", ofType: "mp3")!
+        voiceMemo.URL = Bundle.main.path(forResource: "bensound-dubstep", ofType: "mp3")!
         voiceMemo.date = Date.init().description
-        voiceMemo.tags = "Tag 1, Tag 2, Tag 3"
+        voiceMemo.status = "Bad"
         
         memosArray.append(voiceMemo)
     }
@@ -343,7 +343,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         isPlayingCell = nil
         
         var url : URL
-        url = URL(fileURLWithPath: audio.fileName)
+        url = URL(fileURLWithPath: audio.URL)
 
         let audioSession = AVAudioSession.sharedInstance()
         

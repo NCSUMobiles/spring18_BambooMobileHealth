@@ -253,7 +253,6 @@
 		EAEF8A5D20903F77004A54DB /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				EAEF8A5F20903F88004A54DB /* Views */,
 				EAEF8A5E20903F82004A54DB /* Controllers */,
 			);
 			path = Login;
@@ -265,13 +264,6 @@
 				786926DD20741345009CC203 /* LoginViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		EAEF8A5F20903F88004A54DB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		EAEF8A6020903FCC004A54DB /* Controllers */ = {

@@ -36,14 +36,14 @@ class HistoryVoiceMemoViewCell: UITableViewCell {
     
     func populate(memo : VoiceMemo) {
         
-        let url = URL(fileURLWithPath: memo.fileName)
+        let url = URL(fileURLWithPath: memo.URL)
         
         let audioAsset = AVURLAsset.init(url : url, options: nil)
         audioDuration = Int(CMTimeGetSeconds(audioAsset.duration))
         
         filename.text = memo.title
         endTime.text = String(format:"%02d", audioDuration/60) + ":" + String(format:"%02d", audioDuration%60)
-        tagLabel.text = memo.tags
+        tagLabel.text = memo.status
         
         resetCell()
     }
@@ -58,7 +58,6 @@ class HistoryVoiceMemoViewCell: UITableViewCell {
     }
     
     func setAudioTag(tag : Int) {
-        
         playButton.tag = tag
     }
     
