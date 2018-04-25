@@ -276,6 +276,8 @@ class VoiceMemoViewController: UITableViewController {
         recordCell.recordedLabel.text = "00:00.00"
         var categoryCell = tableView.cellForRow(at: IndexPath(item: 0, section: 1)) as! RecordCategoryTableViewCell
         categoryCell.resetButtons()
+        var namingCell = tableView.cellForRow(at: IndexPath(item: 0, section: 3)) as! RecordFileNamingTableViewCell
+        namingCell.fileNameTextField.text = ""
     }
     
     
