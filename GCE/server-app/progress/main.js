@@ -7,10 +7,10 @@ exports.progress = function(req, res) {
   var isActivity= req.query.act == undefined ? undefined : req.query.act == 1 ? true : false;
   var actName   = req.query.name;
 
-  console.log("username:", username);
-  console.log("token:", token);
-  console.log("isActivity:", isActivity);
-  console.log("actName:", actName);
+  // console.log("username:", username);
+  // console.log("token:", token);
+  // console.log("isActivity:", isActivity);
+  // console.log("actName:", actName);
 
   if (username == undefined || token == undefined || username == "" || token == "" || isActivity == undefined || actName == undefined) {
     res.status(400).send("Bad Request");
@@ -32,7 +32,7 @@ exports.progress = function(req, res) {
 
       if (username == uid && iat <= now && exp >= now && auth_time <= now && 
         sub != undefined && sub != "" && aud == globals.projectId && iss == globals.issuer) {
-            // successfully authenticated. Now we can perform the queries
+          // successfully authenticated. Now we can perform the queries
           const db = globals.firebaseadmin.firestore(); 
           
           var startOfWeek = moment().startOf('week');
@@ -119,8 +119,13 @@ exports.progress = function(req, res) {
       var errorCode = error.code;
       var errorMessage = error.message;
 
-      console.error("Progress: Error occurred signing in.", errorCode, errorMessage);
-      res.status(401).send("Token Expired, Sign-In again.");  
+      console.error("Progress: Error occurred. ", errorCode, errorMessage);
+      if (errorCode == "auth/argument-error") {
+        res.status(401).send("Error occurred. " + errorCode + " " + errorMessage); 
+      }
+      else {
+        res.status(500).send("Error occurred. " + errorCode + " " + errorMessage);  
+      }
     });
   }
 }
