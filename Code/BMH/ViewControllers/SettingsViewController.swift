@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 
 class SettingsViewController: UITableViewController {
-
+    
     var tableData : [[ActEx]]!
     let tableSections = ["Activity","Exercise"]
     
@@ -18,7 +18,7 @@ class SettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // check if we came in here for the first time
         if (LoginHelper.getLoginCount(userId: LoginHelper.getLoggedInUser() as! String) <= 1) {
             // hide the settings button
@@ -34,24 +34,24 @@ class SettingsViewController: UITableViewController {
         self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return tableData.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return tableData[section].count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell", for: indexPath) as! SettingsTableViewCell
         let currentDataElement = tableData[indexPath.section][indexPath.row];
@@ -74,7 +74,7 @@ class SettingsViewController: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
@@ -87,25 +87,27 @@ class SettingsViewController: UITableViewController {
         return tableView.sectionHeaderHeight
     }
     @IBAction func saveButtonClicked(_ sender: UIBarButtonItem) {
-        lastTextField.resignFirstResponder()
+        if lastTextField != nil {
+            lastTextField.resignFirstResponder()
+        }
         
         SettingsHelper.saveActivityExerciseGoalValues(activityExerciseAndGoals: tableData)
         
         let alert = UIAlertController(title: "Success!", message: "Your preferences have been saved.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (alert) -> Void in 
+            if (LoginHelper.getLoginCount(userId: LoginHelper.getLoggedInUser() as! String) <= 1) {
+                // increment the login count
+                LoginHelper.setLoginCount(userId: LoginHelper.getLoggedInUser() as! String, loginCount: 2)
+                
+                // now show the settings button
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
+                
+                // and segue to the main view
+                self.performSegue(withIdentifier: "showTabBar", sender: self)
+            }
+        }))
         self.present(alert, animated: true, completion: nil)
-        
-        if (LoginHelper.getLoginCount(userId: LoginHelper.getLoggedInUser() as! String) <= 1) {
-            // increment the login count
-            LoginHelper.setLoginCount(userId: LoginHelper.getLoggedInUser() as! String, loginCount: 2)
-            
-            // now show the settings button
-            self.navigationItem.rightBarButtonItem?.isEnabled = true
-            self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(red: 62/255.0, green: 100/255.0, blue: 251/255.0, alpha: 1)
-            
-            // and segue to the main view
-            self.performSegue(withIdentifier: "showTabBar", sender: self)
-        }
     }
     
     @IBAction func logout() {

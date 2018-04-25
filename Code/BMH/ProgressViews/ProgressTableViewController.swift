@@ -24,7 +24,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     var labelCellReuseIdentifer : String!
     
     let initDaysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    let sliceColors = [UIColor(hex: "#1f77b4"), UIColor(hex: "#ff7f0e"), UIColor(hex: "#2ca02c"), UIColor(hex: "#d62728"), UIColor(hex: "#9467bd"), UIColor(hex: "#8c564b"), UIColor(hex: "#e377c2"), UIColor.lightGray]
+    let sliceColors = [UIColor(hex: "#1f77b4"), UIColor(hex: "#ff7f0e"), UIColor(hex: "#2ca02c"), UIColor(hex: "#3943B91"), UIColor(hex: "#f71e71"), UIColor(hex: "#8c564b"), UIColor(hex: "#e377c2"), UIColor.lightGray]
     let chartColors = [UIColor(red: 18.0/255.0, green: 121.0/255.0, blue: 201.0/255.0, alpha: 1.0), UIColor.lightGray]
     
     var tap : UITapGestureRecognizer!
@@ -332,7 +332,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     // MARK: - Custom functions
     func createDummyData() -> [Int] {
         var dataArr : [Int] = []
-        var limit : UInt32 = 3000
+        var limit : UInt32 = 300
         
         if self.restorationIdentifier == "Progress_ExerciseViewController" {
             limit = 5

@@ -36,8 +36,6 @@ class UserRecord : NSObject, NSCoding {
         self.actGoals = (aDecoder.decodeObject(forKey: "actGoals") as? [String : Int])!
         self.exGoals = (aDecoder.decodeObject(forKey: "exGoals") as? [String : Int])!
     }
-    
-    
 }
 
 
