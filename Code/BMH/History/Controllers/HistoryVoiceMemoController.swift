@@ -441,6 +441,9 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
     @IBAction func stopAudio () {
         if let audioPlayer = player {
             if audioPlayer.rate != 0 {
+                guard updater != nil else {
+                    return
+                }
                 updater.invalidate()
                 updater = nil
                 audioPlayer.pause()
@@ -546,12 +549,17 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
                 
             }
             else {
-                 isPlayingCell.resetCell()
-                 current_time = 0
-                 remaining_time = Int(isPlayingCell.audioDuration)
                 
-//                current_time = Int(CMTimeGetSeconds(audioPlayer.currentTime()))
-//                remaining_time = Int(isPlayingCell.audioDuration-Int(CMTimeGetSeconds(audioPlayer.currentTime())))
+                current_time = Int(CMTimeGetSeconds(audioPlayer.currentTime()))
+                
+                if (current_time == Int(isPlayingCell.audioDuration)) {
+                    isPlayingCell.resetCell()
+                    current_time = 0
+                    remaining_time = Int(isPlayingCell.audioDuration)
+                }
+                else {
+                    remaining_time = Int(isPlayingCell.audioDuration-Int(CMTimeGetSeconds(audioPlayer.currentTime())))
+                }
             }
             
             isPlayingCell.playTime.text = String(format:"%02d", current_time/60) + ":" + String(format:"%02d", current_time%60)
