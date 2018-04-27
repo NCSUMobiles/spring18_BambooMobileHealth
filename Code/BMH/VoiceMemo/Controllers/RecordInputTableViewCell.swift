@@ -49,8 +49,7 @@ class RecordInputTableViewCell: UITableViewCell, AVAudioRecorderDelegate, AVAudi
             //stop audio
             self.previewButton.isSelected = false
             self.stopPreview()
-        }
-        if(self.previewButton.isEnabled && !self.previewButton.isSelected) {
+        }else if(self.previewButton.isEnabled && !self.previewButton.isSelected) {
             //play audio
             self.previewButton.isSelected = true
             self.playPreview()
