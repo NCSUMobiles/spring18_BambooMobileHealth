@@ -92,11 +92,13 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         loadingView.addSubview(actInd)
         activityView.addSubview(loadingView)
         actInd.startAnimating()
+        
+        reloadVoiceMemos(activity: activities[0])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadVoiceMemos(activity: activities[0])
+        //reloadVoiceMemos(activity: activities[0])
     }
     
     fileprivate func updateRows(oldCount : Int) {

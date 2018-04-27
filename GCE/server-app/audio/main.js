@@ -25,12 +25,12 @@ exports.audio = function(req, res) {
 
       var num_responses = 0;
 
-      if (username == uid && iat <= now && exp >= now && auth_time <= now && sub != undefined && sub != "" && aud == globals.projectId && iss == globals.issuer) {
+      if ((username == uid || uid == "admin") && iat <= now && exp >= now && auth_time <= now && sub != undefined && sub != "" && aud == globals.projectId && iss == globals.issuer) {
         // successfully authenticated. Now we can perform the queries
         const db = globals.firebaseadmin.firestore(); 
         var res_json = [];
 
-        db.collection('user').doc(uid).collection('memos')
+        db.collection('user').doc(username).collection('memos')
           .where('tags.' + actName, '==', true)
           .get()
           .then(snapshot => {
