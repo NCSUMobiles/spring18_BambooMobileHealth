@@ -126,4 +126,9 @@ class SettingsViewController: UITableViewController {
         _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationController = segue.destination as? UITabBarController {
+            (UIApplication.shared.delegate as! AppDelegate).initialTabConterllerSetup(rootTabBarController: destinationController)
+        }
+    }
 }
