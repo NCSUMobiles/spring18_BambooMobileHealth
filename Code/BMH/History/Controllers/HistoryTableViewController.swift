@@ -19,6 +19,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     var activities : [ActEx]!
     var selectedActivity : Int = -1
     var activityData : [String : [String : [Int]]]!
+    var rangeForChart : String = ""
     
     var selectionCellReuseIdentifer : String!
     var chartCellReuseIdentifier : String!
@@ -118,7 +119,8 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         chartCell.barChartView.clear()
         
         // update the chart in third section first row
-        createChart(inCell: chartCell, forRange: getRange())
+        getRange()
+        createChart(inCell: chartCell)
         
     }
     
@@ -187,8 +189,8 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         
         // construct the ranges
-        
-        createChart(inCell: chartCell, forRange: getRange())
+        getRange()
+        createChart(inCell: chartCell)
         
     }
     
@@ -268,7 +270,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             cell.aggSwitch.addTarget(self, action: #selector(changeChart(sender:)), for: UIControlEvents.primaryActionTriggered)
             cell.aggSwitch.addTarget(self, action: #selector(updateChart(sender:)), for: .valueChanged)
             
-            createChart(inCell: cell, forRange: getRange())
+            cell.leftButton.addTarget(self, action: #selector(createChartForPreviousRange(sender:)), for: .primaryActionTriggered)
+            cell.rightButton.addTarget(self, action: #selector(createChartForNextRange(sender:)), for: .primaryActionTriggered)
+            
+            getRange()
+            createChart(inCell: cell)
             
             return cell
         }
@@ -364,6 +370,14 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
     }
     
+    @IBAction func createChartForPreviousRange(sender: UIButton) {
+        print ("Previous Selected")
+    }
+    
+    @IBAction func createChartForNextRange(sender: UIButton) {
+        print ("Next Selected")
+    }
+    
     // MARK: - Custom functions
     
     // generate daily mocking data
@@ -428,7 +442,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         self.tableView.reloadData()
     }
     
-    func getRange() -> String{
+    func getRange(){
         var range = ""
         switch selectedSegment {
         case 1:
@@ -453,11 +467,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             range = dateFormatter.string(from: todaysDate)
             break;
         }
-        return range;
+        rangeForChart = range
     }
     
     // Create a chart
-    func createChart(inCell cell: HistoryCell, forRange range: String) {
+    func createChart(inCell cell: HistoryCell) {
         let index = selectedActivity == -1 ? 0 : selectedActivity
         let activity = activities[index]
         
@@ -466,11 +480,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         //cell.barChartView.delegate = self
         
-        retrieveDataAndDrawChart(inCell: cell, forRange: range)
+        retrieveDataAndDrawChart(inCell: cell)
     }
     
     // retrieve data from backend and draw chart in the specified cell
-    func retrieveDataAndDrawChart(inCell cell: HistoryCell, forRange range : String) {
+    func retrieveDataAndDrawChart(inCell cell: HistoryCell) {
         let index = selectedActivity == -1 ? 0 : selectedActivity
         var dataArr : [Int] = []
         
@@ -509,7 +523,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                               "act"  : self.restorationIdentifier == "History_ActivityViewController" ? 1 : 0,
                               "name" : code,
                               "gran" : gran,
-                              "range": range
+                              "range": self.rangeForChart
                     ] as [String : Any]
                 
                 // make a request to API
