@@ -148,7 +148,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
                 
                 let params = ["uname": LoginHelper.getLoggedInUser() as! String,
                               "token": idToken,
-                              "name" : activity.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!] as [String : Any]
+                              "name" : activity] as [String : Any]
                 
                 // make a request to API
                 Alamofire.request(
