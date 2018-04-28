@@ -277,6 +277,9 @@ class VoiceMemoViewController: UITableViewController {
             
             // Now attempt to upload user profile on server
             let db = Firestore.firestore()
+            let settings = db.settings
+            settings.areTimestampsInSnapshotsEnabled = true
+            db.settings = settings
             db.collection("user").document(LoginHelper.getLoggedInUser()! as! String)
                 .collection("memos").document(fname).setData(docData) { err in
                     if let err = err {

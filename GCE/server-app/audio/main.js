@@ -5,6 +5,7 @@ exports.audio = function(req, res) {
   var username   = req.query.uname;
   var token      = req.query.token;
   var actName    = req.query.name;
+  var status     = req.query.status;
 
   console.log(actName);
 
@@ -30,23 +31,45 @@ exports.audio = function(req, res) {
         const db = globals.firebaseadmin.firestore(); 
         var res_json = [];
 
-        db.collection('user').doc(username).collection('memos')
-          .where('tags.' + actName, '==', true)
-          .get()
-          .then(snapshot => {
-            var docCount = 0;
-            snapshot.forEach(doc => {
-              //console.log(doc.id, '=>', doc.data());
-              res_json.push(doc.data());
+        if (status == undefined) {
+          db.collection('user').doc(username).collection('memos')
+            .where('tags.' + actName, '==', true)
+            .get()
+            .then(snapshot => {
+              var docCount = 0;
+              snapshot.forEach(doc => {
+                //console.log(doc.id, '=>', doc.data());
+                res_json.push(doc.data());
+              });
+              console.info("Sending response with " + res_json.length + " documents");
+              res.status(200).send(res_json);
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+              res.status(500).send("Error getting document.");
+              return;
             });
-            console.info("Sending response with " + res_json.length + " documents");
-            res.status(200).send(res_json);
-          })
-          .catch(function(error) {
-            console.log("Error getting document:", error);
-            res.status(500).send("Error getting document.");
-            return;
-          });
+        }
+        else {
+          db.collection('user').doc(username).collection('memos')
+            .where('tags.' + actName, '==', true)
+            .where('status', '==', status)
+            .get()
+            .then(snapshot => {
+              var docCount = 0;
+              snapshot.forEach(doc => {
+                //console.log(doc.id, '=>', doc.data());
+                res_json.push(doc.data());
+              });
+              console.info("Sending response with " + res_json.length + " documents");
+              res.status(200).send(res_json);
+            })
+            .catch(function(error) {
+              console.log("Error getting document:", error);
+              res.status(500).send("Error getting document.");
+              return;
+            });
+        }
       } 
       else {
           res.status(403).send("Unauthorized User");
