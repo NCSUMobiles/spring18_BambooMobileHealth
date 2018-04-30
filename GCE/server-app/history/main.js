@@ -18,7 +18,7 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
 
   var res_json = {};
 
-  console.log(startOfRange);
+  console.log("Start: ", startOfRange, "End: ", endOfRange);
   
   if (granularity == "d") {
     for (var i = 0; i < 24; i++) {
@@ -175,7 +175,7 @@ exports.history = function(req, res) {
             console.log("Requested data for", range);
 
             startOfRange = moment(range+"-01", "MM-YY-DD");
-            endOfRange   = parseInt(range.split("-")[0]) < moment().month()+1 ? moment(range+"-01", "MM-YY-DD").endOf("month") : moment();
+            endOfRange   = moment(range+"-01", "MM-YY-DD").endOf("month");
 
             fetchData(uid, activity_name, actName, startOfRange, endOfRange, granularity, res);
           }
@@ -184,7 +184,7 @@ exports.history = function(req, res) {
             console.log("Requested data for", range);
 
             startOfRange = moment("01-01-" + range, "MM-DD-YYYY");
-            endOfRange   = parseInt(range) < moment().year() ? moment("12-31-" + range, "MM-DD-YYYY") : moment();
+            endOfRange   = moment("12-31-" + range, "MM-DD-YYYY");
 
             fetchData(uid, activity_name, actName, startOfRange, endOfRange, granularity, res);
           }
