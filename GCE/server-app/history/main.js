@@ -20,14 +20,14 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
 
   console.log("Start: ", startOfRange, "End: ", endOfRange);
   
-  if (granularity == "d") {
-    for (var i = 0; i < 24; i++) {
-      res_json[("00" + i).slice(-2)] = 0;
-    }
-  }
-  else if (granularity == "w") {
-    res_json = {"Sun": 0, "Mon": 0, "Tue": 0, "Wed": 0, "Thu": 0, "Fri": 0, "Sat": 0};
-  }
+  // if (granularity == "d") {
+  //   for (var i = 0; i < 24; i++) {
+  //     res_json[("00" + i).slice(-2)] = 0;
+  //   }
+  // }
+  // else if (granularity == "w") {
+  //   res_json = {"Sun": 0, "Mon": 0, "Tue": 0, "Wed": 0, "Thu": 0, "Fri": 0, "Sat": 0};
+  // }
 
   while (startOfRange <= endOfRange) {
     var dateStr = startOfRange.format("MM-DD-YY")
@@ -47,7 +47,10 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
 
           Object.keys(data).forEach(function(key) {
             console.log(key, data[key]);
-            res_json[key.slice(0,2)] += data[key]
+            //res_json[key.slice(0,2)] += data[key]
+            var k = ("00" + parseInt(key.slice(0,2))).slice(-2)
+            res_json[k] = res_json[k]===undefined ? values : res_json[k] + values
+
           });
         }
         else if (granularity == "w") {
