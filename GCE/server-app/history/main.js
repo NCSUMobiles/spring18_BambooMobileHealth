@@ -31,6 +31,8 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
 
   while (startOfRange <= endOfRange) {
     var dateStr = startOfRange.format("MM-DD-YY")
+    var currDate = moment().hour(0).minute(0).second(0).millisecond(0);
+
     num_requests++;
 
     db.collection('user').doc(uid).collection(activity_name)
@@ -60,36 +62,47 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
             values += e;
           });
 
-          switch(moment(doc.id, "MM-DD-YY").day()) {
-            case 0: res_json["Sun"] = values;
+          var docDate = moment(doc.id, "MM-DD-YY");
+          
+          switch(docDate.day()) {
+            case 0: res_json["Sun"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 1: res_json["Mon"] = values;
+            case 1: res_json["Mon"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 2: res_json["Tue"] = values;
+            case 2: res_json["Tue"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 3: res_json["Wed"] = values;
+            case 3: res_json["Wed"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 4: res_json["Thu"] = values;
+            case 4: res_json["Thu"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 5: res_json["Fri"] = values;
+            case 5: res_json["Fri"] = docDate.isAfter(currDate) ? 0 : values;
             break;
-            case 6: res_json["Sat"] = values;
+            case 6: res_json["Sat"] = docDate.isAfter(currDate) ? 0 : values;
             break;
           }
         }
         else if (granularity == "m") {
           // aggregte the data by days
+          var docDate = moment(doc.id, "MM-DD-YY");
+          
           Object.values(doc.data()).forEach(function(e){
             values += e;
           });
-          res_json[doc.id.slice(3,-3)] = values;
+          if (!docDate.isAfter(currDate)) {
+            res_json[doc.id.slice(3,-3)] = values;
+          }
         }
         else if (granularity == "y") {
           // aggregte the data by months
+          var docDate = moment(doc.id, "MM-DD-YY");
+
           Object.values(doc.data()).forEach(function(e){
             values += e;
           });
-          res_json[doc.id.slice(0,2)] = res_json[doc.id.slice(0,2)]===undefined ? values : res_json[doc.id.slice(0,2)] + values
+
+          if (!docDate.isAfter(currDate)) {
+            res_json[doc.id.slice(0,2)] = res_json[doc.id.slice(0,2)]===undefined ? values : res_json[doc.id.slice(0,2)] + values;
+          }
         }
 
       } 

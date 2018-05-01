@@ -38,32 +38,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSd-aE-9AZ" userLabel="Chart Title View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="26"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyi-2M-rsu">
-                                        <rect key="frame" x="5" y="0.5" width="25" height="25"/>
-                                        <state key="normal" image="left-arrow"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="FxG-v0-I58">
-                                        <rect key="frame" x="137" y="3" width="46" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="Pxk-qd-0gO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKH-cL-YHf">
-                                        <rect key="frame" x="290" y="0.5" width="25" height="25"/>
-                                        <state key="normal" image="right-arrow"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iCc-l1-gYM">
+                                        <rect key="frame" x="5" y="0.0" width="310" height="26"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyi-2M-rsu">
+                                                <rect key="frame" x="0.0" y="0.5" width="25" height="25"/>
+                                                <state key="normal" image="left-arrow"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="FxG-v0-I58">
+                                                <rect key="frame" x="132" y="3" width="46" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKH-cL-YHf">
+                                                <rect key="frame" x="285" y="0.5" width="25" height="25"/>
+                                                <state key="normal" image="right-arrow"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="FxG-v0-I58" firstAttribute="centerY" secondItem="tSd-aE-9AZ" secondAttribute="centerY" id="1hD-pu-mqj"/>
                                     <constraint firstAttribute="height" constant="26" id="2uj-rK-gF1"/>
-                                    <constraint firstItem="KKH-cL-YHf" firstAttribute="centerY" secondItem="tSd-aE-9AZ" secondAttribute="centerY" id="8Qt-VG-TpA"/>
-                                    <constraint firstItem="FxG-v0-I58" firstAttribute="centerX" secondItem="tSd-aE-9AZ" secondAttribute="centerX" id="IV3-VZ-OvQ"/>
-                                    <constraint firstItem="Iyi-2M-rsu" firstAttribute="centerY" secondItem="tSd-aE-9AZ" secondAttribute="centerY" id="acX-OA-Y3f"/>
-                                    <constraint firstItem="Iyi-2M-rsu" firstAttribute="leading" secondItem="tSd-aE-9AZ" secondAttribute="leading" constant="5" id="bFB-Of-438"/>
-                                    <constraint firstAttribute="trailing" secondItem="KKH-cL-YHf" secondAttribute="trailing" constant="5" id="gzT-mS-nrU"/>
+                                    <constraint firstItem="iCc-l1-gYM" firstAttribute="width" secondItem="tSd-aE-9AZ" secondAttribute="width" constant="-10" id="C7n-s1-cQz"/>
+                                    <constraint firstItem="iCc-l1-gYM" firstAttribute="centerY" secondItem="tSd-aE-9AZ" secondAttribute="centerY" id="RVc-lx-Hg7"/>
+                                    <constraint firstItem="iCc-l1-gYM" firstAttribute="height" secondItem="tSd-aE-9AZ" secondAttribute="height" id="TTV-Ur-JnF"/>
+                                    <constraint firstItem="iCc-l1-gYM" firstAttribute="centerX" secondItem="tSd-aE-9AZ" secondAttribute="centerX" id="g68-tP-Cty"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pG-6v-CvO" customClass="BarChartView" customModule="Charts">

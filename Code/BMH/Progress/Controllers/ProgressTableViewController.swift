@@ -111,14 +111,13 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             activities = appDelegate.exercises
         }
         
-        // redraw the chart
+        // redraw the chart (to reflect updated settings)
         // remove any existing selection
         let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
         chartCell.pieChartView.clear()
-        
+
         // update the chart in third section first row
         createChart(inCell: chartCell)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -485,8 +484,16 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                         if ret_code == 200 {
                             self.activityView.removeFromSuperview()
                             var res_json = response.result.value as? [String: Int]
-                            for i in self.initDaysOfWeek {
-                                dataArr.append(res_json![i] ?? 0)
+                            
+                            let currWeekDay = Calendar.current.dateComponents([.weekday], from: Date()).weekday! - 1
+                            for i in 0..<7 {
+                                let weekDay = self.initDaysOfWeek[i]
+                                if (i <= currWeekDay) {
+                                    dataArr.append(res_json![weekDay] ?? 0)
+                                }
+                                else {
+                                    dataArr.append(0)
+                                }
                             }
                             self.activityData[code] = dataArr
                             self.drawChart(inCell: cell, withData: dataArr)
@@ -526,7 +533,14 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                             // now go back to login screen
                             _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
                         }
+                        else if ret_code == 400 {
+                            print ("Malformed request.")
+                            self.activityView.removeFromSuperview()
+                            AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
+                            self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                        }
                         else {
+                            print ("Some other error.")
                             self.activityView.removeFromSuperview()
                             AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
                             self.drawChart(inCell: cell, withData: dataArr) // show no data available message
@@ -682,12 +696,13 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // calculate percent of goal achieved to customize label color
         for i in 0...6 {
-            if (initValues[i] > 0) {
+            //if (initValues[i] > 0) {
                 sum += initValues[i]
                 values.append(initValues[i])
                 setColors.append(sliceColors[i])
-            }
+           // }
         }
+        
         
         // save the total progress this week
         cell.progressValue = sum
