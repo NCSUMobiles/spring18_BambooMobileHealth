@@ -49,7 +49,8 @@ function fetchData(uid, activity_name, actName, startOfRange, endOfRange, granul
             console.log(key, data[key]);
             //res_json[key.slice(0,2)] += data[key]
             var k = ("00" + parseInt(key.slice(0,2))).slice(-2)
-            res_json[k] = res_json[k]===undefined ? values : res_json[k] + values
+            console.log(k)
+            res_json[k] = res_json[k]===undefined ? data[key] : res_json[k] + data[key]
 
           });
         }
