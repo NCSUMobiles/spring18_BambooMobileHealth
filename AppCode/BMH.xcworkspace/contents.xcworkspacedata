@@ -5,7 +5,7 @@
       location = "group:BMH.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/kpadia/Documents/Coursework/CSC563/Project/Github/Code/BMH/FaveButton/FaveButton.xcodeproj">
+      location = "container:BMH/FaveButton/FaveButton.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
