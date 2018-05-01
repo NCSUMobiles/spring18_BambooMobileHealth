@@ -119,7 +119,12 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         chartCell.pieChartView.clear()
 
         // update the chart in third section first row
-        createChart(inCell: chartCell, forceFlash: true)
+        if selectedActivity == -1 {
+            createChart(inCell: chartCell, forceFlash: true)
+        }
+        else {
+            createChart(inCell: chartCell, forceFlash: false)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -249,7 +254,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             
             // create chart inside this cell
             if selectedActivity == -1 {
-                createChart(inCell: cell as! ProgressChartCell, forceFlash: false)
+                createChart(inCell: cell as! ProgressChartCell, forceFlash: true)
             }
             else {
                 createChart(inCell: cell as! ProgressChartCell, forceFlash: false)

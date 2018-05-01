@@ -37,10 +37,11 @@
 		EA7566BB2074BCE600E547D9 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7566BA2074BCE600E547D9 /* UIColorHelper.swift */; };
 		EA9F5C6A2078390F00339C1D /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C692078390F00339C1D /* StringHelper.swift */; };
 		EA9F5C6C2078392D00339C1D /* BarChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5C6B2078392D00339C1D /* BarChartFormatter.swift */; };
+		EAA0534C2098BEF300C08391 /* FaveButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC6C2C42098422300A39438 /* FaveButton.framework */; };
+		EAA0534D2098BEF300C08391 /* FaveButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EAC6C2C42098422300A39438 /* FaveButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		EAC453BA208EAE3700D213E8 /* VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */; };
 		EAC453BC208EB1E500D213E8 /* bensound-ukulele.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */; };
-		EAC6C2C52098422300A39438 /* FaveButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC6C2C42098422300A39438 /* FaveButton.framework */; };
 		EAD05CF8208EBADE00B7B661 /* bensound-dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */; };
 		EAEF8A6520904066004A54DB /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEF8A6420904066004A54DB /* UserRecord.swift */; };
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
@@ -58,6 +59,20 @@
 		FAE33936207E52D40053C227 /* RecordFileNamingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE33934207E52D40053C227 /* RecordFileNamingTableViewCell.xib */; };
 		FAE33938207E700F0053C227 /* MemoReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE33937207E700F0053C227 /* MemoReviewTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EAA0534E2098BEF300C08391 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EAA0534D2098BEF300C08391 /* FaveButton.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1524DDA64DF11A654BCBB4D3 /* Pods-BMH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BMH/Pods-BMH.debug.xcconfig"; sourceTree = "<group>"; };
@@ -122,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAC6C2C52098422300A39438 /* FaveButton.framework in Frameworks */,
+				EAA0534C2098BEF300C08391 /* FaveButton.framework in Frameworks */,
 				98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +403,7 @@
 				EA29CDB5206B22DF00B016FE /* Resources */,
 				C813BA3AF14D9B2F3BF7D0B1 /* [CP] Embed Pods Frameworks */,
 				3F79AE2AD5980E2F9D9D0E8B /* [CP] Copy Pods Resources */,
+				EAA0534E2098BEF300C08391 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
