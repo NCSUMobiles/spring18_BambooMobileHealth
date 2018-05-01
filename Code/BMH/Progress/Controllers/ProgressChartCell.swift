@@ -8,12 +8,13 @@
 
 import UIKit
 import Charts
+import FaveButton
 
 class ProgressChartCell: UITableViewCell {
-
     @IBOutlet weak var pieChartView : PieChartView!
     @IBOutlet weak var barChartView : BarChartView!
     @IBOutlet weak var iconImage : UIImageView!
+    @IBOutlet var starButton : FaveButton!
     @IBOutlet weak var valueLabel : UILabel!
     @IBOutlet weak var iconLabel : UILabel!
     
@@ -53,5 +54,4 @@ class ProgressChartCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

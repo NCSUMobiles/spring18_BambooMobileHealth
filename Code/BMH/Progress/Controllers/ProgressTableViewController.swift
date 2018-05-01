@@ -11,12 +11,14 @@ import Charts
 import Firebase
 import Alamofire
 import FirebaseAuth
+import FaveButton
 
-class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
+class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate, FaveButtonDelegate {
     
     var showPickerView : Bool = false
     var showPieChart : Bool = true
     var showSlicedPieChart : Bool = false
+    var needsFlashing : Bool = false
     
     var activities : [ActEx]!
     var selectedActivity : Int = -1
@@ -117,7 +119,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         chartCell.pieChartView.clear()
 
         // update the chart in third section first row
-        createChart(inCell: chartCell)
+        createChart(inCell: chartCell, forceFlash: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -156,12 +158,15 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // update the text in first section first row
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
         
+        // auto-hide the picker view
+        //self.tableView(self.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        
         // remove any existing selection
         let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
         chartCell.pieChartView.clear()
         
         // update the chart in third section first row
-        createChart(inCell: chartCell)
+        createChart(inCell: chartCell, forceFlash: false)
     }
     
     // MARK: - Table view data source and delegates
@@ -244,17 +249,16 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             
             // create chart inside this cell
             if selectedActivity == -1 {
-                createChart(inCell: cell as! ProgressChartCell)
+                createChart(inCell: cell as! ProgressChartCell, forceFlash: false)
             }
             else {
-                createChart(inCell: cell as! ProgressChartCell)
+                createChart(inCell: cell as! ProgressChartCell, forceFlash: false)
             }
             
             // associate custom handler for touch up inside the toggle buttons in our chart cells
-            //(cell as! ProgressChartCell).pieChartToggle.addTarget(self, action: #selector(togglePieChartType(button:)), for: UIControlEvents.touchUpInside)
             (cell as! ProgressChartCell).barChartToggle.addTarget(self, action: #selector(toggleChartType(button:)), for: UIControlEvents.touchUpInside)
-            
             (cell as! ProgressChartCell).chartToggleButton.addTarget(self, action: #selector(chartTypeChanged(button:)), for: UIControlEvents.primaryActionTriggered)
+            (cell as! ProgressChartCell).starButton.delegate = self
         }
         
         cell.preservesSuperviewLayoutMargins = false
@@ -288,6 +292,11 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                 self.tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .top)
             }
             self.tableView.endUpdates()
+            
+            if (needsFlashing) {
+                let chartCell = ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! ProgressChartCell)
+                chartCell.starButton.sendActions(for: .touchUpInside)
+            }
         }
     }
     
@@ -333,6 +342,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         if !showSlicedPieChart && cell.pieChartView.highlighted[0].x == 0.0 {
             showSlicedPieChart = true
+            cell.barChartToggle.isHidden = false
             cell.chartToggleButton.selectedSegmentIndex = 1
             cell.previousSegmentIndex = cell.currentSegmentIndex
             cell.currentSegmentIndex = 1
@@ -426,21 +436,23 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         valueString.append(valueString2)
         cell.valueLabel.attributedText = valueString
         
+        // return the color
         return valueColor
     }
     
+    
     // Actually draw a chart inside the specified cell with specified data
-    func drawChart(inCell cell: ProgressChartCell, withData dataArr: [Int]) {
+    func drawChart(inCell cell: ProgressChartCell, withData dataArr: [Int], forceFlash: Bool) {
         if showPieChart {
             // Create a pie chart
-            drawPieChart(inCell: cell, withData: dataArr)
+            drawPieChart(inCell: cell, withData: dataArr, forceFlash: forceFlash)
             
             // set chart delegate to self
             cell.pieChartView.delegate = self
         }
         else {
             // Create a bar chart
-            drawBarChart(inCell: cell, withData: dataArr)
+            drawBarChart(inCell: cell, withData: dataArr, forceFlash: forceFlash)
             
             // set chart delegate to self
             cell.barChartView.delegate = self
@@ -448,7 +460,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
     }
     
     // retrieve data from backend and draw chart in the specified cell
-    func retrieveDataAndDrawChart(inCell cell: ProgressChartCell) {
+    func retrieveDataAndDrawChart(inCell cell: ProgressChartCell, forceFlash: Bool) {
         let index = selectedActivity == -1 ? 0 : selectedActivity
         var dataArr : [Int] = []
         
@@ -456,7 +468,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         let code = activity.code
         
         if activityData[code] != nil {
-            self.drawChart(inCell: cell, withData: activityData[code]!)
+            self.drawChart(inCell: cell, withData: activityData[code]!, forceFlash: forceFlash)
             return
         }
         
@@ -496,7 +508,7 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                                 }
                             }
                             self.activityData[code] = dataArr
-                            self.drawChart(inCell: cell, withData: dataArr)
+                            self.drawChart(inCell: cell, withData: dataArr, forceFlash: forceFlash)
                         }
                         else if ret_code == 403 {
                             self.activityView.removeFromSuperview()
@@ -537,13 +549,13 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                             print ("Malformed request.")
                             self.activityView.removeFromSuperview()
                             AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
-                            self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                            self.drawChart(inCell: cell, withData: dataArr, forceFlash: forceFlash) // show no data available message
                         }
                         else {
                             print ("Some other error.")
                             self.activityView.removeFromSuperview()
                             AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
-                            self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                            self.drawChart(inCell: cell, withData: dataArr, forceFlash: forceFlash) // show no data available message
                         }
                 }
             }
@@ -552,13 +564,13 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
                 // remove the spinner
                 self.activityView.removeFromSuperview()
                 AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
-                self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                self.drawChart(inCell: cell, withData: dataArr, forceFlash: forceFlash) // show no data available message
             }
         })
     }
     
     // Create a chart inside the specified cell, creating data as necessary
-    func createChart(inCell cell: ProgressChartCell) {
+    func createChart(inCell cell: ProgressChartCell, forceFlash: Bool) {
         // Configure the cell...
         // For this activity obtain weekly goal value and units
         let index = selectedActivity == -1 ? 0 : selectedActivity
@@ -567,11 +579,16 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         // save activity into cell for futture use
         cell.actEx = activity
 
-        retrieveDataAndDrawChart(inCell: cell)
+        retrieveDataAndDrawChart(inCell: cell, forceFlash: forceFlash)
+        
+        // check if flashing is required
+        if selectedActivity == -1 {
+            
+        }
     }
     
     // draw a pie chart
-    func drawPieChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+    func drawPieChart(inCell cell: ProgressChartCell, withData initValues: [Int], forceFlash : Bool) {
         
         if initValues.count == 0 {
             cell.pieChartView!.data = nil
@@ -674,10 +691,25 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // and animate
         chartView.animate(xAxisDuration: 1.2, easingOption: .easeOutQuint)
+        
+        // also draw the star if required
+        let goalPercent = Double(sum) * 100.0 / Double((activity?.goalValue)!)
+        
+        if (goalPercent > 100) {
+            cell.starButton.isHidden = false
+            needsFlashing = true
+            if (forceFlash) {
+                cell.starButton.sendActions(for: .touchUpInside)
+            }
+        }
+        else {
+            //cell.starButton.setImage(nil, for: .normal)
+            cell.starButton.isHidden = true
+        }
     }
     
     // draw a bar chart
-    func drawBarChart(inCell cell: ProgressChartCell, withData initValues: [Int]) {
+    func drawBarChart(inCell cell: ProgressChartCell, withData initValues: [Int], forceFlash : Bool) {
         
         if initValues.count == 0 {
             cell.barChartView!.data = nil
@@ -771,6 +803,21 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // and animate
         chartView.animate(yAxisDuration: 1.2, easingOption: .easeOutQuart)
+        
+        // also draw the star if required
+        let goalPercent = Double(sum) * 100.0 / Double((activity?.goalValue)!)
+        
+        if (goalPercent > 100 ) {
+            cell.starButton.isHidden = false
+            needsFlashing = true
+            if (forceFlash) {
+                cell.starButton.sendActions(for: .touchUpInside)
+            }
+        }
+        else {
+            //cell.starButton.setImage(nil, for: .normal)
+            cell.starButton.isHidden = true
+        }
     }
     
     // MARK: - Custom IBActions for controlling the chart type
@@ -818,11 +865,11 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         if selectedActivity == -1 {
             cell.pieChartView.clear()
-            createChart(inCell: cell)
+            createChart(inCell: cell, forceFlash: false)
         }
         else {
             cell.pieChartView.clear()
-            createChart(inCell: cell)
+            createChart(inCell: cell, forceFlash: false)
         }
     }
     
@@ -859,10 +906,10 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
         
         // draw new chart
         if selectedActivity == -1 {
-            createChart(inCell: cell)
+            createChart(inCell: cell, forceFlash: false)
         }
         else {
-            createChart(inCell: cell)
+            createChart(inCell: cell, forceFlash: false)
         }
     }
     
@@ -874,5 +921,12 @@ class ProgressTableViewController: UITableViewController, UIPickerViewDelegate, 
             cell.chartToggleButton.selectedSegmentIndex = cell.chartToggleButton.selectedSegmentIndex == 0 ? 1 : 0;
             togglePieChartType(button: cell.chartToggleButton)
         }
+    }
+    
+    // MARK: - FaveButton Delegate
+    func faveButton(_ faveButton: FaveButton, didSelected selected: Bool)  {
+        let activity = activities[selectedActivity == -1 ? 0 : selectedActivity]
+        AlertHelper.showBasicAlertInVC(self, title: "Congratulations!", message: "You have met your goal of \(activity.goalValue) \(activity.goalUnits) this week.")
+        needsFlashing = false
     }
 }

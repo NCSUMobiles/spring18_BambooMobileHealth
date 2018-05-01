@@ -40,6 +40,7 @@
 		EAB7A6A3206D4E7F0098DFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EAB7A6A2206D4E7F0098DFD0 /* GoogleService-Info.plist */; };
 		EAC453BA208EAE3700D213E8 /* VoiceMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */; };
 		EAC453BC208EB1E500D213E8 /* bensound-ukulele.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */; };
+		EAC6C2C52098422300A39438 /* FaveButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC6C2C42098422300A39438 /* FaveButton.framework */; };
 		EAD05CF8208EBADE00B7B661 /* bensound-dubstep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */; };
 		EAEF8A6520904066004A54DB /* UserRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEF8A6420904066004A54DB /* UserRecord.swift */; };
 		EAF7B74E2071ADFE002C55AF /* ProgressChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */; };
@@ -97,6 +98,7 @@
 		EAC453B9208EAE3700D213E8 /* VoiceMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemo.swift; sourceTree = "<group>"; };
 		EAC453BB208EB1E400D213E8 /* bensound-ukulele.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-ukulele.mp3"; sourceTree = "<group>"; };
 		EAC4BEF320897D84005A1309 /* BMH-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BMH-Bridging-Header.h"; sourceTree = "<group>"; };
+		EAC6C2C42098422300A39438 /* FaveButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FaveButton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD05CF7208EBADE00B7B661 /* bensound-dubstep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-dubstep.mp3"; sourceTree = "<group>"; };
 		EAEF8A6420904066004A54DB /* UserRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecord.swift; sourceTree = "<group>"; };
 		EAF7B74C2071ADFE002C55AF /* ProgressChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartCell.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAC6C2C52098422300A39438 /* FaveButton.framework in Frameworks */,
 				98BD6969929EC011E017EFAD /* Pods_BMH.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +335,7 @@
 		EB89E9CA20796AAA3FF51249 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAC6C2C42098422300A39438 /* FaveButton.framework */,
 				1D1710C135088E5B384F48D3 /* Pods_BMH.framework */,
 			);
 			name = Frameworks;

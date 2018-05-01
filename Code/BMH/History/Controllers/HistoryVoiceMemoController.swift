@@ -323,7 +323,7 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
             return 160;
         }
         if indexPath.section == 1 {
-            return 116;
+            return 110;
         }
         return 44;
     }
