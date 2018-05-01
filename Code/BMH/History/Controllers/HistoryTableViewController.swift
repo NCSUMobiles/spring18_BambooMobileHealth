@@ -19,7 +19,9 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     var activities : [ActEx]!
     var selectedActivity : Int = -1
     var activityData : [String : [String : [Int]]]!
-    var rangeForChart : String = ""
+    var chartRange : String = ""
+    var chartTitle : String = ""
+    var chartDate : Date = Date()
     
     var selectionCellReuseIdentifer : String!
     var chartCellReuseIdentifier : String!
@@ -112,16 +114,6 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         else if self.restorationIdentifier == "History_ExerciseViewController" {
             activities = appDelegate.exercises
         }
-        
-        // redraw the chart
-        // remove any existing selection
-        let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryCell)
-        chartCell.barChartView.clear()
-        
-        // update the chart in third section first row
-        getRange()
-        createChart(inCell: chartCell)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,32 +158,16 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         chartCell.barChartView.clear()
         
         // update the chart in third section first row
-        // TODO: change to random data
-        
-        /*
-         if selectedSegment == 2 {
-         createChart(inCell: chartCell, forActivity: selectedActivity, withData: createWeeklyData())
-         
-         }
-         else if selectedSegment == 3 {
-         createChart(inCell: chartCell, forActivity: 0, withData: [Int(arc4random_uniform(3001)+87500)])
-         }
-         else if selectedSegment == 4 {
-         createChart(inCell: chartCell, forActivity: 0, withData: [Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(5000)+87000), Int(arc4random_uniform(2000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(3000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(4000)+87000), Int(arc4random_uniform(2000)+87000)])
-         
-         
-         }
-         else {
-         createChart(inCell: chartCell, forActivity: selectedActivity, withData: createDailyData())
-         
-         }
-         */
-        
-        
         // construct the ranges
-        getRange()
-        createChart(inCell: chartCell)
+        var rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+        chartRange = rangeAndTitle[0]
+        chartTitle = rangeAndTitle[1]
         
+        // update the cell's top label
+        chartCell.topLabel.text = chartTitle
+        
+        // and draw the chart
+        createChart(inCell: chartCell)
     }
     
     // MARK: - Table view data source
@@ -267,13 +243,21 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             cell.barChartView.maxVisibleCount = 10000
             cell.barChartView.chartDescription?.text = ""
             
-            cell.aggSwitch.addTarget(self, action: #selector(changeChart(sender:)), for: UIControlEvents.primaryActionTriggered)
+            //cell.aggSwitch.addTarget(self, action: #selector(changeChart(sender:)), for: UIControlEvents.primaryActionTriggered)
             cell.aggSwitch.addTarget(self, action: #selector(updateChart(sender:)), for: .valueChanged)
             
             cell.leftButton.addTarget(self, action: #selector(createChartForPreviousRange(sender:)), for: .primaryActionTriggered)
             cell.rightButton.addTarget(self, action: #selector(createChartForNextRange(sender:)), for: .primaryActionTriggered)
             
-            getRange()
+            // get latest ranges
+            var rangeAndTitle = getChartRangeAndTitle(forDate: Date())
+            chartRange = rangeAndTitle[0]
+            chartTitle = rangeAndTitle[1]
+            
+            // update the cell's top label
+            cell.topLabel.text = chartTitle
+            
+            // and draw the chart
             createChart(inCell: cell)
             
             return cell
@@ -333,16 +317,193 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         return tableView.sectionFooterHeight
     }
     
-    var selectIndex : Int = 0 {
-        didSet{
-            // use stepperValue with your UIButton as you want
+    @IBAction func createChartForPreviousRange(sender: UIButton) {
+        print ("Previous Selected")
+        let cell = (sender.superview?.superview?.superview?.superview?.superview as? HistoryCell)!
+        cell.rightButton.isEnabled = true
+        
+        // get previous range
+        getPreviousRange()
+        
+        // update the cell's top label
+        cell.topLabel.text = chartTitle
+        
+        // and draw the chart
+        createChart(inCell: cell)
+    }
+    
+    @IBAction func createChartForNextRange(sender: UIButton) {
+        print ("Next Selected")
+        let cell = (sender.superview?.superview?.superview?.superview?.superview as? HistoryCell)!
+        
+        // get next range
+        getNextRange()
+        
+        // update the cell's top label
+        cell.topLabel.text = chartTitle
+        
+        // and draw the chart
+        createChart(inCell: cell)
+        
+        // now figure out if the right button has to be disabled
+        var testRange = getChartRangeAndTitle(forDate: Date())
+        var testDate = Date()
+        var dateToCheck = Date()
+        
+        let dateFormatter = DateFormatter()
+        
+        switch selectedSegment {
+        case 1:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        case 2:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            dateToCheck = dateFormatter.date(from: String(chartRange.split(separator: " ")[1]))!
+            testDate = dateFormatter.date(from: String(testRange[0].split(separator: " ")[1]))!
+            break;
+        case 3:
+            dateFormatter.dateFormat = "MM-yy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        default:
+            dateFormatter.dateFormat = "yyyy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        }
+        
+        if (testDate <= dateToCheck) {
+            cell.rightButton.isEnabled = false
         }
     }
     
-    // get the seven days of week
-    func daysOfWeekString(shortFormat : Bool) -> [String] {
+    @objc func updateChart(sender: UISegmentedControl) {
+        let cell = (sender.superview?.superview as? HistoryCell)!
+        //cell.rightButton.isEnabled = true
+        
+        var testDate : Date
+        var dateToCheck : Date
+        let dateFormatter = DateFormatter()
         let gregorian = Calendar(identifier: .gregorian)
-        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
+        
+        let prevSegment = selectedSegment;
+        
+        if sender.selectedSegmentIndex == 0 {
+            selectedSegment = 1
+        }
+        else if sender.selectedSegmentIndex == 1 {
+            selectedSegment = 2
+        }
+        else if sender.selectedSegmentIndex == 2 {
+            selectedSegment = 3
+        }
+        else {
+            selectedSegment = 4
+        }
+        
+        // get range and title
+        var rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+        chartRange = rangeAndTitle[0]
+        chartTitle = rangeAndTitle[1]
+        
+        // correct it if going to Day view from Current Year, Month or Week.
+        if (selectedSegment == 1) {
+            switch prevSegment {
+            case 2:
+                let weekdays = daysOfWeekDate(shortFormat: true, startDate: Date())
+                dateFormatter.dateFormat = "MM-dd-yy"
+                testDate = dateFormatter.date(from: chartRange)!
+                
+                if ( (gregorian.compare(weekdays[0], to: testDate, toGranularity:.day) == .orderedAscending || gregorian.compare(weekdays[0], to: testDate, toGranularity:.day) == .orderedSame) && (gregorian.compare(weekdays[6], to: testDate, toGranularity:.day) == .orderedDescending || gregorian.compare(weekdays[6], to: testDate, toGranularity:.day) == .orderedSame)) {
+                    chartDate = Date()
+                    rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+                    chartRange = rangeAndTitle[0]
+                    chartTitle = rangeAndTitle[1]
+                }
+                break;
+            case 3:
+                dateFormatter.dateFormat = "MM-dd-yy"
+                testDate = Date()
+                let dateComps = chartRange.split(separator: "-")
+                let startOfMonth = dateFormatter.date(from: String(dateComps[0]) + "-15-" + String(dateComps[2]))
+                var endOfMonth = gregorian.date(byAdding: .month, value: 1, to: startOfMonth!)
+                endOfMonth = gregorian.date(byAdding: .day, value: -1, to: endOfMonth!)
+                
+                
+                if ( (gregorian.compare(startOfMonth!, to: testDate, toGranularity:.day) == .orderedAscending || gregorian.compare(startOfMonth!, to: testDate, toGranularity:.day) == .orderedSame) && (gregorian.compare(endOfMonth!, to: testDate, toGranularity:.day) == .orderedDescending || gregorian.compare(endOfMonth!, to: testDate, toGranularity:.day) == .orderedSame)) {
+                    chartDate = Date()
+                    rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+                    chartRange = rangeAndTitle[0]
+                    chartTitle = rangeAndTitle[1]
+                }
+                break;
+            case 4:
+                dateFormatter.dateFormat = "MM-dd-yy"
+                testDate = Date()
+                let dateComps = chartRange.split(separator: "-")
+                let startOfYear = dateFormatter.date(from: "01-01-" + String(dateComps[2]))
+                var endOfYear = gregorian.date(byAdding: .year, value: 1, to: startOfYear!)
+                endOfYear = gregorian.date(byAdding: .day, value: -1, to: endOfYear!)
+                
+                
+                if ( (gregorian.compare(startOfYear!, to: testDate, toGranularity:.day) == .orderedAscending || gregorian.compare(startOfYear!, to: testDate, toGranularity:.day) == .orderedSame) && (gregorian.compare(endOfYear!, to: testDate, toGranularity:.day) == .orderedDescending || gregorian.compare(endOfYear!, to: testDate, toGranularity:.day) == .orderedSame)) {
+                    chartDate = Date()
+                    rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+                    chartRange = rangeAndTitle[0]
+                    chartTitle = rangeAndTitle[1]
+                }
+            default:
+                break;
+            }
+            print ("Correct range is \(chartRange)")
+        }
+
+        // update the cell's top label
+        cell.topLabel.text = chartTitle
+        
+        // and draw the chart
+        createChart(inCell: cell)
+        
+        // figure out if the right button has to be disabled
+        var testRange = getChartRangeAndTitle(forDate: Date())
+        switch selectedSegment {
+        case 1:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        case 2:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            dateToCheck = dateFormatter.date(from: String(chartRange.split(separator: " ")[1]))!
+            testDate = dateFormatter.date(from: String(testRange[0].split(separator: " ")[1]))!
+            break;
+        case 3:
+            dateFormatter.dateFormat = "MM-yy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        default:
+            dateFormatter.dateFormat = "yyyy"
+            dateToCheck = dateFormatter.date(from: chartRange)!
+            testDate = dateFormatter.date(from: testRange[0])!
+            break;
+        }
+        
+        if (testDate <= dateToCheck) {
+            cell.rightButton.isEnabled = false
+        } else {
+            cell.rightButton.isEnabled = true
+        }
+    }
+    
+    // MARK: - Custom functions
+    // get the seven days of week
+    func daysOfWeekString(shortFormat : Bool, startDate : Date) -> [String] {
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: startDate))
         var daysString : [String] = []
         let format = DateFormatter()
         format.timeStyle = .none
@@ -362,112 +523,163 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         return daysString
     }
     
-    @IBAction func changeChart(sender: UISegmentedControl) {
-        //        print ("self: ", self.restorationIdentifier!)
-        //        print ("index: ", sender.selectedSegmentIndex)
-        selectIndex = Int(sender.selectedSegmentIndex)
-        //        print("selectIndex is: ", selectIndex)
+    func daysOfWeekDate(shortFormat : Bool, startDate : Date) -> [Date] {
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: startDate))
+        var days : [Date] = []
+        let format = DateFormatter()
+        format.timeStyle = .none
         
-    }
-    
-    @IBAction func createChartForPreviousRange(sender: UIButton) {
-        print ("Previous Selected")
-    }
-    
-    @IBAction func createChartForNextRange(sender: UIButton) {
-        print ("Next Selected")
-    }
-    
-    // MARK: - Custom functions
-    
-    // generate daily mocking data
-    func createDailyData()-> Array<Int> {
-        return [Int(arc4random_uniform(21)), Int(arc4random_uniform(11)), Int(arc4random_uniform(11)), Int(arc4random_uniform(21)), Int(arc4random_uniform(11)), Int(arc4random_uniform(21)), Int(arc4random_uniform(21)), Int(arc4random_uniform(31)),
-                Int(arc4random_uniform(501)), Int(arc4random_uniform(401)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)),
-                Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)),
-                Int(arc4random_uniform(301)), Int(arc4random_uniform(301)), Int(arc4random_uniform(501)), Int(arc4random_uniform(501)),
-                Int(arc4random_uniform(401)), Int(arc4random_uniform(301)), Int(arc4random_uniform(401)), Int(arc4random_uniform(301))]
-    }
-    
-    // generate weekly mocking data
-    func createWeeklyData()-> Array<Int> {
-        for i in 0..<7 {
-            weekData[i] = createDailyData()
-        }
-        var oneWeekData = [Int]()
-        for i in 0..<weekData.count {
-            oneWeekData.append(weekData[i].reduce(0){$0 + $1})
-        }
-        
-        return oneWeekData
-    }
-    
-    // generate monthly mocking data
-    func createMonthlyData()-> Array<Int> {
-        for i in 0..<4 {
-            monthData[i] = createWeeklyData()
-        }
-        var oneMonthData = [Int]()
-        for i in 0..<monthData.count {
-            oneMonthData.append(monthData[i].reduce(0){$0 + $1})
-        }
-        return oneMonthData
-    }
-    
-    // generate yearly mocking data
-    func createYearlyData()-> Array<Int> {
-        for i in 0..<12 {
-            yearData[i] = createMonthlyData()
-        }
-        var oneYearData = [Int]()
-        for i in 0..<yearData.count {
-            oneYearData.append(yearData[i].reduce(0){$0 + $1})
-        }
-        return oneYearData
-    }
-    
-    @objc func updateChart(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            selectedSegment = 1
-        }
-        else if sender.selectedSegmentIndex == 1 {
-            selectedSegment = 2
-        }
-        else if sender.selectedSegmentIndex == 2 {
-            selectedSegment = 3
+        if (shortFormat) {
+            format.dateStyle = .short
+            format.dateFormat = "MM-dd-yy"
         }
         else {
-            selectedSegment = 4
+            format.dateStyle = .long
         }
-        self.tableView.reloadData()
+        
+        for i in (0...6) {
+            days.append(gregorian.date(byAdding: .day, value: i, to: sunday!)!)
+        }
+        
+        return days
     }
     
-    func getRange(){
+    func getChartRangeAndTitle(forDate selectedDate: Date) -> [String]{
         var range = ""
+        var rangeString = ""
         switch selectedSegment {
         case 1:
-            let todaysDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM-dd-yy"
-            range = dateFormatter.string(from: todaysDate)
+            range = dateFormatter.string(from: selectedDate)
+            
+            dateFormatter.dateStyle = .long
+            rangeString = dateFormatter.string(from: selectedDate) == dateFormatter.string(from: Date()) ? "Today" : dateFormatter.string(from: selectedDate)
             break;
         case 2:
-            range = daysOfWeekString(shortFormat: true)[0] + " " + daysOfWeekString(shortFormat: true)[6]
+            var weekDays = daysOfWeekString(shortFormat: true, startDate: selectedDate)
+            range = weekDays[0] + " " + weekDays[6]
+            
+            weekDays = daysOfWeekString(shortFormat: false, startDate: selectedDate)
+            rangeString = weekDays[0] + " — " + weekDays[6]
             break;
         case 3:
-            let todaysDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM-yy"
-            range = dateFormatter.string(from: todaysDate)
+            range = dateFormatter.string(from: selectedDate)
+            
+            dateFormatter.dateFormat = "MMMM yyyy"
+            rangeString = dateFormatter.string(from: selectedDate)
             break;
         default:
-            let todaysDate = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy"
-            range = dateFormatter.string(from: todaysDate)
+            range = dateFormatter.string(from: selectedDate)
+            
+            rangeString = range
             break;
         }
-        rangeForChart = range
+        print ("Range is \(range)")
+        return [range, rangeString]
+    }
+    
+    func getPreviousRange(){
+        let gregorian = Calendar(identifier: .gregorian)
+        let dateFormatter = DateFormatter()
+        
+        switch selectedSegment {
+        case 1:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            let selectedDate = dateFormatter.date(from: chartRange)
+            
+            chartDate = gregorian.date(byAdding: .day, value: -1, to: selectedDate!)! // prev day
+            break;
+        case 2:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            let selectedDate = dateFormatter.date(from: String(chartRange.split(separator: " ")[0]))
+            
+            chartDate = gregorian.date(byAdding: .day, value: -4, to: selectedDate!)! // prev Wed
+            break;
+        case 3:
+            dateFormatter.dateFormat = "dd-MM-yy"
+            chartDate = gregorian.date(byAdding: .month, value: -1, to: dateFormatter.date(from: "15-" + chartRange)!)! // prev month 15th
+            break;
+        default:
+            dateFormatter.dateFormat = "MM-dd-yyyy"
+            chartDate = gregorian.date(byAdding: .year, value: -1, to: dateFormatter.date(from: "12-15-" + chartRange)!)! // prev year Dec
+            break;
+        }
+        
+        var rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+        chartRange = rangeAndTitle[0]
+        chartTitle = rangeAndTitle[1]
+    }
+    
+    func getNextRange(){
+        let gregorian = Calendar(identifier: .gregorian)
+        let dateFormatter = DateFormatter()
+        
+        switch selectedSegment {
+        case 1:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            var selectedDate = dateFormatter.date(from: chartRange)
+            selectedDate = gregorian.date(byAdding: .day, value: +1, to: selectedDate!)! // next day
+            
+            if (gregorian.compare(selectedDate!, to: Date(), toGranularity: .day) == .orderedDescending) {
+                chartDate = Date()
+            }
+            else {
+                chartDate = selectedDate!
+            }
+            break;
+        case 2:
+            dateFormatter.dateFormat = "MM-dd-yy"
+            var selectedDate = dateFormatter.date(from: String(chartRange.split(separator: " ")[1]))
+            selectedDate = gregorian.date(byAdding: .day, value: +4, to: selectedDate!)! // next Wed
+            
+            if (gregorian.compare(selectedDate!, to: Date(), toGranularity: .day) == .orderedDescending) {
+                chartDate = Date()
+            }
+            else if (gregorian.compare(selectedDate!, to: Date(), toGranularity: .day) == .orderedSame) {
+                chartDate = Date()
+            }
+            else {
+                chartDate = selectedDate!
+            }
+            break;
+        case 3:
+            dateFormatter.dateFormat = "dd-MM-yy"
+            let selectedDate = gregorian.date(byAdding: .month, value: +1, to: dateFormatter.date(from: "15-" + chartRange)!)! // next month 15th
+            if (gregorian.compare(selectedDate, to: Date(), toGranularity: .day) == .orderedDescending) {
+                chartDate = Date()
+            }
+            else if (gregorian.compare(selectedDate, to: Date(), toGranularity: .month) == .orderedSame) {
+                chartDate = Date()
+            }
+            else {
+                chartDate = selectedDate
+            }
+            break;
+        default:
+            dateFormatter.dateFormat = "MM-dd-yyyy"
+            let selectedDate = gregorian.date(byAdding: .year, value: +1, to: dateFormatter.date(from: "01-15-" + chartRange)!)! // next year Jan
+            if (gregorian.compare(selectedDate, to: Date(), toGranularity: .day) == .orderedDescending) {
+                chartDate = Date()
+            }
+            else if (gregorian.compare(selectedDate, to: Date(), toGranularity: .year) == .orderedSame) {
+                chartDate = Date()
+            }
+            else
+            {
+                chartDate = selectedDate
+            }
+            break;
+        }
+        
+        var rangeAndTitle = getChartRangeAndTitle(forDate: chartDate)
+        chartRange = rangeAndTitle[0]
+        chartTitle = rangeAndTitle[1]
     }
     
     // Create a chart
@@ -490,6 +702,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         
         let activity = activities[index]
         let code = activity.code
+        let range = self.chartRange
         
         var gran = ""
         switch selectedSegment {
@@ -503,8 +716,8 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         break;
         }
         
-        if activityData[code] != nil &&  activityData[code]![gran] != nil {
-            self.drawChart(inCell: cell, withData: activityData[code]![gran]!)
+        if activityData[code] != nil &&  activityData[code]![range] != nil {
+            self.drawChart(inCell: cell, withData: activityData[code]![range]!)
             return
         }
         
@@ -523,7 +736,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                               "act"  : self.restorationIdentifier == "History_ActivityViewController" ? 1 : 0,
                               "name" : code,
                               "gran" : gran,
-                              "range": self.rangeForChart
+                              "range": range
                     ] as [String : Any]
                 
                 // make a request to API
@@ -554,7 +767,7 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                             if self.activityData[code] == nil {
                                 self.activityData[code] = [:]
                             }
-                            self.activityData[code]![gran] = dataArr
+                            self.activityData[code]![range] = dataArr
                             self.drawChart(inCell: cell, withData: dataArr)
                         }
                         else if ret_code == 403 {
@@ -592,7 +805,14 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
                             // now go back to login screen
                             _ = (UIApplication.shared.delegate as! AppDelegate).setViewControllerOnWindowFromId(storyBoardId: "loginViewController")
                         }
+                        else if ret_code == 400 {
+                            print ("Malformed request.")
+                            self.activityView.removeFromSuperview()
+                            AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
+                            self.drawChart(inCell: cell, withData: dataArr) // show no data available message
+                        }
                         else {
+                            print ("Some other error.")
                             self.activityView.removeFromSuperview()
                             AlertHelper.showBasicAlertInVC(self, title: "Oops!", message: "Something went wrong. Could not retrieve data.")
                             self.drawChart(inCell: cell, withData: dataArr) // show no data available message
@@ -610,11 +830,12 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
     }
     
     func drawChart(inCell cell: HistoryCell, withData data_Value: [Int]) {
-        //var dataLabel_: [String]!
-        var dataValue_ = [Int]()
+        var dataValue_ = data_Value
         
-        //dataLabel_ = data_Label
-        dataValue_ = data_Value
+        if dataValue_.count == 0 {
+            cell.barChartView!.data = nil
+            return
+        }
         
         var sum = 0
         var dataEntries:[BarChartDataEntry] = []
@@ -636,6 +857,11 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
             sum += dataValue_[i]
             //            dataValue_.append(dataValue[i])
             //            dataEntries.append(dataEntry)
+        }
+        
+        if (sum == 0) {
+            cell.barChartView!.data = nil
+            return
         }
         
         if selectedSegment == 1 {
@@ -693,15 +919,15 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         leftAxis.axisMinimum = 0
         
         /*
-        if (selectedSegment == 1) {
-            rightAxis.axisMinimum = 0
-            leftAxis.axisMinimum = 0
-        }
-        else {
-            rightAxis.resetCustomAxisMin()
-            leftAxis.resetCustomAxisMin()
-        }
-        */
+         if (selectedSegment == 1) {
+         rightAxis.axisMinimum = 0
+         leftAxis.axisMinimum = 0
+         }
+         else {
+         rightAxis.resetCustomAxisMin()
+         leftAxis.resetCustomAxisMin()
+         }
+         */
         
         cell.barChartView.legend.enabled = false
         cell.barChartView.drawBordersEnabled = true

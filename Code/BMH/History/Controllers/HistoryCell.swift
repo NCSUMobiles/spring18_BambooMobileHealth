@@ -26,6 +26,8 @@ class HistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        barChartView.noDataText = "No data found."
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

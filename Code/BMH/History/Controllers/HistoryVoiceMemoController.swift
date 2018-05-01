@@ -93,6 +93,11 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         activityView.addSubview(loadingView)
         actInd.startAnimating()
         
+        //reloadVoiceMemos(activity: activities[0])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         reloadVoiceMemos(activity: activities[0])
     }
     

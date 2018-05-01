@@ -33,6 +33,7 @@ class ProgressChartCell: UITableViewCell {
         // Initialization code
         
         pieChartView.noDataText = "No data recorded so far."
+        barChartView.noDataText = "No data recorded so far."
         
         pieChartToggle.imageEdgeInsets = UIEdgeInsetsMake(2,2,2,2)
         pieChartToggle.backgroundColor = .clear
