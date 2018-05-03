@@ -1,9 +1,11 @@
 const express    = require("express");
+const bodyParser = require('body-parser');
+
 const login      = require('./authentication/main');
 const progress   = require('./progress/main');
 const history    = require('./history/main');
 const audio      = require('./audio/main');
-const bodyParser = require('body-parser');
+const stt        = require('./stt/main');
 const globals    = require('./globals.js');
 
 const app        = express();
@@ -43,6 +45,9 @@ router.get('/history', history.history)
 
 // route to handle requests for history tab, audio memos
 router.get('/audio', audio.audio)
+
+// route to handle requests for stt
+router.get('/stt', stt.stt)
 
 // route everything udner /api to router
 app.use('/api', router);
