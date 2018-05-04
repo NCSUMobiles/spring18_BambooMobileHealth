@@ -277,6 +277,9 @@ class HistoryVoiceMemoController: UITableViewController, UIPickerViewDelegate, U
         // update the text in first section first row
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity]
         
+        // auto-hide the picker view
+        self.tableView(self.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        
         // stop existing audio
         stopAudio()
         

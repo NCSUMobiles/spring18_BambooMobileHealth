@@ -153,6 +153,9 @@ class HistoryTableViewController: UITableViewController, UIPickerViewDelegate, U
         // update the text in first section first row
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)))?.textLabel?.text = activities[selectedActivity].name
         
+        // auto-hide the picker view
+        self.tableView(self.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        
         // remove any existing selection
         let chartCell =  ((self.tableView.cellForRow(at: IndexPath(row: 0, section: 1))) as! HistoryCell)
         chartCell.barChartView.clear()
