@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BMH Viewer</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+    .loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">BMH</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <!-- <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                    </ul>
+                </div> -->
+                <!-- /.sidebar-collapse -->
+            <!-- </div> -->
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Voice Memo List</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+			<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Select a user and an activity/excercise
+                         </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form">
+                                       <div class="form-group">
+                                            <label>User</label>
+                                            <select class="form-control" id="user-select">
+                                                <option value="PPV44" selected="true">PPV44</option>
+                                                <option value="RVT11">RVT11</option>
+                                                <option value="GBR72">GBR72</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-6">                                 
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>Activity / Excercise</label>
+                                            <select class="form-control" id="ex-select">
+                                                <option value="Walking" selected="true">Walking</option>
+                                                <option value="Running-Elliptical">Running-Elliptical</option>
+                                                <option value="Swimming">Swimming</option>
+                                                <option value="Physical Therapy @ PT Clinic">Physical Therapy @ PT Clinic</option>
+                                                <option value="Physical Therapy @ Home Session">Physical Therapy @ Home Session</option>
+                                                <option value="Yoga-Pilates">Yoga-Pilates</option>
+                                                <option value="Strength Training">Strength Training</option>
+                                                <option value="Cycling-Hand Cycling">Cycling-Hand Cycling</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <br/>
+                                <div class="col-lg-6">
+                                    <p><b>Filter by status</b></p>
+                                    
+                                    <input data-radiocharm-label="All"   name="statusBtn" data-radiocharm-background-color="2564E1" type="radio" value="all" checked/>
+                                    <input data-radiocharm-label="Good"  name="statusBtn" data-radiocharm-background-color="5cb85c" type="radio" value="Good"/>
+                                    <input data-radiocharm-label="Okay"  name="statusBtn" data-radiocharm-background-color="f0ad4e" type="radio" value="Okay"/>
+                                    <input data-radiocharm-label="Bad"   name="statusBtn" data-radiocharm-background-color="c9302c" type="radio" value="Bad"/>
+
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="form-submit" type="submit" class="btn btn-default" >Submit Button</button>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+			
+			<div class="row">
+			
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Audio Files
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="dataTables_length" id="dataTables-example_length">
+										<!-- <label>Show 
+                                            <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                                                <option value="10">10</option><option value="25">25</option><option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries
+                                        </label> -->
+                                        </div>
+                                    </div>
+										<div class="col-sm-6">
+                                            <div id="dataTables-example_filter" class="dataTables_filter">
+                                           <!--  <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
+                                            </label> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+										
+										<div class="col-sm-12">
+										
+										<table id="audioTable" class="table table-sm table-dark">
+										  <thead>
+											<tr>
+											  <th scope="col" class="col-xs-1">#</th>
+											  <th scope="col" class="col-sm-2">Title</th>
+											  <th scope="col" class="col-sm-1">Status</th>
+                                              <th scope="col" class="col-sm-1">Date</th>
+											  <th scope="col" class="col-sm-2">Audio File</th>
+											  <th scope="col">Transcript</th>
+											  
+											</tr>
+										  </thead>
+										  <tbody>
+											
+											
+										  </tbody>
+										</table>
+                                <tbody>
+                                    
+                                 </div></div></div>
+                            <!-- /.table-responsive -->
+                            
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+	   </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <link href="../css/jquery-radiocharm.css" rel="stylesheet">
+    <script src="../js/jquery-radiocharm.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript" src="../js/transcript.js"> </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input:radio').radiocharm();
+        });
+
+        $("#form-submit").click(function(){
+            loadData();
+        });
+
+        function transcriptAudio(audioURL, rowId) {
+            console.log("Received request to transcript", audioURL);
+            $('#audioTable > tbody > tr:nth-child(' + rowId + ') > td:nth-child(6)').html("<div class='loader'></div>");
+
+            $.get( "api/sttAdmin", {uri: audioURL}, function(data) {
+                // populate the table below
+
+                // Update the transcript
+                if (data.trim() == "") {
+                    $('#audioTable > tbody > tr:nth-child(' + rowId + ') > td:nth-child(6)').html("Could not transcript successfully.");
+                }
+                else {
+                    $('#audioTable > tbody > tr:nth-child(' + rowId + ') > td:nth-child(6)').html(data);
+                }
+
+            })
+            .fail(function() {
+                // remove existing entries
+                $('#audioTable > tbody > tr:nth-child(' + rowId + ') > td:nth-child(6)').html("Transcript failed.");
+            });
+        }
+
+        function loadData() {
+            var username = $( "#user-select option:selected" ).text();
+            var exName = $( "#ex-select option:selected" ).text();
+            var statusVal = $('input[name=statusBtn]:checked').val(); 
+
+            $.get( "api/audiolist", {uname: username, name: exName, status: statusVal}, function(data) {
+                // populate the table below
+
+                // first remove existing entries
+                $('#audioTable > tbody > tr').remove()
+
+                // now iterate over each object inside data
+                data.forEach(function(d, i){
+                    $('#audioTable tbody:last-child').append('\
+                                            <tr valign="middle">\
+                                              <th scope="row">' + (i+1) + '</th>\
+                                              <td>' + d.title + '</td>\
+                                              <td>' + d.status + '</td>\
+                                              <td>' + d.date + '</td>\
+                                              <td>\
+                                                    <audio controls>\
+                                                        <source src="' + d.URL + '" type="audio/mpeg">\
+                                                        Your browser does not support the audio tag.\
+                                                    </audio> </td>\
+                                              <td>\
+                                                    <input type="image" src="../vendor/icons8-music-notation-50.png" border="0" alt="Submit" onclick="transcriptAudio(\'' + d.URL + '\',' + (i+1) + ')"/>\
+                                              </td>\
+                                            </tr>');
+                });
+
+            })
+            .fail(function() {
+                // remove existing entries
+                $('#audioTable > tbody > tr').remove()
+                alert( "Oops! Couldn't fetch voice memos." );
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -6,6 +6,34 @@ const globals  = require('../globals.js');
 const tempPath = './download.m4a'
 const convPath = './converted.flac'
 
+exports.sttAdmin = function(req, res) {
+  var uri        = req.query.uri;
+
+  console.log("uri:", uri);
+
+  if (uri == undefined || uri == "" ) {
+    res.status(400).send("Bad Request");
+  }
+  else {
+    var file = fs.createWriteStream(tempPath);
+    var request = http.get(uri, function(response) {
+      response.pipe(file);
+      file.on('finish', function() {
+            transcript(res);
+          });
+    }).on('error', function(error) { 
+        // Handle errors
+        fs.unlinkSync(tempPath);   
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        
+        console.error("STT: Error occurred.", errorCode, errorMessage);
+        res.status(500).send("Error occurred. " + errorCode + " " + errorMessage);
+      });
+  }
+}
+
+
 exports.stt = function(req, res) {
   var username   = req.query.uname;
   var token      = req.query.token;

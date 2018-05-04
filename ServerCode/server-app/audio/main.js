@@ -1,6 +1,66 @@
 const globals = require('../globals.js');
 const moment  = require('moment');
 
+exports.audiolist = function(req, res /*uname, name, status*/) {
+  var username   = req.query.uname; //uname;
+  var actName    = req.query.name; // name;
+  var status     = req.query.status; // status;
+
+  console.log(username, actName, status);
+
+  if (username == undefined || username == "" || actName == undefined) {
+    res.status(400).send("Bad Request");
+    //return null;
+  }
+  else {
+    const db = globals.firebaseadmin.firestore(); 
+    var res_json = [];
+
+    if (status == undefined || status == "all") {
+      db.collection('user').doc(username).collection('memos')
+        .where('tags.' + actName, '==', true)
+        .get()
+        .then(snapshot => {
+          var docCount = 0;
+          snapshot.forEach(doc => {
+            //console.log(doc.id, '=>', doc.data());
+            res_json.push(doc.data());
+          });
+          console.info("Sending response with " + res_json.length + " documents");
+          res.status(200).send(res_json);
+          //return res_json;
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+          res.status(500).send("Error getting document.");
+          //return null;
+        });
+    }
+    else {
+      db.collection('user').doc(username).collection('memos')
+        .where('tags.' + actName, '==', true)
+        .where('status', '==', status)
+        .get()
+        .then(snapshot => {
+          var docCount = 0;
+          snapshot.forEach(doc => {
+            //console.log(doc.id, '=>', doc.data());
+            res_json.push(doc.data());
+          });
+          console.info("Sending response with " + res_json.length + " documents");
+          res.status(200).send(res_json);
+          //return res_json;
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+          res.status(500).send("Error getting document.");
+          //return null;
+        });
+    }
+  }
+}
+
+
 exports.audio = function(req, res) {
   var username   = req.query.uname;
   var token      = req.query.token;

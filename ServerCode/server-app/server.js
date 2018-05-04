@@ -1,5 +1,6 @@
-const express    = require("express");
+const express    = require('express');
 const bodyParser = require('body-parser');
+const path       = require('path');
 
 const login      = require('./authentication/main');
 const progress   = require('./progress/main');
@@ -17,8 +18,6 @@ globals.firebaseadmin.initializeApp({
   databaseURL: 'https://bamboomobile-9c643.firebaseio.com'
 });
 
-//globals.firebase.initializeApp(globals.firebaseconfig);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -30,8 +29,13 @@ app.use(function(req, res, next) {
 var router = express.Router();
 
 // test route
-router.get('/', function(req, res) {
-    res.json({ message: 'Hello World from BMH API!' });
+// app.get('/', function(req, res) {
+//     res.json({ message: 'Hello World from BMH API!' });
+// });
+
+// get the transcript page 
+app.get('/', function(req, res){
+  return res.sendFile(path.join(__dirname + '/transcript/login.html'));
 });
 
 // route to handle user login
@@ -46,11 +50,20 @@ router.get('/history', history.history)
 // route to handle requests for history tab, audio memos
 router.get('/audio', audio.audio)
 
+// route to handle requests for audio files from the transcript interface
+router.get('/audiolist', audio.audiolist)
+
 // route to handle requests for stt
 router.get('/stt', stt.stt)
 
+// route to handle requests for stt using admin
+router.get('/sttAdmin', stt.sttAdmin)
+
 // route everything udner /api to router
 app.use('/api', router);
+
+// route everything under /transcript for static pages
+app.use(express.static(path.join(__dirname, '/transcript')));
 
 // start listening on port
 const server = app.listen(port, (err) => {
@@ -89,7 +102,7 @@ function shutdown() {
       console.error(err);
       process.exit(1);
     }
-
+    
     login.con.end((err) => {
       // The connection is terminated gracefully
       // Ensures all previously enqueued queries are still

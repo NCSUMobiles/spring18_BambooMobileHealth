@@ -2,12 +2,7 @@ const mysql   = require('mysql');
 const globals = require('../globals.js');
 
 // First you need to create a connection to the db
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'bmh_user',
-  password: 'Id0ntKn0w',
-  database: 'BMH'
-});
+const con = mysql.createConnection(globals.connection);
 
 con.connect((err) => {
   if(err) {
@@ -33,7 +28,7 @@ exports.login = function(req, res) {
         if(results[0].password == password) {
           // generate an authentication token that will be sent back to the user
           var uid = username;
-	  globals.firebaseadmin.auth()
+	        globals.firebaseadmin.auth()
                .createCustomToken(uid)
                .then(function(customToken) {
     	         // Send token back to client
